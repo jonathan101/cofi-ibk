@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Interbank App Menu</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings:
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24
+    }
+  </style>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#05bd4e",
+            "background-light": "#f5f8f7",
+            "background-dark": "#0f2317",
+          },
+          fontFamily: {
+            "display": ["Inter", "sans-serif"]
+          },
+          borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="relative w-full min-h-screen overflow-hidden group/design-root" style="height: 812px; max-width: 375px; margin: auto;">
+<div class="absolute inset-0 z-0 flex flex-col h-full bg-background-light dark:bg-background-dark">
+<header class="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-800">
+<span class="material-symbols-outlined text-gray-800 dark:text-gray-200">menu</span>
+<h1 class="text-lg font-bold text-gray-900 dark:text-gray-100">COFI Chat</h1>
+<div class="size-6"></div>
+</header>
+<main class="flex-1 p-4">
+<p class="text-gray-600 dark:text-gray-400">Main chat content area...</p>
+</main>
+</div>
+<div class="absolute inset-0 z-10 w-full h-full bg-black/50"></div>
+<div class="absolute left-0 top-0 z-20 flex h-full min-h-screen w-10/12 flex-col bg-white dark:bg-[#1a2e23] shadow-2xl">
+<div class="flex flex-col flex-1 p-4">
+<div class="flex items-center gap-4 px-4 pt-8 pb-6">
+<img class="size-12 rounded-full object-cover" data-alt="User's profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6zRgaVNXno1YDAviLzhnVFQ9s61lHtXU8ahNJvYz1_1i7V8wFW4kZJRyVBP7dSaEnPMrWNHcp35ohddjMnxF2ZUAYT1eXPm76G9A-ysiosMP29zfHLWbWsCQMPVSLQMXs38xzgU-K04gz5URrZOuxMGj_KcHYewfsvmlEiYRAmE7OYedqRxgcqF_TA1L8ld04ogWRdcWDiGvoP_HdXKT9FxOBfqnCg853mDmWCn77tzuJzefA5ByDINDyNObw8gCM32YPboADf94"/>
+<div>
+<p class="text-lg font-bold text-gray-800 dark:text-gray-100">Valeria O.</p>
+<p class="text-sm text-gray-500 dark:text-gray-400">Ver perfil</p>
+</div>
+</div>
+<ul class="flex flex-col gap-2 mt-4">
+<li class="flex h-14 items-center gap-4 rounded-lg bg-primary/20 px-4">
+<span class="material-symbols-outlined text-primary">chat</span>
+<p class="text-base font-bold text-primary truncate">COFI Chat</p>
+</li>
+<li class="flex h-14 items-center gap-4 rounded-lg px-4 hover:bg-gray-100 dark:hover:bg-gray-800">
+<span class="material-symbols-outlined text-gray-600 dark:text-gray-300">notifications</span>
+<p class="text-base font-medium text-gray-800 dark:text-gray-200 truncate">Alertas</p>
+</li>
+<li class="flex h-14 items-center gap-4 rounded-lg px-4 hover:bg-gray-100 dark:hover:bg-gray-800">
+<span class="material-symbols-outlined text-gray-600 dark:text-gray-300">workspace_premium</span>
+<p class="text-base font-medium text-gray-800 dark:text-gray-200 truncate">Recompensas</p>
+</li>
+<li class="flex h-14 items-center gap-4 rounded-lg px-4 hover:bg-gray-100 dark:hover:bg-gray-800">
+<span class="material-symbols-outlined text-gray-600 dark:text-gray-300">savings</span>
+<p class="text-base font-medium text-gray-800 dark:text-gray-200 truncate">Plan de Ahorro</p>
+</li>
+</ul>
+</div>
+<div class="p-4 border-t border-gray-200 dark:border-gray-700">
+<div class="flex items-center gap-4 rounded-lg px-4 min-h-14 hover:bg-gray-100 dark:hover:bg-gray-800">
+<span class="material-symbols-outlined text-gray-600 dark:text-gray-300">logout</span>
+<p class="flex-1 text-base font-normal text-gray-800 dark:text-gray-200 truncate">Salir del Chat</p>
+</div>
+</div>
+</div>
+</div>
+
+</body></html>

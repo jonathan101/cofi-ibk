@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Interbank App - Inicio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#0039A6", // Updated Interbank Blue
+            "background-light": "#f6f7f8",
+            "background-dark": "#101822",
+            "interbank-green": "#05be50", // Updated Interbank Green
+            "interbank-dark-blue": "#0039A6", // Using primary blue for consistency
+            "interbank-pink": "#f44883",
+            "text-light": "#617289",
+            "text-dark": "#111418",
+            "border-light": "#dbe0e6",
+          },
+          fontFamily: {
+            "display": ["Inter", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "1rem",
+            "lg": "1.5rem",
+            "xl": "3rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    body {
+      min-height: max(884px, 100dvh);
+      padding-bottom: 5rem;
+    }
+    .material-symbols-outlined.fill-1 {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-display bg-background-light dark:bg-background-dark">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden antialiased">
+<header class="sticky top-0 z-10 flex h-[95px] items-center bg-background-light dark:bg-background-dark p-4 justify-between border-b border-border-light/50 dark:border-white/10">
+<button class="flex items-center justify-center h-10 w-10 text-text-dark dark:text-white">
+<span class="material-symbols-outlined text-3xl">menu</span>
+</button>
+<img alt="Interbank Logo" class="h-8" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmwqnFWgxP-MIfxvcI5-h-PCQqux5Mrh_qZehZeL874gPw5Z5POi0Ki_xY8tEOUX0KO1uSw69aAigURJae5LYfH3whY7skz8XBTfLmpW05EvnYt9jtPFpiHMDxuaewN7AM36FRqzCd4_j_h_JjP-jReFCbFn6iQmEpPliKfBvmDpeHUH9oRYTnXw2cFvZJE0V4fO-QO62pIi3wYGLeSQJhIUv3kSXO68ONOvHAospqdlCmt7jc1zAgA6Crryew9Ce8qxCvFkwDjZo"/>
+<button class="flex items-center justify-center h-10 w-10 text-text-dark dark:text-white relative">
+<span class="material-symbols-outlined text-3xl">notifications</span>
+<span class="absolute top-1.5 right-1.5 h-2.5 w-2.5 rounded-full bg-red-500 border-2 border-background-light dark:border-background-dark"></span>
+</button>
+</header>
+<main class="flex-1 px-4 py-6">
+<h1 class="text-text-dark dark:text-white tracking-tight text-[32px] font-medium leading-tight text-center pb-3 pt-4">¿A quién le vas a Plinear hoy?</h1>
+<div class="flex justify-center gap-x-6 py-4 overflow-x-auto">
+<div class="flex flex-col items-center gap-2 text-center flex-shrink-0">
+<button class="flex h-[72px] w-[72px] items-center justify-center rounded-full bg-primary text-white">
+<img alt="Plin logo" class="h-8 w-8" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_7zqiJDHR1tCm8HYJdfQ6gJDXFL65qgvrgo93a1JJpTzZvuygXFE1XSgr2pRB5Vw0yoGNKggEtFn_mmeM_dZgBwh8Rv85RRxxqk2ecjFWw4mgLbF4okRNsZ3fQU8uqvKa2-_CYtYuhuJdHFxtfFXlqgjMgcbVyzQ3AIHg9d43qjtwmJo9N1Cb8eehEhaXq9A6bw0Q9J_0aB5JijpiiVNb4bsd52VDS_xa3ShL-RvALKrgh2G3lyjY4-R33KFsEpEFqOHrV4VhL6Y"/>
+</button>
+<span class="text-sm font-medium text-primary">Plinear a celular</span>
+</div>
+<div class="flex flex-col items-center gap-2 text-center flex-shrink-0">
+<button class="flex h-[72px] w-[72px] items-center justify-center rounded-full border border-interbank-green bg-white text-interbank-green">
+<span class="material-symbols-outlined text-4xl">add</span>
+</button>
+<span class="text-sm font-medium text-interbank-green">Agregar contacto</span>
+</div>
+<div class="flex flex-col items-center gap-2 text-center flex-shrink-0">
+<button class="flex h-[72px] w-[72px] items-center justify-center rounded-full border border-interbank-green bg-white text-interbank-green">
+<span class="material-symbols-outlined text-4xl">add</span>
+</button>
+<span class="text-sm font-medium text-interbank-green">Agregar contacto</span>
+</div>
+<div class="flex flex-col items-center gap-2 text-center flex-shrink-0">
+<button class="flex h-[72px] w-[72px] items-center justify-center rounded-full border border-interbank-green bg-white text-interbank-green">
+<span class="material-symbols-outlined text-4xl">add</span>
+</button>
+<span class="text-sm font-medium text-interbank-green">Agregar contacto</span>
+</div>
+<div class="flex flex-col items-center gap-2 text-center flex-shrink-0">
+<button class="flex h-[72px] w-[72px] items-center justify-center rounded-full border border-interbank-green bg-white text-interbank-green">
+<span class="material-symbols-outlined text-4xl">add</span>
+</button>
+<span class="text-sm font-medium text-interbank-green">Agregar contacto</span>
+</div>
+</div>
+<p class="text-primary dark:text-white/70 text-sm font-normal leading-normal pb-3 pt-4 text-center">T.C. referencial: Compra: <span class="font-bold">3.36</span> Venta: <span class="font-bold">3.39</span></p>
+<div class="bg-white dark:bg-background-dark/50 rounded-lg shadow-sm p-5 mt-4">
+<div class="flex justify-between items-center pb-4">
+<h2 class="text-text-dark dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em]">Productos</h2>
+<button class="text-interbank-green text-sm font-bold flex items-center">
+<span class="material-symbols-outlined text-2xl fill-1">edit</span>
+</button>
+</div>
+<div class="flex flex-col divide-y divide-border-light dark:divide-white/10">
+<a class="flex items-center gap-4 py-4 bg-white rounded-[18px] shadow-sm" href="#">
+<div class="flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-sm">
+<span class="material-symbols-outlined text-3xl text-interbank-pink">savings</span>
+</div>
+<div class="flex-1">
+<p class="font-bold text-interbank-dark-blue dark:text-white">Personal</p>
+<p class="text-sm text-text-light dark:text-white/70">Saldo disponible</p>
+</div>
+<div class="flex items-center gap-2">
+<p class="font-bold text-lg text-interbank-dark-blue dark:text-white tracking-wider">•••••</p>
+<span class="material-symbols-outlined text-interbank-green">chevron_right</span>
+</div>
+</a>
+<a class="flex items-center gap-4 py-4 bg-white rounded-[18px] shadow-sm" href="#">
+<div class="flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-sm">
+<span class="material-symbols-outlined text-3xl text-interbank-pink">savings</span>
+</div>
+<div class="flex-1">
+<p class="font-bold text-interbank-dark-blue dark:text-white">Esenciales</p>
+<p class="text-sm text-text-light dark:text-white/70">Saldo disponible</p>
+</div>
+<div class="flex items-center gap-2">
+<p class="font-bold text-lg text-interbank-dark-blue dark:text-white tracking-wider">•••••</p>
+<span class="material-symbols-outlined text-interbank-green">chevron_right</span>
+</div>
+</a>
+<a class="flex items-center gap-4 py-4 bg-white rounded-[18px] shadow-sm" href="#">
+<div class="flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-sm">
+<span class="material-symbols-outlined text-3xl text-interbank-pink">savings</span>
+</div>
+<div class="flex-1">
+<p class="font-bold text-interbank-dark-blue dark:text-white">Mascotas</p>
+<p class="text-sm text-text-light dark:text-white/70">Saldo disponible</p>
+</div>
+<div class="flex items-center gap-2">
+<p class="font-bold text-lg text-interbank-dark-blue dark:text-white tracking-wider">•••••</p>
+<span class="material-symbols-outlined text-interbank-green">chevron_right</span>
+</div>
+</a>
+<a class="flex items-center gap-4 py-4 bg-white rounded-[18px] shadow-sm" href="#">
+<div class="flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-sm">
+<span class="material-symbols-outlined text-3xl text-interbank-pink">savings</span>
+</div>
+<div class="flex-1">
+<p class="font-bold text-interbank-dark-blue dark:text-white">Cuenta Simple Dólares</p>
+<p class="text-sm text-text-light dark:text-white/70">Saldo disponible</p>
+</div>
+<div class="flex items-center gap-2">
+<p class="font-bold text-lg text-interbank-dark-blue dark:text-white tracking-wider">•••••</p>
+<span class="material-symbols-outlined text-interbank-green">chevron_right</span>
+</div>
+</a>
+<a class="flex items-center gap-4 py-4 bg-white rounded-[18px] shadow-sm" href="#">
+<div class="flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-sm">
+<span class="material-symbols-outlined text-3xl text-interbank-green">credit_card</span>
+</div>
+<div class="flex-1">
+<p class="font-bold text-interbank-dark-blue dark:text-white">The Platinum Card</p>
+<p class="text-sm text-text-light dark:text-white/70">Línea disponible</p>
+</div>
+<div class="flex items-center gap-2">
+<p class="font-bold text-lg text-interbank-dark-blue dark:text-white tracking-wider">•••••</p>
+<span class="material-symbols-outlined text-interbank-green">chevron_right</span>
+</div>
+</a>
+</div>
+</div>
+</main>
+<nav class="fixed bottom-0 left-0 right-0 z-30 bg-white dark:bg-background-dark/80 backdrop-blur-sm h-20 shadow-[0_-4px_10px_rgba(0,0,0,0.05)]">
+<div class="h-full flex items-center justify-around max-w-lg mx-auto">
+<a class="flex flex-col items-center justify-center flex-1 text-interbank-green dark:text-white text-sm font-medium" href="#">
+<span class="material-symbols-outlined text-2xl fill-1">home</span>
+<span>Inicio</span>
+</a>
+<a class="flex flex-col items-center justify-center flex-1 text-text-light dark:text-white/70 text-sm font-medium" href="#">
+<span class="material-symbols-outlined text-2xl">receipt_long</span>
+<span>Operaciones</span>
+</a>
+<div class="flex-1 flex justify-center items-center">
+<button class="flex items-center justify-center h-16 w-16 -translate-y-6 rounded-full bg-[#00b058] text-white shadow-lg">
+<span class="material-symbols-outlined text-3xl">qr_code_scanner</span>
+</button>
+</div>
+<a class="flex flex-col items-center justify-center flex-1 text-text-light dark:text-white/70 text-sm font-medium" href="#">
+<span class="material-symbols-outlined text-2xl">redeem</span>
+<span>Beneficios</span>
+</a>
+<a class="flex flex-col items-center justify-center flex-1 text-text-light dark:text-white/70 text-sm font-medium" href="#">
+<span class="material-symbols-outlined text-2xl">person_outline</span>
+<span>Para Ti</span>
+</a>
+</div>
+</nav>
+<button class="fixed bottom-24 right-4 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-interbank-green text-white shadow-lg">
+<span class="material-symbols-outlined text-3xl">savings</span>
+<span class="absolute -top-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full bg-red-500 text-xs font-bold text-white leading-none">3</span>
+</button>
+</div>
+</body></html>

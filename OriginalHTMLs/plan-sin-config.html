@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Plan de Ahorros</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#136dec",
+              "background-light": "#F6F8F7",
+              "background-dark": "#101822",
+              "brand-green": "#00843d",
+              "alert-amber": "#ffab00",
+              "alert-red": "#e53e3e",
+              "primary-text-light": "#1C2D3A",
+              "secondary-text-light": "#6B7B8B",
+              "primary-text-dark": "#f6f7f8",
+              "secondary-text-dark": "#a0aec0",
+              "interbank-green-light": "#e0ffe0",
+              "interbank-green-dark": "#00843d",
+              "interbank-blue": "#007bff",
+              "gray-dark-bg": "#374151",
+              "interbank-green": "#05be50","alert-pill-amber-bg": "#FFE8B5","alert-pill-amber-text": "#A66A00","alert-pill-red-bg": "#FFD5D5","alert-pill-red-text": "#8B0000",
+              "subtle-gray": "#F2F4F5",},
+            fontFamily: {
+              "display": ["Inter", "sans-serif"],
+            },
+            borderRadius: {
+              "DEFAULT": "0.25rem",
+              "lg": "0.5rem",
+              "xl": "0.75rem",
+              "full": "9999px",
+            },
+          },
+        },
+      };
+    </script>
+<style type="text/tailwindcss">
+      body {
+        min-height: max(884px, 100dvh);
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-display bg-subtle-gray dark:bg-background-dark">
+<div class="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<header class="relative flex w-full items-center justify-between px-4 py-4 md:px-6">
+<button class="flex items-center justify-center text-primary-text-light dark:text-primary-text-dark">
+<span class="material-symbols-outlined text-3xl">menu</span>
+</button>
+</header>
+<main class="flex flex-1 flex-col items-center justify-center p-6 text-center">
+<div class="flex flex-col items-center gap-6 max-w-sm w-full bg-white dark:bg-gray-dark-bg p-8 rounded-xl shadow-sm">
+<div class="relative flex h-32 w-32 items-center justify-center">
+<span class="material-symbols-outlined text-8xl text-secondary-text-light dark:text-secondary-text-dark" style="font-size: 100px;">
+              savings
+            </span>
+<span class="material-symbols-outlined absolute -bottom-1 -right-1 rounded-full bg-white p-1 text-4xl text-secondary-text-light dark:bg-gray-dark-bg dark:text-secondary-text-dark">
+              settings
+            </span>
+</div>
+<p class="text-primary-text-light dark:text-primary-text-dark text-lg font-medium leading-relaxed">
+            Aún no has configurado tu Plan de Ahorros. ¡Empieza ahora a alcanzar tus metas!
+          </p>
+<button class="w-full rounded-full bg-interbank-green px-8 py-4 text-lg font-bold text-white shadow-lg transition-transform hover:scale-105 active:scale-100">
+            Configurar mi plan
+          </button>
+</div>
+</main>
+</div>
+
+</body></html>

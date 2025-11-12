@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Alertas - Interbank App</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#05bd4e",
+            "background-light": "#f5f8f7",
+            "background-dark": "#0f2317",
+          },
+          fontFamily: {
+            "display": ["Inter"]
+          },
+          borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<header class="sticky top-0 z-10 flex items-center bg-background-light dark:bg-background-dark p-4 shadow-sm">
+<button class="text-gray-800 dark:text-gray-200 flex size-10 shrink-0 items-center justify-center rounded-full">
+<span class="material-symbols-outlined text-2xl">menu</span>
+</button>
+<h1 class="text-gray-900 dark:text-gray-100 text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-10">Alertas</h1>
+</header>
+<main class="flex flex-col gap-4 p-4">
+<div class="flex gap-4 bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm">
+<div class="flex items-start gap-4 flex-1">
+<div class="flex items-center justify-center rounded-full bg-amber-100 dark:bg-amber-900/40 shrink-0 size-12">
+<span class="material-symbols-outlined text-2xl text-amber-500 dark:text-amber-400">warning</span>
+</div>
+<div class="flex flex-1 flex-col justify-center">
+<p class="text-gray-900 dark:text-gray-100 text-base font-medium leading-normal">Detectamos que tus gastos se están saliendo de tu plan de ahorros</p>
+<p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal mt-1">Revisa tus últimas transacciones para ajustar tu presupuesto.</p>
+</div>
+</div>
+<div class="shrink-0"><p class="text-gray-400 dark:text-gray-500 text-sm font-normal leading-normal">Hace 2h</p></div>
+</div>
+<div class="flex gap-4 bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm">
+<div class="flex items-start gap-4 flex-1">
+<div class="flex items-center justify-center rounded-full bg-amber-100 dark:bg-amber-900/40 shrink-0 size-12">
+<span class="material-symbols-outlined text-2xl text-amber-500 dark:text-amber-400">warning</span>
+</div>
+<div class="flex flex-1 flex-col justify-center">
+<p class="text-gray-900 dark:text-gray-100 text-base font-medium leading-normal">Tus gastos hormiga han incrementado...</p>
+<p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal mt-1">Pequeños gastos suman. Identifícalos para mantener el control.</p>
+</div>
+</div>
+<div class="shrink-0"><p class="text-gray-400 dark:text-gray-500 text-sm font-normal leading-normal">Hace 1d</p></div>
+</div>
+<div class="flex flex-col gap-3 bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm">
+<div class="flex items-start gap-4">
+<div class="flex items-center justify-center rounded-full bg-primary/20 shrink-0 size-12">
+<span class="material-symbols-outlined text-2xl text-primary">credit_card</span>
+</div>
+<div class="flex flex-1 flex-col justify-center">
+<p class="text-gray-900 dark:text-gray-100 text-base font-medium leading-normal">Hay un gasto inusual en tu Tarjeta de Crédito...</p>
+<p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal mt-1">Monto: S/ 450.00 en 'Tienda Online'. ¿Reconoces esta compra?</p>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-5 bg-primary text-white text-sm font-medium leading-normal mt-3 hover:bg-primary/90 transition-colors">
+<span class="truncate">Pagar en cuotas</span>
+</button>
+</div>
+</div>
+</div>
+<div class="flex gap-4 bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm">
+<div class="flex items-start gap-4 flex-1">
+<div class="relative flex items-center justify-center shrink-0 size-12">
+<svg class="absolute w-full h-full text-red-600" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M15.73 3H8.27L3 8.27V15.73L8.27 21H15.73L21 15.73V8.27L15.73 3Z"></path>
+</svg>
+<span class="material-symbols-outlined text-xl text-white z-10">priority_high</span>
+</div>
+<div class="flex flex-1 flex-col justify-center">
+<p class="text-gray-900 dark:text-gray-100 text-base font-medium leading-normal">Has superado tu presupuesto. Gastos en punto de no retorno.</p>
+<p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal mt-1">Es crucial revisar tus finanzas para evitar mayores inconvenientes.</p>
+</div>
+</div>
+<div class="shrink-0"><p class="text-gray-400 dark:text-gray-500 text-sm font-normal leading-normal">Hace 2d</p></div>
+</div>
+</main>
+</div>
+</body></html>
