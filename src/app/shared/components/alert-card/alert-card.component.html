@@ -1,0 +1,19 @@
+<div class="alert-card" [class]="'alert-' + severidad">
+  <div class="alert-header">
+    <div class="alert-icon">
+      <span *ngIf="!icono">{{ getSeverityIcon() }}</span>
+      <img *ngIf="icono" [src]="icono" [alt]="titulo" />
+    </div>
+    <div class="alert-content">
+      <h4 class="alert-titulo">{{ titulo }}</h4>
+      <p class="alert-subtitulo" *ngIf="subtitulo">{{ subtitulo }}</p>
+    </div>
+  </div>
+  
+  <button 
+    *ngIf="textoBoton" 
+    class="alert-button"
+    (click)="handleAction()">
+    {{ textoBoton }}
+  </button>
+</div>

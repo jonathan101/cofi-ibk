@@ -1,0 +1,95 @@
+[
+  {
+    "id": "rec1",
+    "titulo": "Alquiler departamento",
+    "monto": -800,
+    "fechaInicio": "2024-08-01T00:00:00.000Z",
+    "fechaFin": "2025-12-31T00:00:00.000Z",
+    "diaDelMes": 5,
+    "activa": true,
+    "operacionesGeneradas": [
+      {
+        "mes": "Agosto 2024",
+        "operacionId": "op-rec-ago-1",
+        "vinculada": true
+      },
+      {
+        "mes": "Septiembre 2024",
+        "operacionId": "op-rec-sep-1",
+        "vinculada": true
+      },
+      {
+        "mes": "Octubre 2024",
+        "operacionId": "op-rec-oct-1",
+        "vinculada": true
+      },
+      {
+        "mes": "Noviembre 2024",
+        "operacionId": "op-rec-nov-1",
+        "vinculada": true
+      }
+    ]
+  },
+  {
+    "id": "rec2",
+    "titulo": "Pago de luz",
+    "monto": -120,
+    "fechaInicio": "2024-08-01T00:00:00.000Z",
+    "fechaFin": "2025-12-31T00:00:00.000Z",
+    "diaDelMes": 15,
+    "activa": true,
+    "operacionesGeneradas": [
+      {
+        "mes": "Agosto 2024",
+        "operacionId": "op-rec-ago-2",
+        "vinculada": true
+      },
+      {
+        "mes": "Septiembre 2024",
+        "operacionId": "op-rec-sep-2",
+        "vinculada": true
+      },
+      {
+        "mes": "Octubre 2024",
+        "operacionId": "op-rec-oct-2",
+        "vinculada": true
+      },
+      {
+        "mes": "Noviembre 2024",
+        "operacionId": "op-rec-nov-2",
+        "vinculada": false
+      }
+    ]
+  },
+  {
+    "id": "rec3",
+    "titulo": "Internet y cable",
+    "monto": -150,
+    "fechaInicio": "2024-08-01T00:00:00.000Z",
+    "fechaFin": "2025-12-31T00:00:00.000Z",
+    "diaDelMes": "fin_de_mes",
+    "activa": true,
+    "operacionesGeneradas": [
+      {
+        "mes": "Agosto 2024",
+        "operacionId": "op-rec-ago-3",
+        "vinculada": true
+      },
+      {
+        "mes": "Septiembre 2024",
+        "operacionId": "op-rec-sep-3",
+        "vinculada": true
+      },
+      {
+        "mes": "Octubre 2024",
+        "operacionId": "op-rec-oct-3",
+        "vinculada": true
+      },
+      {
+        "mes": "Noviembre 2024",
+        "operacionId": "op-rec-nov-3",
+        "vinculada": false
+      }
+    ]
+  }
+]

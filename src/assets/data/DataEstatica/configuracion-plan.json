@@ -1,0 +1,48 @@
+{
+  "ingresoNetoMensual": 4000,
+  "metaAhorro": 800,
+  "tiempoAlertaCompraAlta": 30,
+  "cuentasExcluidas": [],
+  "clasificacionGastos": {
+    "topeHormiga": {
+      "automatico": true,
+      "montoManual": null
+    },
+    "topeMedio": {
+      "automatico": true,
+      "montoManual": null
+    }
+  },
+  "topesMensuales": {
+    "cobrosAutomaticos": {
+      "porcentaje": 10,
+      "montoFijo": null
+    },
+    "gastosHormiga": {
+      "porcentaje": 10,
+      "montoFijo": null
+    },
+    "gastosMedios": {
+      "porcentaje": 10,
+      "montoFijo": null
+    },
+    "gastosExcepcionales": {
+      "porcentaje": 10,
+      "montoFijo": null
+    },
+    "cargaFinanciera": {
+      "porcentaje": 30,
+      "montoFijo": null
+    },
+    "movimientosCaja": {
+      "porcentaje": null,
+      "montoFijo": null
+    },
+    "operacionesRecurrentes": {
+      "porcentaje": null,
+      "montoFijo": null
+    }
+  },
+  "fechaVigencia": "2024-11-01T00:00:00.000Z",
+  "aplicaAMesesAnteriores": false
+}

@@ -1,0 +1,30 @@
+[
+  {
+    "id": "ch1",
+    "nombre": "Primer depa",
+    "montoActual": 5000,
+    "metaMonto": 20000,
+    "icono": "home"
+  },
+  {
+    "id": "ch2",
+    "nombre": "Primer carro",
+    "montoActual": 3500,
+    "metaMonto": 15000,
+    "icono": "car"
+  },
+  {
+    "id": "ch3",
+    "nombre": "Viaje a Europa",
+    "montoActual": 2000,
+    "metaMonto": 8000,
+    "icono": "plane"
+  },
+  {
+    "id": "ch4",
+    "nombre": "Fondo de emergencia",
+    "montoActual": 1500,
+    "metaMonto": 10000,
+    "icono": "shield"
+  }
+]

@@ -1,0 +1,294 @@
+// ============================================
+// Mixins SCSS - Utilidades Reutilizables
+// ============================================
+
+@import 'variables';
+
+// Mixin para Media Queries Responsivas
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == 'xs' {
+    @media (max-width: $breakpoint-sm - 1) {
+      @content;
+    }
+  } @else if $breakpoint == 'sm' {
+    @media (min-width: $breakpoint-sm) {
+      @content;
+    }
+  } @else if $breakpoint == 'md' {
+    @media (min-width: $breakpoint-md) {
+      @content;
+    }
+  } @else if $breakpoint == 'lg' {
+    @media (min-width: $breakpoint-lg) {
+      @content;
+    }
+  } @else if $breakpoint == 'xl' {
+    @media (min-width: $breakpoint-xl) {
+      @content;
+    }
+  }
+}
+
+// Mixin para Flexbox Centrado
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// Mixin para Flexbox con Dirección
+@mixin flex($direction: row, $justify: flex-start, $align: stretch) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+// Mixin para Truncar Texto
+@mixin text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// Mixin para Texto Multilínea con Truncado
+@mixin text-truncate-multiline($lines: 2) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// Mixin para Sombras de Card
+@mixin card-shadow($level: 'md') {
+  @if $level == 'sm' {
+    box-shadow: $shadow-sm;
+  } @else if $level == 'md' {
+    box-shadow: $shadow-md;
+  } @else if $level == 'lg' {
+    box-shadow: $shadow-lg;
+  } @else if $level == 'xl' {
+    box-shadow: $shadow-xl;
+  }
+}
+
+// Mixin para Transiciones
+@mixin transition($properties...) {
+  transition-property: $properties;
+  transition-duration: $transition-base;
+  transition-timing-function: ease-in-out;
+}
+
+// Mixin para Botones
+@mixin button-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-sm $spacing-md;
+  border: none;
+  border-radius: $border-radius-md;
+  font-family: $font-family-primary;
+  font-size: $font-size-base;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  @include transition(background-color, transform, box-shadow);
+  
+  &:hover {
+    transform: translateY(-1px);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+// Mixin para Botón Primario
+@mixin button-primary {
+  @include button-base;
+  background-color: $color-primary;
+  color: $color-text-light;
+  
+  &:hover:not(:disabled) {
+    background-color: $color-primary-dark;
+    box-shadow: $shadow-md;
+  }
+}
+
+// Mixin para Botón Secundario
+@mixin button-secondary {
+  @include button-base;
+  background-color: $color-bg-secondary;
+  color: $color-text-primary;
+  border: 1px solid $color-border-medium;
+  
+  &:hover:not(:disabled) {
+    background-color: $color-bg-tertiary;
+  }
+}
+
+// Mixin para Input
+@mixin input-base {
+  width: 100%;
+  padding: $spacing-sm $spacing-md;
+  border: 1px solid $color-border-medium;
+  border-radius: $border-radius-md;
+  font-family: $font-family-primary;
+  font-size: $font-size-base;
+  color: $color-text-primary;
+  background-color: $color-bg-primary;
+  @include transition(border-color, box-shadow);
+  
+  &:focus {
+    outline: none;
+    border-color: $color-primary;
+    box-shadow: 0 0 0 3px rgba(0, 166, 81, 0.1);
+  }
+  
+  &::placeholder {
+    color: $color-text-tertiary;
+  }
+  
+  &:disabled {
+    background-color: $color-bg-secondary;
+    color: $color-text-disabled;
+    cursor: not-allowed;
+  }
+}
+
+// Mixin para Card
+@mixin card {
+  background-color: $color-bg-primary;
+  border-radius: $border-radius-lg;
+  padding: $spacing-lg;
+  @include card-shadow('md');
+}
+
+// Mixin para Scroll Personalizado
+@mixin custom-scrollbar($width: 8px, $track-color: $color-bg-secondary, $thumb-color: $color-border-medium) {
+  &::-webkit-scrollbar {
+    width: $width;
+    height: $width;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: $track-color;
+    border-radius: $border-radius-sm;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: $thumb-color;
+    border-radius: $border-radius-sm;
+    
+    &:hover {
+      background: darken($thumb-color, 10%);
+    }
+  }
+}
+
+// Mixin para Animación de Entrada
+@mixin fade-in($duration: $transition-base) {
+  animation: fadeIn $duration ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+// Mixin para Animación de Slide Up
+@mixin slide-up($duration: $transition-base) {
+  animation: slideUp $duration ease-in-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+// Mixin para Pills de Alerta
+@mixin pill-alert($color) {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: $border-radius-full;
+  background-color: $color;
+  color: $color-text-light;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+}
+
+// Mixin para Estado de Colapso
+@mixin collapsible-section {
+  overflow: hidden;
+  @include transition(max-height, opacity);
+  
+  &.collapsed {
+    max-height: 0;
+    opacity: 0;
+  }
+  
+  &.expanded {
+    max-height: 1000px;
+    opacity: 1;
+  }
+}
+
+// Mixin para Contenedor Móvil
+@mixin mobile-container {
+  width: 100%;
+  max-width: $mobile-container-max-width;
+  min-width: $mobile-container-min-width;
+  min-height: $mobile-container-min-height;
+  margin: 0 auto;
+  box-shadow: $shadow-2xl;
+  border-radius: $mobile-container-border-radius;
+  overflow: hidden;
+  
+  @include respond-to('md') {
+    max-width: 100%;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+
+// Mixin para Botón Flotante
+@mixin floating-button {
+  position: fixed;
+  bottom: $floating-button-bottom;
+  right: $floating-button-right;
+  width: $floating-button-size;
+  height: $floating-button-size;
+  border-radius: $border-radius-full;
+  background-color: $color-primary;
+  color: $color-text-light;
+  box-shadow: $floating-button-shadow;
+  @include flex-center;
+  cursor: pointer;
+  z-index: $z-index-fixed;
+  @include transition(transform, box-shadow);
+  
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0, 166, 81, 0.4);
+  }
+  
+  &:active {
+    transform: scale(0.95);
+  }
+}

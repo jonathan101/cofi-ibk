@@ -1,0 +1,35 @@
+[
+  {
+    "id": "reward1",
+    "tipo": "recompensa",
+    "timestamp": "2024-11-11T16:00:00.000Z",
+    "leido": false,
+    "tituloRecompensa": "20% de descuento en Wong",
+    "subtituloRecompensa": "Válido hasta fin de mes",
+    "iconoRecompensa": "reward",
+    "imagenRecompensa": "/assets/images/promo-wong.png",
+    "textoBotonRecompensa": "Activar descuento"
+  },
+  {
+    "id": "reward2",
+    "tipo": "recompensa",
+    "timestamp": "2024-11-12T10:30:00.000Z",
+    "leido": false,
+    "tituloRecompensa": "Tipo de cambio preferencial",
+    "subtituloRecompensa": "Compra dólares a S/ 3.70",
+    "iconoRecompensa": "reward",
+    "imagenRecompensa": null,
+    "textoBotonRecompensa": "Ver más"
+  },
+  {
+    "id": "reward3",
+    "tipo": "recompensa",
+    "timestamp": "2024-11-13T15:45:00.000Z",
+    "leido": false,
+    "tituloRecompensa": "Ampliación de línea TC",
+    "subtituloRecompensa": "Aumenta tu línea hasta S/ 10,000",
+    "iconoRecompensa": "reward",
+    "imagenRecompensa": null,
+    "textoBotonRecompensa": "Solicitar"
+  }
+]

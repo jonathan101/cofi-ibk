@@ -1,0 +1,23 @@
+@import '../../../../styles/variables';
+
+.mobile-container {
+  width: 100%;
+  max-width: $mobile-container-max-width;
+  min-width: $mobile-container-min-width;
+  min-height: $mobile-container-min-height;
+  margin: 0 auto;
+  box-shadow: $shadow-2xl;
+  border-radius: $mobile-container-border-radius;
+  overflow: hidden;
+  background-color: $color-bg-primary;
+  position: relative;
+
+  // Modo móvil: pantalla completa sin marco
+  &.mobile-mode {
+    max-width: 100%;
+    min-width: 100%;
+    border-radius: 0;
+    box-shadow: none;
+    min-height: 100vh;
+  }
+}

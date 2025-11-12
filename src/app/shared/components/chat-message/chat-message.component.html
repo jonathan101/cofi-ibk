@@ -1,0 +1,28 @@
+<!-- Mensaje de chat normal -->
+<div *ngIf="message.tipo === 'chat'" class="mensaje-chat" [class.es-ia]="message.esIA">
+  <div class="mensaje-contenido">
+    <p>{{ message.texto }}</p>
+  </div>
+</div>
+
+<!-- Alerta -->
+<div *ngIf="message.tipo === 'alerta'" class="mensaje-alerta">
+  <app-alert-card
+    [titulo]="message.titulo || ''"
+    [subtitulo]="message.subtitulo || ''"
+    [icono]="message.icono || ''"
+    [textoBoton]="message.textoBoton || ''"
+    [severidad]="message.severidad || 'info'">
+  </app-alert-card>
+</div>
+
+<!-- Recompensa -->
+<div *ngIf="message.tipo === 'recompensa'" class="mensaje-recompensa">
+  <app-reward-card
+    [titulo]="message.tituloRecompensa || ''"
+    [subtitulo]="message.subtituloRecompensa || ''"
+    [icono]="message.iconoRecompensa || ''"
+    [imagen]="message.imagenRecompensa || ''"
+    [textoBoton]="message.textoBotonRecompensa || ''">
+  </app-reward-card>
+</div>

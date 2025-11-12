@@ -1,0 +1,61 @@
+@import '../../../../styles/variables';
+
+.floating-button {
+  position: fixed;
+  bottom: $floating-button-bottom;
+  right: $floating-button-right;
+  width: $floating-button-size;
+  height: $floating-button-size;
+  border-radius: $border-radius-full;
+  background-color: $color-primary;
+  border: none;
+  cursor: pointer;
+  box-shadow: $floating-button-shadow;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all $transition-fast;
+  z-index: $z-index-fixed;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0, 166, 81, 0.4);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  .chicho-icon {
+    width: 32px;
+    height: 32px;
+    color: $color-text-light;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .notification-badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    min-width: $badge-size;
+    height: $badge-size;
+    padding: 0 $spacing-xs;
+    background-color: $badge-bg;
+    color: $badge-color;
+    border-radius: $border-radius-full;
+    font-size: $badge-font-size;
+    font-weight: $font-weight-bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: $shadow-md;
+    border: 2px solid $color-bg-primary;
+  }
+}

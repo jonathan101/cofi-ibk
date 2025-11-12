@@ -1,0 +1,116 @@
+@import '../../../../styles/variables';
+
+.alert-card {
+  background-color: $color-bg-primary;
+  border-radius: $border-radius-lg;
+  padding: $spacing-md;
+  box-shadow: $shadow-md;
+  border-left: 4px solid;
+  transition: all $transition-fast;
+
+  &:hover {
+    box-shadow: $shadow-lg;
+  }
+
+  .alert-header {
+    display: flex;
+    gap: $spacing-md;
+    margin-bottom: $spacing-md;
+
+    .alert-icon {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: $font-size-xl;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+
+    .alert-content {
+      flex: 1;
+
+      .alert-titulo {
+        margin: 0 0 $spacing-xs 0;
+        font-size: $font-size-base;
+        font-weight: $font-weight-semibold;
+        color: $color-text-primary;
+      }
+
+      .alert-subtitulo {
+        margin: 0;
+        font-size: $font-size-sm;
+        color: $color-text-secondary;
+        line-height: 1.4;
+      }
+    }
+  }
+
+  .alert-button {
+    width: 100%;
+    padding: $spacing-sm $spacing-md;
+    border: none;
+    border-radius: $border-radius-md;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    cursor: pointer;
+    transition: all $transition-fast;
+    background-color: transparent;
+    color: inherit;
+    border: 1px solid currentColor;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+
+  // Estilos por severidad
+  &.alert-warning {
+    border-left-color: $color-warning;
+
+    .alert-button {
+      color: $color-warning;
+      border-color: $color-warning;
+
+      &:hover {
+        background-color: rgba($color-warning, 0.1);
+      }
+    }
+  }
+
+  &.alert-danger {
+    border-left-color: $color-danger;
+
+    .alert-button {
+      color: $color-danger;
+      border-color: $color-danger;
+
+      &:hover {
+        background-color: rgba($color-danger, 0.1);
+      }
+    }
+  }
+
+  &.alert-info {
+    border-left-color: $color-info;
+
+    .alert-button {
+      color: $color-info;
+      border-color: $color-info;
+
+      &:hover {
+        background-color: rgba($color-info, 0.1);
+      }
+    }
+  }
+}

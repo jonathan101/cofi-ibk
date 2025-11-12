@@ -1,0 +1,59 @@
+@import '../../../../styles/variables';
+
+.mensaje-chat {
+  display: flex;
+  margin-bottom: $spacing-md;
+  animation: fadeIn $transition-fast;
+
+  .mensaje-contenido {
+    max-width: 75%;
+    padding: $spacing-md;
+    border-radius: $border-radius-lg;
+    background-color: $color-bg-secondary;
+    color: $color-text-primary;
+    font-size: $font-size-base;
+    line-height: 1.5;
+    word-wrap: break-word;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  // Mensaje del usuario (alineado a la derecha)
+  &:not(.es-ia) {
+    justify-content: flex-end;
+
+    .mensaje-contenido {
+      background-color: $color-primary;
+      color: $color-text-light;
+    }
+  }
+
+  // Mensaje de IA (alineado a la izquierda)
+  &.es-ia {
+    justify-content: flex-start;
+
+    .mensaje-contenido {
+      background-color: $color-bg-secondary;
+      color: $color-text-primary;
+    }
+  }
+}
+
+.mensaje-alerta,
+.mensaje-recompensa {
+  margin-bottom: $spacing-md;
+  animation: fadeIn $transition-fast;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

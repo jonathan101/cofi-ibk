@@ -1,0 +1,25 @@
+<div class="reward-card">
+  <!-- Imagen de fondo si existe -->
+  <div class="reward-image" *ngIf="imagen">
+    <img [src]="imagen" [alt]="titulo" />
+  </div>
+
+  <div class="reward-content">
+    <div class="reward-header">
+      <div class="reward-icon" *ngIf="icono">
+        <img [src]="icono" [alt]="titulo" />
+      </div>
+      <div class="reward-text">
+        <h4 class="reward-titulo">{{ titulo }}</h4>
+        <p class="reward-subtitulo" *ngIf="subtitulo">{{ subtitulo }}</p>
+      </div>
+    </div>
+
+    <button 
+      *ngIf="textoBoton" 
+      class="reward-button"
+      (click)="handleAction()">
+      {{ textoBoton }}
+    </button>
+  </div>
+</div>

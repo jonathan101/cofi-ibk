@@ -1,0 +1,995 @@
+[
+  {
+    "id": "sep-001",
+    "fecha": "2024-09-01T10:30:00.000Z",
+    "operacion": "Sueldo mensual",
+    "monto": 4000,
+    "categoria": "ingresos",
+    "tipoProducto": "TD"
+  },
+  {
+    "id": "sep-020",
+    "fecha": "2024-09-02T17:22:00.000Z",
+    "operacion": "Depósito en cuenta",
+    "monto": 965,
+    "categoria": "movimiento_caja",
+    "tipoMovimiento": "deposito",
+    "tipoProducto": "TD"
+  },
+  {
+    "id": "sep-013",
+    "fecha": "2024-09-04T20:23:00.000Z",
+    "operacion": "Pago de servicios",
+    "monto": -428,
+    "categoria": "movimiento_caja",
+    "tipoMovimiento": "transferencia",
+    "tipoProducto": "TD"
+  },
+  {
+    "id": "op-rec-sep-1",
+    "fecha": "2024-09-05T00:00:00.000Z",
+    "operacion": "Alquiler departamento",
+    "monto": -800,
+    "categoria": "movimiento_caja",
+    "tipoMovimiento": "transferencia",
+    "categoriaUsuario": "operacion_recurrente",
+    "tipoProducto": "TD",
+    "estado": "pagado",
+    "operacionRecurrenteId": "rec1",
+    "vinculadaARecurrente": true
+  },
+  {
+    "id": "sep-002",
+    "fecha": "2024-09-05T08:00:00.000Z",
+    "operacion": "Netflix",
+    "monto": -35,
+    "categoria": "gastos",
+    "subcategoria": "entretenimiento",
+    "tipoProducto": "TC",
+    "tipoGasto": "automatico"
+  },
+  {
+    "id": "sep-003",
+    "fecha": "2024-09-05T08:00:00.000Z",
+    "operacion": "Spotify Premium",
+    "monto": -20,
+    "categoria": "gastos",
+    "subcategoria": "entretenimiento",
+    "tipoProducto": "TC",
+    "tipoGasto": "automatico"
+  },
+  {
+    "id": "sep-050",
+    "fecha": "2024-09-07T19:57:00.000Z",
+    "operacion": "Bembos",
+    "monto": -56,
+    "categoria": "gastos",
+    "subcategoria": "restaurantes",
+    "tipoProducto": "TC",
+    "tipoGasto": "medio"
+  },
+  {
+    "id": "sep-026",
+    "fecha": "2024-09-09T10:59:00.000Z",
+    "operacion": "Agencia de viajes",
+    "monto": -508,
+    "categoria": "gastos",
+    "subcategoria": "viajes",
+    "tipoProducto": "TC",
+    "tipoGasto": "excepcional"
+  },
+  {
+    "id": "sep-037",
+    "fecha": "2024-09-12T16:12:00.000Z",
+    "operacion": "Café local",
+    "monto": -13,
+    "categoria": "gastos",
+    "subcategoria": "restaurantes",
+    "tipoProducto": "TC",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "sep-004",
+    "fecha": "2024-09-13T08:00:00.000Z",
+    "operacion": "Gimnasio Gold's Gym",
+    "monto": -150,
+    "categoria": "gastos",
+    "subcategoria": "salud",
+    "tipoProducto": "TC",
+    "tipoGasto": "automatico"
+  },
+  {
+    "id": "sep-036",
+    "fecha": "2024-09-13T15:25:00.000Z",
+    "operacion": "Gasolina Primax - Lleno",
+    "monto": -137,
+    "categoria": "gastos",
+    "subcategoria": "transporte",
+    "tipoProducto": "TD",
+    "tipoGasto": "excepcional"
+  },
+  {
+    "id": "sep-005",
+    "fecha": "2024-09-14T08:00:00.000Z",
+    "operacion": "Amazon Prime",
+    "monto": -25,
+    "categoria": "gastos",
+    "subcategoria": "entretenimiento",
+    "tipoProducto": "TC",
+    "tipoGasto": "automatico"
+  },
+  {
+    "id": "op-rec-sep-2",
+    "fecha": "2024-09-15T00:00:00.000Z",
+    "operacion": "Pago de luz",
+    "monto": -120,
+    "categoria": "movimiento_caja",
+    "tipoMovimiento": "otros",
+    "categoriaUsuario": "operacion_recurrente",
+    "tipoProducto": "TD",
+    "estado": "pagado",
+    "operacionRecurrenteId": "rec2",
+    "vinculadaARecurrente": true
+  },
+  {
+    "id": "sep-018",
+    "fecha": "2024-09-15T10:48:00.000Z",
+    "operacion": "Transferencia recibida",
+    "monto": 722,
+    "categoria": "movimiento_caja",
+    "tipoMovimiento": "deposito",
+    "tipoProducto": "TD"
+  },
+  {
+    "id": "sep-040",
+    "fecha": "2024-09-15T14:43:00.000Z",
+    "operacion": "Taxi Cabify",
+    "monto": -19,
+    "categoria": "gastos",
+    "subcategoria": "transporte",
+    "tipoProducto": "TC",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "sep-023",
+    "fecha": "2024-09-15T17:36:00.000Z",
+    "operacion": "Supermercado Wong",
+    "monto": -38,
+    "categoria": "gastos",
+    "subcategoria": "supermercado",
+    "tipoProducto": "TD",
+    "tipoGasto": "medio"
+  },
+  {
+    "id": "sep-025",
+    "fecha": "2024-09-15T18:57:00.000Z",
+    "operacion": "H&M",
+    "monto": -387,
+    "categoria": "gastos",
+    "subcategoria": "compras",
+    "tipoProducto": "TC",
+    "tipoGasto": "excepcional"
+  },
+  {
+    "id": "sep-035",
+    "fecha": "2024-09-15T19:34:00.000Z",
+    "operacion": "Ripley",
+    "monto": -450,
+    "categoria": "gastos",
+    "subcategoria": "compras",
+    "tipoProducto": "TC",
+    "tipoGasto": "excepcional"
+  },
+  {
+    "id": "sep-009",
+    "fecha": "2024-09-16T13:37:00.000Z",
+    "operacion": "Pago tarjeta de crédito Mastercard",
+    "monto": -806,
+    "categoria": "pago_financiero",
+    "tipoProducto": "TD",
+    "estado": "pagado"
+  },
+  {
+    "id": "sep-043",
+    "fecha": "2024-09-17T14:21:00.000Z",
+    "operacion": "Tienda de barrio",
+    "monto": -13,
+    "categoria": "gastos",
+    "subcategoria": "supermercado",
+    "tipoProducto": "TD",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "sep-046",
+    "fecha": "2024-09-18T12:18:00.000Z",
+    "operacion": "KFC",
+    "monto": -54,
+    "categoria": "gastos",
+    "subcategoria": "restaurantes",
+    "tipoProducto": "TC",
+    "tipoGasto": "medio"
+  },
+  {
+    "id": "sep-012",
+    "fecha": "2024-09-18T14:10:00.000Z",
+    "operacion": "Pago tarjeta de crédito Mastercard",
+    "monto": -1202,
+    "categoria": "pago_financiero",
+    "tipoProducto": "TD",
+    "estado": "pagado"
+  },
+  {
+    "id": "sep-010",
+    "fecha": "2024-09-19T17:12:00.000Z",
+    "operacion": "Cuota préstamo vehicular",
+    "monto": -1427,
+    "categoria": "pago_financiero",
+    "tipoProducto": "TD",
+    "estado": "pagado"
+  },
+  {
+    "id": "sep-028",
+    "fecha": "2024-09-20T10:34:00.000Z",
+    "operacion": "Snack bar",
+    "monto": -17,
+    "categoria": "gastos",
+    "subcategoria": "restaurantes",
+    "tipoProducto": "TC",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "sep-011",
+    "fecha": "2024-09-20T14:26:00.000Z",
+    "operacion": "Cuota préstamo vehicular",
+    "monto": -894,
+    "categoria": "pago_financiero",
+    "tipoProducto": "TD",
+    "estado": "pagado"
+  },
+  {
+    "id": "op-rec-sep-3",
+    "fecha": "2024-09-30T00:00:00.000Z",
+    "operacion": "Internet y cable",
+    "monto": -150,
+    "categoria": "movimiento_caja",
+    "tipoMovimiento": "otros",
+    "categoriaUsuario": "operacion_recurrente",
+    "tipoProducto": "TD",
+    "estado": "pagado",
+    "operacionRecurrenteId": "rec3",
+    "vinculadaARecurrente": true
+  },
+  {
+    "id": "sep-014",
+    "fecha": "2024-09-23T8:17:00.000Z",
+    "operacion": "Transferencia a terceros",
+    "monto": -619,
+    "categoria": "movimiento_caja",
+    "tipoMovimiento": "transferencia",
+    "tipoProducto": "TD"
+  },
+  {
+    "id": "sep-016",
+    "fecha": "2024-09-20T19:47:00.000Z",
+    "operacion": "Retiro ATM",
+    "monto": -106,
+    "categoria": "movimiento_caja",
+    "tipoMovimiento": "retiro",
+    "tipoProducto": "TD"
+  },
+  {
+    "id": "sep-015",
+    "fecha": "2024-09-26T15:49:00.000Z",
+    "operacion": "Transferencia recibida",
+    "monto": 615,
+    "categoria": "movimiento_caja",
+    "tipoMovimiento": "deposito",
+    "tipoProducto": "TD"
+  },
+  {
+    "id": "sep-017",
+    "fecha": "2024-09-03T11:0:00.000Z",
+    "operacion": "Retiro ATM",
+    "monto": -287,
+    "categoria": "movimiento_caja",
+    "tipoMovimiento": "retiro",
+    "tipoProducto": "TD"
+  },
+  {
+    "id": "sep-019",
+    "fecha": "2024-09-10T8:49:00.000Z",
+    "operacion": "Transferencia a ahorros",
+    "monto": -261,
+    "categoria": "movimiento_caja",
+    "tipoMovimiento": "transferencia",
+    "tipoProducto": "TD"
+  },
+  {
+    "id": "sep-021",
+    "fecha": "2024-09-21T15:39:00.000Z",
+    "operacion": "Transferencia a terceros",
+    "monto": -695,
+    "categoria": "movimiento_caja",
+    "tipoMovimiento": "transferencia",
+    "tipoProducto": "TD"
+  },
+  {
+    "id": "sep-022",
+    "fecha": "2024-09-12T12:1:00.000Z",
+    "operacion": "Transferencia a ahorros",
+    "monto": -250,
+    "categoria": "movimiento_caja",
+    "tipoMovimiento": "transferencia",
+    "tipoProducto": "TD"
+  },
+  {
+    "id": "sep-024",
+    "fecha": "2024-09-26T14:3:00.000Z",
+    "operacion": "Pasaje bus",
+    "monto": -18,
+    "categoria": "gastos",
+    "subcategoria": "transporte",
+    "tipoProducto": "TC",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "sep-027",
+    "fecha": "2024-09-18T8:33:00.000Z",
+    "operacion": "China Wok",
+    "monto": -39,
+    "categoria": "gastos",
+    "subcategoria": "restaurantes",
+    "tipoProducto": "TC",
+    "tipoGasto": "medio"
+  },
+  {
+    "id": "sep-029",
+    "fecha": "2024-09-19T9:49:00.000Z",
+    "operacion": "Análisis clínicos",
+    "monto": -23,
+    "categoria": "gastos",
+    "subcategoria": "salud",
+    "tipoProducto": "TD",
+    "tipoGasto": "medio"
+  },
+  {
+    "id": "sep-030",
+    "fecha": "2024-09-22T8:21:00.000Z",
+    "operacion": "Gasolina Primax",
+    "monto": -56,
+    "categoria": "gastos",
+    "subcategoria": "transporte",
+    "tipoProducto": "TD",
+    "tipoGasto": "medio"
+  },
+  {
+    "id": "sep-031",
+    "fecha": "2024-09-17T8:44:00.000Z",
+    "operacion": "Taxi Beat",
+    "monto": -9,
+    "categoria": "gastos",
+    "subcategoria": "transporte",
+    "tipoProducto": "TC",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "sep-032",
+    "fecha": "2024-09-21T10:32:00.000Z",
+    "operacion": "Uber Eats",
+    "monto": -56,
+    "categoria": "gastos",
+    "subcategoria": "delivery",
+    "tipoProducto": "TC",
+    "tipoGasto": "medio"
+  },
+  {
+    "id": "sep-033",
+    "fecha": "2024-09-12T14:5:00.000Z",
+    "operacion": "Glovo",
+    "monto": -55,
+    "categoria": "gastos",
+    "subcategoria": "delivery",
+    "tipoProducto": "TC",
+    "tipoGasto": "medio"
+  },
+  {
+    "id": "sep-034",
+    "fecha": "2024-09-26T11:31:00.000Z",
+    "operacion": "Café local",
+    "monto": -11,
+    "categoria": "gastos",
+    "subcategoria": "restaurantes",
+    "tipoProducto": "TC",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "sep-038",
+    "fecha": "2024-09-23T9:6:00.000Z",
+    "operacion": "PedidosYa - Café",
+    "monto": -15,
+    "categoria": "gastos",
+    "subcategoria": "delivery",
+    "tipoProducto": "TC",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "sep-039",
+    "fecha": "2024-09-06T9:11:00.000Z",
+    "operacion": "Farmacia Universal",
+    "monto": -10,
+    "categoria": "gastos",
+    "subcategoria": "salud",
+    "tipoProducto": "TD",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "sep-044",
+    "fecha": "2024-09-26T12:40:00.000Z",
+    "operacion": "Pardos Chicken",
+    "monto": -29,
+    "categoria": "gastos",
+    "subcategoria": "restaurantes",
+    "tipoProducto": "TC",
+    "tipoGasto": "medio"
+  },
+  {
+    "id": "sep-041",
+    "fecha": "2024-09-28T12:44:00.000Z",
+    "operacion": "Taxi Beat",
+    "monto": -18,
+    "categoria": "gastos",
+    "subcategoria": "transporte",
+    "tipoProducto": "TC",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "sep-042",
+    "fecha": "2024-09-12T8:29:00.000Z",
+    "operacion": "Taxi Cabify",
+    "monto": -17,
+    "categoria": "gastos",
+    "subcategoria": "transporte",
+    "tipoProducto": "TC",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "sep-045",
+    "fecha": "2024-09-19T9:56:00.000Z",
+    "operacion": "Delivery Rappi",
+    "monto": -23,
+    "categoria": "gastos",
+    "subcategoria": "delivery",
+    "tipoProducto": "TC",
+    "tipoGasto": "medio"
+  },
+  {
+    "id": "sep-047",
+    "fecha": "2024-09-23T10:46:00.000Z",
+    "operacion": "Bembos",
+    "monto": -46,
+    "categoria": "gastos",
+    "subcategoria": "restaurantes",
+    "tipoProducto": "TC",
+    "tipoGasto": "medio"
+  },
+  {
+    "id": "sep-048",
+    "fecha": "2024-09-03T9:31:00.000Z",
+    "operacion": "Bodega del barrio",
+    "monto": -15,
+    "categoria": "gastos",
+    "subcategoria": "supermercado",
+    "tipoProducto": "TD",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "sep-049",
+    "fecha": "2024-09-26T9:52:00.000Z",
+    "operacion": "Exámenes médicos",
+    "monto": -82,
+    "categoria": "gastos",
+    "subcategoria": "salud",
+    "tipoProducto": "TD",
+    "tipoGasto": "excepcional"
+  },
+  {
+    "id": "sep-086",
+    "fecha": "2024-09-02T13:19:00.000Z",
+    "operacion": "Bodega del barrio",
+    "monto": -9,
+    "categoria": "gastos",
+    "subcategoria": "supermercado",
+    "tipoProducto": "TD",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "sep-070",
+    "fecha": "2024-09-03T12:42:00.000Z",
+    "operacion": "Glovo",
+    "monto": -35,
+    "categoria": "gastos",
+    "subcategoria": "delivery",
+    "tipoProducto": "TC",
+    "tipoGasto": "medio"
+  },
+  {
+    "id": "sep-075",
+    "fecha": "2024-09-03T16:31:00.000Z",
+    "operacion": "Delivery Rappi",
+    "monto": -35,
+    "categoria": "gastos",
+    "subcategoria": "delivery",
+    "tipoProducto": "TC",
+    "tipoGasto": "medio"
+  },
+  {
+    "id": "sep-059",
+    "fecha": "2024-09-03T18:58:00.000Z",
+    "operacion": "Pasaje bus",
+    "monto": -10,
+    "categoria": "gastos",
+    "subcategoria": "transporte",
+    "tipoProducto": "TC",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "sep-054",
+    "fecha": "2024-09-04T20:29:00.000Z",
+    "operacion": "Bowling",
+    "monto": -37,
+    "categoria": "gastos",
+    "subcategoria": "entretenimiento",
+    "tipoProducto": "TC",
+    "tipoGasto": "medio"
+  },
+  {
+    "id": "sep-084",
+    "fecha": "2024-09-05T10:55:00.000Z",
+    "operacion": "Delivery Rappi - Snack",
+    "monto": -13,
+    "categoria": "gastos",
+    "subcategoria": "delivery",
+    "tipoProducto": "TC",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "sep-052",
+    "fecha": "2024-09-05T14:48:00.000Z",
+    "operacion": "Bodega del barrio",
+    "monto": -18,
+    "categoria": "gastos",
+    "subcategoria": "supermercado",
+    "tipoProducto": "TD",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "sep-082",
+    "fecha": "2024-09-05T16:26:00.000Z",
+    "operacion": "Taxi Uber - Largo",
+    "monto": -41,
+    "categoria": "gastos",
+    "subcategoria": "transporte",
+    "tipoProducto": "TD",
+    "tipoGasto": "medio"
+  },
+  {
+    "id": "sep-087",
+    "fecha": "2024-09-06T14:51:00.000Z",
+    "operacion": "Taxi Cabify",
+    "monto": -8,
+    "categoria": "gastos",
+    "subcategoria": "transporte",
+    "tipoProducto": "TC",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "sep-061",
+    "fecha": "2024-09-06T15:23:00.000Z",
+    "operacion": "Pasaje bus",
+    "monto": -9,
+    "categoria": "gastos",
+    "subcategoria": "transporte",
+    "tipoProducto": "TC",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "sep-099",
+    "fecha": "2024-09-07T15:16:00.000Z",
+    "operacion": "Snack bar",
+    "monto": -14,
+    "categoria": "gastos",
+    "subcategoria": "restaurantes",
+    "tipoProducto": "TC",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "sep-077",
+    "fecha": "2024-09-08T14:45:00.000Z",
+    "operacion": "Tienda de barrio",
+    "monto": -18,
+    "categoria": "gastos",
+    "subcategoria": "supermercado",
+    "tipoProducto": "TD",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "sep-089",
+    "fecha": "2024-09-08T15:50:00.000Z",
+    "operacion": "Metro - Despensa",
+    "monto": -251,
+    "categoria": "gastos",
+    "subcategoria": "supermercado",
+    "tipoProducto": "TD",
+    "tipoGasto": "excepcional"
+  },
+  {
+    "id": "sep-058",
+    "fecha": "2024-09-08T17:12:00.000Z",
+    "operacion": "Delivery Rappi - Snack",
+    "monto": -19,
+    "categoria": "gastos",
+    "subcategoria": "delivery",
+    "tipoProducto": "TC",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "sep-091",
+    "fecha": "2024-09-09T11:28:00.000Z",
+    "operacion": "Taxi Uber - Largo",
+    "monto": -57,
+    "categoria": "gastos",
+    "subcategoria": "transporte",
+    "tipoProducto": "TD",
+    "tipoGasto": "medio"
+  },
+  {
+    "id": "sep-078",
+    "fecha": "2024-09-09T14:49:00.000Z",
+    "operacion": "Taxi largo",
+    "monto": -96,
+    "categoria": "gastos",
+    "subcategoria": "transporte",
+    "tipoProducto": "TD",
+    "tipoGasto": "excepcional"
+  },
+  {
+    "id": "sep-065",
+    "fecha": "2024-09-10T18:57:00.000Z",
+    "operacion": "Bodega del barrio",
+    "monto": -15,
+    "categoria": "gastos",
+    "subcategoria": "supermercado",
+    "tipoProducto": "TD",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "sep-051",
+    "fecha": "2024-09-12T11:31:00.000Z",
+    "operacion": "Farmacia Universal",
+    "monto": -16,
+    "categoria": "gastos",
+    "subcategoria": "salud",
+    "tipoProducto": "TD",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "sep-073",
+    "fecha": "2024-09-12T19:11:00.000Z",
+    "operacion": "KFC",
+    "monto": -57,
+    "categoria": "gastos",
+    "subcategoria": "restaurantes",
+    "tipoProducto": "TC",
+    "tipoGasto": "medio"
+  },
+  {
+    "id": "sep-060",
+    "fecha": "2024-09-13T19:11:00.000Z",
+    "operacion": "Glovo",
+    "monto": -56,
+    "categoria": "gastos",
+    "subcategoria": "delivery",
+    "tipoProducto": "TC",
+    "tipoGasto": "medio"
+  },
+  {
+    "id": "sep-098",
+    "fecha": "2024-09-14T15:37:00.000Z",
+    "operacion": "Gasolina Shell - Lleno",
+    "monto": -85,
+    "categoria": "gastos",
+    "subcategoria": "transporte",
+    "tipoProducto": "TD",
+    "tipoGasto": "excepcional"
+  },
+  {
+    "id": "sep-081",
+    "fecha": "2024-09-16T12:51:00.000Z",
+    "operacion": "Pasaje bus",
+    "monto": -18,
+    "categoria": "gastos",
+    "subcategoria": "transporte",
+    "tipoProducto": "TC",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "sep-068",
+    "fecha": "2024-09-16T19:38:00.000Z",
+    "operacion": "Minimarket",
+    "monto": -16,
+    "categoria": "gastos",
+    "subcategoria": "supermercado",
+    "tipoProducto": "TD",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "sep-076",
+    "fecha": "2024-09-16T20:41:00.000Z",
+    "operacion": "Pardos Chicken",
+    "monto": -31,
+    "categoria": "gastos",
+    "subcategoria": "restaurantes",
+    "tipoProducto": "TC",
+    "tipoGasto": "medio"
+  },
+  {
+    "id": "sep-062",
+    "fecha": "2024-09-19T16:12:00.000Z",
+    "operacion": "Revista",
+    "monto": -10,
+    "categoria": "gastos",
+    "subcategoria": "entretenimiento",
+    "tipoProducto": "TC",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "sep-056",
+    "fecha": "2024-09-21T11:30:00.000Z",
+    "operacion": "Farmacia - Medicamentos",
+    "monto": -42,
+    "categoria": "gastos",
+    "subcategoria": "salud",
+    "tipoProducto": "TD",
+    "tipoGasto": "medio"
+  },
+  {
+    "id": "sep-066",
+    "fecha": "2024-09-21T20:21:00.000Z",
+    "operacion": "Minimarket",
+    "monto": -19,
+    "categoria": "gastos",
+    "subcategoria": "supermercado",
+    "tipoProducto": "TD",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "sep-053",
+    "fecha": "2024-09-27T19:26:00.000Z",
+    "operacion": "Tienda de barrio",
+    "monto": -14,
+    "categoria": "gastos",
+    "subcategoria": "supermercado",
+    "tipoProducto": "TD",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "sep-055",
+    "fecha": "2024-09-28T14:17:00.000Z",
+    "operacion": "Taxi al aeropuerto",
+    "monto": -23,
+    "categoria": "gastos",
+    "subcategoria": "transporte",
+    "tipoProducto": "TD",
+    "tipoGasto": "medio"
+  },
+  {
+    "id": "sep-057",
+    "fecha": "2024-09-16T8:7:00.000Z",
+    "operacion": "Café Starbucks",
+    "monto": -14,
+    "categoria": "gastos",
+    "subcategoria": "restaurantes",
+    "tipoProducto": "TC",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "sep-063",
+    "fecha": "2024-09-09T9:51:00.000Z",
+    "operacion": "Bodega del barrio",
+    "monto": -12,
+    "categoria": "gastos",
+    "subcategoria": "supermercado",
+    "tipoProducto": "TD",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "sep-064",
+    "fecha": "2024-09-20T8:10:00.000Z",
+    "operacion": "Uber Eats - Desayuno",
+    "monto": -15,
+    "categoria": "gastos",
+    "subcategoria": "delivery",
+    "tipoProducto": "TC",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "sep-067",
+    "fecha": "2024-09-08T9:47:00.000Z",
+    "operacion": "Minimarket",
+    "monto": -9,
+    "categoria": "gastos",
+    "subcategoria": "supermercado",
+    "tipoProducto": "TD",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "sep-069",
+    "fecha": "2024-09-22T19:56:00.000Z",
+    "operacion": "Delivery Rappi - Snack",
+    "monto": -13,
+    "categoria": "gastos",
+    "subcategoria": "delivery",
+    "tipoProducto": "TC",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "sep-071",
+    "fecha": "2024-09-25T9:8:00.000Z",
+    "operacion": "Mercado Libre",
+    "monto": -119,
+    "categoria": "gastos",
+    "subcategoria": "compras",
+    "tipoProducto": "TC",
+    "tipoGasto": "excepcional"
+  },
+  {
+    "id": "sep-072",
+    "fecha": "2024-09-04T20:9:00.000Z",
+    "operacion": "Taxi Cabify",
+    "monto": -10,
+    "categoria": "gastos",
+    "subcategoria": "transporte",
+    "tipoProducto": "TC",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "sep-074",
+    "fecha": "2024-09-23T9:49:00.000Z",
+    "operacion": "Supermercado Wong",
+    "monto": -22,
+    "categoria": "gastos",
+    "subcategoria": "supermercado",
+    "tipoProducto": "TD",
+    "tipoGasto": "medio"
+  },
+  {
+    "id": "sep-094",
+    "fecha": "2024-09-17T12:35:00.000Z",
+    "operacion": "Supermercado Wong - Compra grande",
+    "monto": -120,
+    "categoria": "gastos",
+    "subcategoria": "supermercado",
+    "tipoProducto": "TD",
+    "tipoGasto": "excepcional"
+  },
+  {
+    "id": "sep-079",
+    "fecha": "2024-09-21T19:43:00.000Z",
+    "operacion": "Estacionamiento",
+    "monto": -10,
+    "categoria": "gastos",
+    "subcategoria": "transporte",
+    "tipoProducto": "TC",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "sep-080",
+    "fecha": "2024-09-02T19:5:00.000Z",
+    "operacion": "Glovo",
+    "monto": -28,
+    "categoria": "gastos",
+    "subcategoria": "delivery",
+    "tipoProducto": "TC",
+    "tipoGasto": "medio"
+  },
+  {
+    "id": "sep-083",
+    "fecha": "2024-09-21T19:1:00.000Z",
+    "operacion": "Bodega del barrio",
+    "monto": -5,
+    "categoria": "gastos",
+    "subcategoria": "supermercado",
+    "tipoProducto": "TD",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "sep-085",
+    "fecha": "2024-09-22T15:51:00.000Z",
+    "operacion": "Snack bar",
+    "monto": -13,
+    "categoria": "gastos",
+    "subcategoria": "restaurantes",
+    "tipoProducto": "TC",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "sep-088",
+    "fecha": "2024-09-04T9:45:00.000Z",
+    "operacion": "Plaza Vea",
+    "monto": -41,
+    "categoria": "gastos",
+    "subcategoria": "supermercado",
+    "tipoProducto": "TD",
+    "tipoGasto": "medio"
+  },
+  {
+    "id": "sep-097",
+    "fecha": "2024-09-22T16:40:00.000Z",
+    "operacion": "Juan Valdez",
+    "monto": -12,
+    "categoria": "gastos",
+    "subcategoria": "restaurantes",
+    "tipoProducto": "TC",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "sep-090",
+    "fecha": "2024-09-23T13:18:00.000Z",
+    "operacion": "Restaurante La Rosa Náutica",
+    "monto": -369,
+    "categoria": "gastos",
+    "subcategoria": "restaurantes",
+    "tipoProducto": "TC",
+    "tipoGasto": "excepcional"
+  },
+  {
+    "id": "sep-092",
+    "fecha": "2024-09-27T18:16:00.000Z",
+    "operacion": "Jugos",
+    "monto": -14,
+    "categoria": "gastos",
+    "subcategoria": "restaurantes",
+    "tipoProducto": "TC",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "sep-093",
+    "fecha": "2024-09-14T8:45:00.000Z",
+    "operacion": "Snack bar",
+    "monto": -12,
+    "categoria": "gastos",
+    "subcategoria": "restaurantes",
+    "tipoProducto": "TC",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "sep-096",
+    "fecha": "2024-09-22T12:28:00.000Z",
+    "operacion": "Uber Eats",
+    "monto": -45,
+    "categoria": "gastos",
+    "subcategoria": "delivery",
+    "tipoProducto": "TC",
+    "tipoGasto": "medio"
+  },
+  {
+    "id": "sep-095",
+    "fecha": "2024-09-28T18:11:00.000Z",
+    "operacion": "H&M",
+    "monto": -395,
+    "categoria": "gastos",
+    "subcategoria": "compras",
+    "tipoProducto": "TC",
+    "tipoGasto": "excepcional"
+  },
+  {
+    "id": "sep-100",
+    "fecha": "2024-09-27T12:8:00.000Z",
+    "operacion": "Agencia de viajes",
+    "monto": -492,
+    "categoria": "gastos",
+    "subcategoria": "viajes",
+    "tipoProducto": "TC",
+    "tipoGasto": "excepcional"
+  }
+]

@@ -1,0 +1,3 @@
+# Public directory
+# Archivos estáticos que se copian directamente al build
+# En Angular 18+, reemplaza src/favicon.ico y otros archivos raíz

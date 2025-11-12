@@ -1,0 +1,26 @@
+[
+  {
+    "id": "msg1",
+    "tipo": "chat",
+    "timestamp": "2024-11-10T10:00:00.000Z",
+    "leido": true,
+    "texto": "¡Hola! Bienvenido a Chicho, tu asistente de ahorro inteligente.",
+    "esIA": true
+  },
+  {
+    "id": "msg2",
+    "tipo": "chat",
+    "timestamp": "2024-11-10T10:05:00.000Z",
+    "leido": true,
+    "texto": "Hola Chicho, ¿cómo estoy con mis gastos este mes?",
+    "esIA": false
+  },
+  {
+    "id": "msg3",
+    "tipo": "chat",
+    "timestamp": "2024-11-10T10:05:30.000Z",
+    "leido": true,
+    "texto": "Has gastado S/ 2,450 hasta ahora en noviembre. Estás dentro de tu presupuesto, pero te recomiendo revisar tus gastos en restaurantes que han aumentado un 15% respecto al mes pasado.",
+    "esIA": true
+  }
+]

@@ -1,0 +1,529 @@
+[
+  {
+    "id": "nov-001",
+    "fecha": "2024-11-01T10:30:00.000Z",
+    "operacion": "Sueldo mensual",
+    "monto": 4000,
+    "categoria": "ingresos",
+    "tipoProducto": "TD"
+  },
+  {
+    "id": "nov-029",
+    "fecha": "2024-11-02T19:45:00.000Z",
+    "operacion": "Taxi Uber",
+    "monto": -14,
+    "categoria": "gastos",
+    "subcategoria": "transporte",
+    "tipoProducto": "TC",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "nov-039",
+    "fecha": "2024-11-02T20:19:00.000Z",
+    "operacion": "Bodega del barrio",
+    "monto": -16,
+    "categoria": "gastos",
+    "subcategoria": "supermercado",
+    "tipoProducto": "TD",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "nov-022",
+    "fecha": "2024-11-03T10:28:00.000Z",
+    "operacion": "Delivery Rappi - Snack",
+    "monto": -18,
+    "categoria": "gastos",
+    "subcategoria": "delivery",
+    "tipoProducto": "TC",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "nov-040",
+    "fecha": "2024-11-04T12:17:00.000Z",
+    "operacion": "Análisis clínicos",
+    "monto": -55,
+    "categoria": "gastos",
+    "subcategoria": "salud",
+    "tipoProducto": "TD",
+    "tipoGasto": "medio"
+  },
+  {
+    "id": "nov-042",
+    "fecha": "2024-11-04T14:21:00.000Z",
+    "operacion": "Juan Valdez",
+    "monto": -14,
+    "categoria": "gastos",
+    "subcategoria": "restaurantes",
+    "tipoProducto": "TC",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "nov-043",
+    "fecha": "2024-11-04T17:49:00.000Z",
+    "operacion": "Minimarket",
+    "monto": -19,
+    "categoria": "gastos",
+    "subcategoria": "supermercado",
+    "tipoProducto": "TD",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "op-rec-nov-1",
+    "fecha": "2024-11-05T00:00:00.000Z",
+    "operacion": "Alquiler departamento",
+    "monto": -800,
+    "categoria": "movimiento_caja",
+    "tipoMovimiento": "transferencia",
+    "categoriaUsuario": "operacion_recurrente",
+    "tipoProducto": "TD",
+    "estado": "pagado",
+    "operacionRecurrenteId": "rec1",
+    "vinculadaARecurrente": true
+  },
+  {
+    "id": "nov-002",
+    "fecha": "2024-11-05T08:00:00.000Z",
+    "operacion": "Netflix",
+    "monto": -35,
+    "categoria": "gastos",
+    "subcategoria": "entretenimiento",
+    "tipoProducto": "TC",
+    "tipoGasto": "automatico"
+  },
+  {
+    "id": "nov-003",
+    "fecha": "2024-11-05T08:00:00.000Z",
+    "operacion": "Spotify Premium",
+    "monto": -20,
+    "categoria": "gastos",
+    "subcategoria": "entretenimiento",
+    "tipoProducto": "TC",
+    "tipoGasto": "automatico"
+  },
+  {
+    "id": "nov-047",
+    "fecha": "2024-11-05T10:35:00.000Z",
+    "operacion": "KFC",
+    "monto": -58,
+    "categoria": "gastos",
+    "subcategoria": "restaurantes",
+    "tipoProducto": "TC",
+    "tipoGasto": "medio"
+  },
+  {
+    "id": "nov-041",
+    "fecha": "2024-11-05T10:58:00.000Z",
+    "operacion": "Panadería",
+    "monto": -19,
+    "categoria": "gastos",
+    "subcategoria": "supermercado",
+    "tipoProducto": "TD",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "nov-016",
+    "fecha": "2024-11-05T17:32:00.000Z",
+    "operacion": "Retiro ATM",
+    "monto": -302,
+    "categoria": "movimiento_caja",
+    "tipoMovimiento": "retiro",
+    "tipoProducto": "TD"
+  },
+  {
+    "id": "nov-049",
+    "fecha": "2024-11-06T12:13:00.000Z",
+    "operacion": "Jugos",
+    "monto": -15,
+    "categoria": "gastos",
+    "subcategoria": "restaurantes",
+    "tipoProducto": "TC",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "nov-045",
+    "fecha": "2024-11-06T16:40:00.000Z",
+    "operacion": "Saga Falabella",
+    "monto": -152,
+    "categoria": "gastos",
+    "subcategoria": "compras",
+    "tipoProducto": "TC",
+    "tipoGasto": "excepcional"
+  },
+  {
+    "id": "nov-050",
+    "fecha": "2024-11-06T18:20:00.000Z",
+    "operacion": "Bembos",
+    "monto": -48,
+    "categoria": "gastos",
+    "subcategoria": "restaurantes",
+    "tipoProducto": "TC",
+    "tipoGasto": "medio"
+  },
+  {
+    "id": "nov-031",
+    "fecha": "2024-11-08T12:58:00.000Z",
+    "operacion": "Café local",
+    "monto": -12,
+    "categoria": "gastos",
+    "subcategoria": "restaurantes",
+    "tipoProducto": "TC",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "nov-037",
+    "fecha": "2024-11-09T13:31:00.000Z",
+    "operacion": "Uber Eats - Desayuno",
+    "monto": -19,
+    "categoria": "gastos",
+    "subcategoria": "delivery",
+    "tipoProducto": "TC",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "nov-028",
+    "fecha": "2024-11-09T14:39:00.000Z",
+    "operacion": "Tienda de barrio",
+    "monto": -16,
+    "categoria": "gastos",
+    "subcategoria": "supermercado",
+    "tipoProducto": "TD",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "nov-024",
+    "fecha": "2024-11-09T17:35:00.000Z",
+    "operacion": "Tienda de barrio",
+    "monto": -10,
+    "categoria": "gastos",
+    "subcategoria": "supermercado",
+    "tipoProducto": "TD",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "nov-026",
+    "fecha": "2024-11-10T13:12:00.000Z",
+    "operacion": "Jugos",
+    "monto": -20,
+    "categoria": "gastos",
+    "subcategoria": "restaurantes",
+    "tipoProducto": "TC",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "nov-009",
+    "fecha": "2024-11-11T11:37:00.000Z",
+    "operacion": "Pago tarjeta de crédito Visa",
+    "monto": -557,
+    "categoria": "pago_financiero",
+    "tipoProducto": "TD",
+    "estado": "pagado"
+  },
+  {
+    "id": "nov-034",
+    "fecha": "2024-11-11T17:24:00.000Z",
+    "operacion": "Revista",
+    "monto": -19,
+    "categoria": "gastos",
+    "subcategoria": "entretenimiento",
+    "tipoProducto": "TC",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "nov-032",
+    "fecha": "2024-11-12T15:10:00.000Z",
+    "operacion": "Panadería",
+    "monto": -11,
+    "categoria": "gastos",
+    "subcategoria": "supermercado",
+    "tipoProducto": "TD",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "nov-036",
+    "fecha": "2024-11-12T16:17:00.000Z",
+    "operacion": "Consulta médica",
+    "monto": -48,
+    "categoria": "gastos",
+    "subcategoria": "salud",
+    "tipoProducto": "TD",
+    "tipoGasto": "medio"
+  },
+  {
+    "id": "nov-004",
+    "fecha": "2024-11-13T08:00:00.000Z",
+    "operacion": "Gimnasio Gold's Gym",
+    "monto": -150,
+    "categoria": "gastos",
+    "subcategoria": "salud",
+    "tipoProducto": "TC",
+    "tipoGasto": "automatico"
+  },
+  {
+    "id": "nov-017",
+    "fecha": "2024-11-13T12:29:00.000Z",
+    "operacion": "Pago de servicios",
+    "monto": -539,
+    "categoria": "movimiento_caja",
+    "tipoMovimiento": "transferencia",
+    "tipoProducto": "TD"
+  },
+  {
+    "id": "nov-005",
+    "fecha": "2024-11-14T08:00:00.000Z",
+    "operacion": "Amazon Prime",
+    "monto": -25,
+    "categoria": "gastos",
+    "subcategoria": "entretenimiento",
+    "tipoProducto": "TC",
+    "tipoGasto": "automatico"
+  },
+  {
+    "id": "nov-021",
+    "fecha": "2024-11-14T10:14:00.000Z",
+    "operacion": "Jugos",
+    "monto": -17,
+    "categoria": "gastos",
+    "subcategoria": "restaurantes",
+    "tipoProducto": "TC",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "op-rec-nov-2",
+    "fecha": "2024-11-15T00:00:00.000Z",
+    "operacion": "Pago de luz",
+    "monto": -120,
+    "categoria": "movimiento_caja",
+    "tipoMovimiento": "otros",
+    "categoriaUsuario": "operacion_recurrente",
+    "tipoProducto": "TD",
+    "estado": "pagado",
+    "operacionRecurrenteId": "rec2",
+    "vinculadaARecurrente": true
+  },
+  {
+    "id": "nov-010",
+    "fecha": "2024-11-17T13:34:00.000Z",
+    "operacion": "Cuota préstamo personal",
+    "monto": -1103,
+    "categoria": "pago_financiero",
+    "tipoProducto": "TD",
+    "estado": "pagado"
+  },
+  {
+    "id": "op-rec-nov-3",
+    "fecha": "2024-11-30T00:00:00.000Z",
+    "operacion": "Internet y cable",
+    "monto": -150,
+    "categoria": "movimiento_caja",
+    "tipoMovimiento": "otros",
+    "categoriaUsuario": "operacion_recurrente",
+    "tipoProducto": "TD",
+    "estado": "pagado",
+    "operacionRecurrenteId": "rec3",
+    "vinculadaARecurrente": true
+  },
+  {
+    "id": "nov-011",
+    "fecha": "2024-11-14T8:13:00.000Z",
+    "operacion": "Cuota préstamo personal",
+    "monto": -876,
+    "categoria": "pago_financiero",
+    "tipoProducto": "TD",
+    "estado": "pagado"
+  },
+  {
+    "id": "nov-012",
+    "fecha": "2024-11-10T9:26:00.000Z",
+    "operacion": "Pago tarjeta de crédito Visa",
+    "monto": -1369,
+    "categoria": "pago_financiero",
+    "tipoProducto": "TD",
+    "estado": "pagado"
+  },
+  {
+    "id": "nov-013",
+    "fecha": "2024-11-08T19:7:00.000Z",
+    "operacion": "Retiro ATM",
+    "monto": -289,
+    "categoria": "movimiento_caja",
+    "tipoMovimiento": "retiro",
+    "tipoProducto": "TD"
+  },
+  {
+    "id": "nov-014",
+    "fecha": "2024-11-15T18:0:00.000Z",
+    "operacion": "Depósito en cuenta",
+    "monto": 835,
+    "categoria": "movimiento_caja",
+    "tipoMovimiento": "deposito",
+    "tipoProducto": "TD"
+  },
+  {
+    "id": "nov-015",
+    "fecha": "2024-11-08T8:51:00.000Z",
+    "operacion": "Retiro ATM",
+    "monto": -458,
+    "categoria": "movimiento_caja",
+    "tipoMovimiento": "retiro",
+    "tipoProducto": "TD"
+  },
+  {
+    "id": "nov-018",
+    "fecha": "2024-11-15T8:29:00.000Z",
+    "operacion": "Transferencia a terceros",
+    "monto": -468,
+    "categoria": "movimiento_caja",
+    "tipoMovimiento": "transferencia",
+    "tipoProducto": "TD"
+  },
+  {
+    "id": "nov-019",
+    "fecha": "2024-11-25T15:31:00.000Z",
+    "operacion": "Depósito en cuenta",
+    "monto": 871,
+    "categoria": "movimiento_caja",
+    "tipoMovimiento": "deposito",
+    "tipoProducto": "TD"
+  },
+  {
+    "id": "nov-020",
+    "fecha": "2024-11-10T8:54:00.000Z",
+    "operacion": "Transferencia recibida",
+    "monto": 520,
+    "categoria": "movimiento_caja",
+    "tipoMovimiento": "deposito",
+    "tipoProducto": "TD"
+  },
+  {
+    "id": "nov-023",
+    "fecha": "2024-11-12T9:21:00.000Z",
+    "operacion": "Café Starbucks",
+    "monto": -19,
+    "categoria": "gastos",
+    "subcategoria": "restaurantes",
+    "tipoProducto": "TC",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "nov-025",
+    "fecha": "2024-11-03T17:7:00.000Z",
+    "operacion": "Airbnb",
+    "monto": -337,
+    "categoria": "gastos",
+    "subcategoria": "viajes",
+    "tipoProducto": "TC",
+    "tipoGasto": "excepcional"
+  },
+  {
+    "id": "nov-027",
+    "fecha": "2024-11-09T14:7:00.000Z",
+    "operacion": "Metro",
+    "monto": -23,
+    "categoria": "gastos",
+    "subcategoria": "supermercado",
+    "tipoProducto": "TD",
+    "tipoGasto": "medio"
+  },
+  {
+    "id": "nov-030",
+    "fecha": "2024-11-12T8:37:00.000Z",
+    "operacion": "Tienda de barrio",
+    "monto": -5,
+    "categoria": "gastos",
+    "subcategoria": "supermercado",
+    "tipoProducto": "TD",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "nov-033",
+    "fecha": "2024-11-08T15:1:00.000Z",
+    "operacion": "Snack bar",
+    "monto": -18,
+    "categoria": "gastos",
+    "subcategoria": "restaurantes",
+    "tipoProducto": "TC",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "nov-035",
+    "fecha": "2024-11-11T12:9:00.000Z",
+    "operacion": "Minimarket",
+    "monto": -5,
+    "categoria": "gastos",
+    "subcategoria": "supermercado",
+    "tipoProducto": "TD",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "nov-038",
+    "fecha": "2024-11-11T9:17:00.000Z",
+    "operacion": "KFC",
+    "monto": -37,
+    "categoria": "gastos",
+    "subcategoria": "restaurantes",
+    "tipoProducto": "TC",
+    "tipoGasto": "medio"
+  },
+  {
+    "id": "nov-044",
+    "fecha": "2024-11-12T9:6:00.000Z",
+    "operacion": "Plaza Vea",
+    "monto": -21,
+    "categoria": "gastos",
+    "subcategoria": "supermercado",
+    "tipoProducto": "TD",
+    "tipoGasto": "medio"
+  },
+  {
+    "id": "nov-046",
+    "fecha": "2024-11-05T13:6:00.000Z",
+    "operacion": "Delivery Rappi - Snack",
+    "monto": -13,
+    "categoria": "gastos",
+    "subcategoria": "delivery",
+    "tipoProducto": "TC",
+    "tipoGasto": "hormiga"
+  },
+  {
+    "id": "nov-048",
+    "fecha": "2024-11-12T9:21:00.000Z",
+    "operacion": "Plaza Vea - Compra mensual",
+    "monto": -286,
+    "categoria": "gastos",
+    "subcategoria": "supermercado",
+    "tipoProducto": "TD",
+    "tipoGasto": "excepcional"
+  },
+  {
+    "id": "op-rec-oct-2",
+    "fecha": "2024-10-15T00:00:00.000Z",
+    "operacion": "Pago de luz",
+    "monto": -120,
+    "categoria": "movimiento_caja",
+    "tipoMovimiento": "otros",
+    "categoriaUsuario": "operacion_recurrente",
+    "tipoProducto": "TD",
+    "estado": "pendiente",
+    "operacionRecurrenteId": "rec2",
+    "vinculadaARecurrente": false,
+    "fechaPagoMaxima": "2024-10-20T00:00:00.000Z",
+    "esAtrasada": true,
+    "mesOriginal": "Octubre 2024"
+  },
+  {
+    "id": "op-rec-oct-3",
+    "fecha": "2024-10-31T00:00:00.000Z",
+    "operacion": "Internet y cable",
+    "monto": -150,
+    "categoria": "movimiento_caja",
+    "tipoMovimiento": "otros",
+    "categoriaUsuario": "operacion_recurrente",
+    "tipoProducto": "TD",
+    "estado": "pendiente",
+    "operacionRecurrenteId": "rec3",
+    "vinculadaARecurrente": false,
+    "fechaPagoMaxima": "2024-11-05T00:00:00.000Z",
+    "esAtrasada": true,
+    "mesOriginal": "Octubre 2024"
+  }
+]

@@ -1,0 +1,168 @@
+// ============================================
+// Estilos Globales - Chicho Chatbot PoC
+// ============================================
+
+// Importar variables y mixins
+@import 'styles/variables';
+@import 'styles/mixins';
+
+// Reset y Estilos Base
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: $font-family-primary;
+  font-size: $font-size-base;
+  font-weight: $font-weight-normal;
+  line-height: 1.5;
+  color: $color-text-primary;
+  background-color: $color-bg-secondary;
+  overflow-x: hidden;
+}
+
+// Tipografía
+h1, h2, h3, h4, h5, h6 {
+  font-weight: $font-weight-semibold;
+  line-height: 1.2;
+  margin-bottom: $spacing-md;
+}
+
+h1 {
+  font-size: $font-size-3xl;
+}
+
+h2 {
+  font-size: $font-size-2xl;
+}
+
+h3 {
+  font-size: $font-size-xl;
+}
+
+h4 {
+  font-size: $font-size-lg;
+}
+
+h5 {
+  font-size: $font-size-base;
+}
+
+h6 {
+  font-size: $font-size-sm;
+}
+
+p {
+  margin-bottom: $spacing-md;
+}
+
+a {
+  color: $color-primary;
+  text-decoration: none;
+  @include transition(color);
+  
+  &:hover {
+    color: $color-primary-dark;
+  }
+}
+
+// Utilidades Globales
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-primary {
+  color: $color-primary;
+}
+
+.text-secondary {
+  color: $color-text-secondary;
+}
+
+.text-success {
+  color: $color-success;
+}
+
+.text-warning {
+  color: $color-warning;
+}
+
+.text-danger {
+  color: $color-danger;
+}
+
+.bg-primary {
+  background-color: $color-primary;
+}
+
+.bg-secondary {
+  background-color: $color-bg-secondary;
+}
+
+.mt-sm { margin-top: $spacing-sm; }
+.mt-md { margin-top: $spacing-md; }
+.mt-lg { margin-top: $spacing-lg; }
+.mt-xl { margin-top: $spacing-xl; }
+
+.mb-sm { margin-bottom: $spacing-sm; }
+.mb-md { margin-bottom: $spacing-md; }
+.mb-lg { margin-bottom: $spacing-lg; }
+.mb-xl { margin-bottom: $spacing-xl; }
+
+.pt-sm { padding-top: $spacing-sm; }
+.pt-md { padding-top: $spacing-md; }
+.pt-lg { padding-top: $spacing-lg; }
+.pt-xl { padding-top: $spacing-xl; }
+
+.pb-sm { padding-bottom: $spacing-sm; }
+.pb-md { padding-bottom: $spacing-md; }
+.pb-lg { padding-bottom: $spacing-lg; }
+.pb-xl { padding-bottom: $spacing-xl; }
+
+// Clases de Utilidad para Pills de Alerta
+.pill-normal {
+  color: $color-alert-normal;
+}
+
+.pill-amber {
+  @include pill-alert($color-alert-amber);
+}
+
+.pill-red {
+  @include pill-alert($color-alert-red);
+}
+
+// Scroll Personalizado Global
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: $color-bg-secondary;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $color-border-medium;
+  border-radius: $border-radius-sm;
+  
+  &:hover {
+    background: $color-border-dark;
+  }
+}

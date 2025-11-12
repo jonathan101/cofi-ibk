@@ -1,0 +1,35 @@
+[
+  {
+    "id": "alert1",
+    "tipo": "alerta",
+    "timestamp": "2024-11-12T14:30:00.000Z",
+    "leido": false,
+    "titulo": "Gasto alto detectado",
+    "subtitulo": "Compra de S/ 450 en tienda online",
+    "icono": "alert-warning",
+    "textoBoton": "Ver detalle",
+    "severidad": "warning"
+  },
+  {
+    "id": "alert2",
+    "tipo": "alerta",
+    "timestamp": "2024-11-13T09:15:00.000Z",
+    "leido": false,
+    "titulo": "Límite de gastos cerca",
+    "subtitulo": "Has usado el 85% de tu presupuesto en restaurantes",
+    "icono": "alert-danger",
+    "textoBoton": "Revisar gastos",
+    "severidad": "danger"
+  },
+  {
+    "id": "alert3",
+    "tipo": "alerta",
+    "timestamp": "2024-11-14T11:00:00.000Z",
+    "leido": false,
+    "titulo": "Pago pendiente",
+    "subtitulo": "Tienes un pago de S/ 120 venciendo mañana",
+    "icono": "alert-info",
+    "textoBoton": "Pagar ahora",
+    "severidad": "info"
+  }
+]
