@@ -1,0 +1,49 @@
+<div class="chanchito-container">
+  <header class="header">
+    <div class="back-button" (click)="goBack()">
+      <span class="material-symbols-outlined">arrow_back</span>
+    </div>
+    <h1 class="header-title">Elige tu Chanchito</h1>
+  </header>
+
+  <main class="content">
+    <div class="chanchitos-grid">
+      <div 
+        *ngFor="let chanchito of chanchitos" 
+        class="chanchito-item"
+        (click)="seleccionarChanchito(chanchito.id)">
+        <div class="chanchito-icon-container">
+          <div 
+            class="chanchito-outer-ring"
+            [class.selected]="chanchitoSeleccionado === chanchito.id">
+            <div 
+              class="chanchito-icon-circle"
+              [style.background-color]="chanchito.color">
+              <span class="material-symbols-outlined chanchito-icon">{{ chanchito.icono }}</span>
+            </div>
+            <div class="check-badge" *ngIf="chanchitoSeleccionado === chanchito.id">
+              <span class="material-symbols-outlined">check</span>
+            </div>
+          </div>
+        </div>
+        <p class="chanchito-nombre">{{ chanchito.nombre }}</p>
+        <p class="chanchito-saldo">S/ {{ chanchito.montoActual.toFixed(2) }}</p>
+      </div>
+    </div>
+
+    <div class="add-chanchito-section">
+      <button class="add-chanchito-button" (click)="agregarNuevoChanchito()">
+        <div class="add-icon">
+          <span class="material-symbols-outlined">add_circle</span>
+        </div>
+        <span>Añadir nuevo Chanchito</span>
+      </button>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <button class="btn-primary" (click)="guardarSeleccion()">
+      Confirmar Selección
+    </button>
+  </footer>
+</div>

@@ -1,0 +1,393 @@
+@import '../../../../styles/variables';
+@import '../../../../styles/mixins';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.topes-gastos-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  max-width: 28rem;
+  margin: 0 auto;
+  background-color: #FFFFFF;
+  overflow: hidden;
+
+  @include dark-mode {
+    background-color: #2a2a2a;
+  }
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  background-color: #FFFFFF;
+  padding: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #CCCCCC;
+  flex-shrink: 0;
+
+  @include dark-mode {
+    background-color: #2a2a2a;
+    border-bottom-color: #444444;
+  }
+
+  .back-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    flex-shrink: 0;
+    color: #333333;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+
+    @include dark-mode {
+      color: #F2F2F2;
+    }
+
+    .material-symbols-outlined {
+      font-size: 1.5rem;
+    }
+  }
+
+  .header-title {
+    flex: 1;
+    text-align: center;
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #333333;
+    padding-right: 2.5rem;
+    margin: 0;
+
+    @include dark-mode {
+      color: #F2F2F2;
+    }
+  }
+}
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 1rem;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.description {
+  font-size: 1rem;
+  color: #666666;
+  margin-bottom: 1.5rem;
+
+  @include dark-mode {
+    color: #b3b3b3;
+  }
+}
+
+.ingreso-section {
+  margin-bottom: 1.5rem;
+}
+
+.ingreso-libre-section {
+  margin-bottom: 2rem;
+}
+
+.ingreso-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #666666;
+  margin-bottom: 0.5rem;
+
+  @include dark-mode {
+    color: #b3b3b3;
+  }
+}
+
+.ingreso-libre-description {
+  font-size: 0.875rem;
+  color: #666666;
+  margin-top: 0.25rem;
+
+  @include dark-mode {
+    color: #b3b3b3;
+  }
+}
+
+.ingreso-amount {
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+
+  .currency {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #333333;
+
+    @include dark-mode {
+      color: #F2F2F2;
+    }
+  }
+
+  .amount {
+    font-size: 1.875rem;
+    font-weight: 800;
+    color: #333333;
+
+    @include dark-mode {
+      color: #F2F2F2;
+    }
+  }
+
+  .decimals {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #333333;
+
+    @include dark-mode {
+      color: #F2F2F2;
+    }
+  }
+
+  &.ingreso-libre {
+    .currency,
+    .amount,
+    .decimals {
+      color: #00843D;
+    }
+  }
+}
+
+.section-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #333333;
+  margin-bottom: 1rem;
+
+  @include dark-mode {
+    color: #F2F2F2;
+  }
+}
+
+.topes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.tope-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background-color: #F2F2F2;
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  min-height: 4rem;
+
+  @include dark-mode {
+    background-color: #1a1a1a;
+  }
+}
+
+.tope-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.tope-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.tope-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background-color: #E6F3EC;
+  color: #00843D;
+  flex-shrink: 0;
+
+  @include dark-mode {
+    background-color: #003a1a;
+  }
+
+  .material-symbols-outlined {
+    font-size: 1.25rem;
+  }
+}
+
+.tope-nombre {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333333;
+
+  @include dark-mode {
+    color: #F2F2F2;
+  }
+}
+
+.tope-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #FFFFFF;
+  border: 1px solid #CCCCCC;
+  border-radius: 0.5rem;
+  padding: 0.25rem;
+
+  @include dark-mode {
+    background-color: #2a2a2a;
+    border-color: #444444;
+  }
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .input-prefix {
+    position: absolute;
+    left: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #666666;
+    pointer-events: none;
+
+    @include dark-mode {
+      color: #b3b3b3;
+    }
+  }
+
+  input {
+    width: 5rem;
+    height: 2.5rem;
+    padding: 0.375rem 0.5rem 0.375rem 1.75rem;
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: right;
+    color: #333333;
+    background: transparent;
+    border: none;
+    outline: none;
+
+    @include dark-mode {
+      color: #F2F2F2;
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 2px rgba(0, 132, 61, 0.2);
+      border-radius: 0.25rem;
+    }
+  }
+}
+
+.toggle-buttons {
+  display: flex;
+  background-color: #F2F2F2;
+  border-radius: 0.25rem;
+  overflow: hidden;
+
+  @include dark-mode {
+    background-color: #1a1a1a;
+  }
+
+  button {
+    padding: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #666666;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    @include dark-mode {
+      color: #b3b3b3;
+    }
+
+    &.active {
+      background-color: #00843D;
+      color: white;
+    }
+
+    &:first-child {
+      border-radius: 0.25rem 0 0 0.25rem;
+    }
+
+    &:last-child {
+      border-radius: 0 0.25rem 0.25rem 0;
+    }
+  }
+}
+
+.tope-calculated {
+  font-size: 0.875rem;
+  color: #666666;
+  text-align: right;
+  padding-right: 0.5rem;
+  margin: 0;
+
+  @include dark-mode {
+    color: #b3b3b3;
+  }
+}
+
+.footer {
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  padding: 1rem;
+  background-color: #FFFFFF;
+  border-top: 1px solid #CCCCCC;
+  flex-shrink: 0;
+
+  @include dark-mode {
+    background-color: #2a2a2a;
+    border-top-color: #444444;
+  }
+}
+
+.btn-primary {
+  width: 100%;
+  border-radius: 12px;
+  background-color: #00843D;
+  padding: 0.75rem;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 700;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(0, 132, 61, 0.2);
+  }
+}

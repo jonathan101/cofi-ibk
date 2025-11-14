@@ -1,0 +1,137 @@
+<div class="operaciones-container">
+  <header class="header">
+    <button class="back-button" (click)="goBack()">
+      <span class="material-symbols-outlined">arrow_back</span>
+    </button>
+    <h1 class="header-title">Operaciones Recurrentes</h1>
+  </header>
+
+  <main class="content">
+    <!-- Lista de operaciones -->
+    <div class="operaciones-list" *ngIf="operacionesRecurrentes.length > 0">
+      <div class="operacion-item" *ngFor="let op of operacionesRecurrentes">
+        <div class="operacion-icon">
+          <span class="material-symbols-outlined">{{ getIconForOperacion(op) }}</span>
+        </div>
+        <div class="operacion-info">
+          <p class="operacion-nombre">{{ getNombreOperacion(op) }}</p>
+          <p class="operacion-detalle">Mensual - Día {{ op.diaDelMes }}</p>
+          <p class="operacion-monto">S/ {{ op.monto.toFixed(2) }}</p>
+        </div>
+        <div class="operacion-actions">
+          <button class="action-button edit" (click)="editarOperacion(op)">
+            <span class="material-symbols-outlined">edit</span>
+          </button>
+          <button class="action-button delete" (click)="eliminarOperacion(op.id)">
+            <span class="material-symbols-outlined">delete</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Estado vacío -->
+    <div class="empty-state" *ngIf="operacionesRecurrentes.length === 0">
+      <div class="empty-icon">
+        <span class="material-symbols-outlined">receipt_long</span>
+      </div>
+      <h2>Aún no tienes operaciones recurrentes</h2>
+      <p>Añade tus pagos y transferencias frecuentes para automatizarlos.</p>
+    </div>
+  </main>
+
+  <!-- Botón flotante -->
+  <div class="fab-button" (click)="agregarOperacion()">
+    <span class="material-symbols-outlined">add</span>
+  </div>
+
+  <!-- Modal para agregar/editar operación -->
+  <div class="modal-overlay" *ngIf="showModal" (click)="cerrarModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>{{ operacionEditando ? 'Editar Operación' : 'Nueva Operación Recurrente' }}</h2>
+        <button class="close-button" (click)="cerrarModal()">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="nombre">Nombre de la operación</label>
+          <input 
+            type="text" 
+            id="nombre" 
+            [(ngModel)]="formData.nombre"
+            placeholder="Ej: Pago de Luz - Enel"
+            class="form-input"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="monto">Monto</label>
+          <div class="input-with-prefix">
+            <span class="prefix">S/</span>
+            <input 
+              type="number" 
+              id="monto" 
+              [(ngModel)]="formData.monto"
+              placeholder="0.00"
+              step="0.01"
+              min="0"
+              class="form-input with-prefix"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="categoria">Categoría</label>
+          <select 
+            id="categoria" 
+            [(ngModel)]="formData.categoria"
+            class="form-input"
+          >
+            <option value="">Selecciona una categoría</option>
+            <option value="Servicios">Servicios</option>
+            <option value="Transferencias">Transferencias</option>
+            <option value="Suscripciones">Suscripciones</option>
+            <option value="Seguros">Seguros</option>
+            <option value="Otros">Otros</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="diaDelMes">Día del mes</label>
+          <input 
+            type="number" 
+            id="diaDelMes" 
+            [(ngModel)]="formData.diaDelMes"
+            placeholder="15"
+            min="1"
+            max="31"
+            class="form-input"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="tipoProducto">Tipo de producto</label>
+          <select 
+            id="tipoProducto" 
+            [(ngModel)]="formData.tipoProducto"
+            class="form-input"
+          >
+            <option value="TD">Tarjeta de Débito</option>
+            <option value="TC">Tarjeta de Crédito</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="button-secondary" (click)="cerrarModal()">
+          Cancelar
+        </button>
+        <button class="button-primary" (click)="guardarOperacion()">
+          {{ operacionEditando ? 'Guardar Cambios' : 'Agregar Operación' }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

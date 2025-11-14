@@ -1,0 +1,60 @@
+<div class="meta-ahorro-container">
+  <header class="header">
+    <button class="back-button" (click)="goBack()">
+      <span class="material-symbols-outlined">arrow_back</span>
+    </button>
+    <h1 class="header-title">Define tu Meta de Ahorro</h1>
+  </header>
+
+  <main class="content">
+    <div class="info-card">
+      <div class="info-row border-bottom">
+        <p class="info-label">Tu Ingreso Neto Mensual</p>
+        <p class="info-value">S/ {{ ingresoNeto | number:'1.2-2' }}</p>
+      </div>
+      <div class="info-row">
+        <p class="info-label">Tus Ingresos Libres</p>
+        <p class="info-value">S/ {{ ingresosLibres | number:'1.2-2' }}</p>
+      </div>
+    </div>
+
+    <h2 class="section-title">Elige cuánto quieres ahorrar al mes</h2>
+
+    <h3 class="amount-display">S/ {{ metaAhorro | number:'1.2-2' }}</h3>
+
+    <div class="slider-container">
+      <div class="slider-wrapper">
+        <div class="slider-track">
+          <div class="slider-fill" [style.width.%]="sliderPercentage"></div>
+          <div class="slider-thumb-container">
+            <div class="slider-thumb" [style.left.%]="sliderPercentage"></div>
+          </div>
+        </div>
+      </div>
+      <input 
+        type="range" 
+        class="slider-input"
+        [min]="minMeta"
+        [max]="maxMeta"
+        [value]="metaAhorro"
+        (input)="onSliderChange($event)"
+        step="10"
+      />
+      <div class="slider-labels">
+        <span class="slider-label">S/ {{ minMeta }}</span>
+        <span class="slider-label">S/ {{ maxMeta | number:'1.0-0' }}</span>
+      </div>
+    </div>
+
+    <div class="warning-banner" *ngIf="showWarning">
+      <span class="material-symbols-outlined">warning</span>
+      <p>Esta meta es ambiciosa y podría ser difícil de alcanzar. ¡Puedes ajustarla cuando quieras!</p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <button class="btn-primary" (click)="guardarMeta()">
+      Establecer Meta
+    </button>
+  </footer>
+</div>

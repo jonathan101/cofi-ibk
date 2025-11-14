@@ -1,0 +1,42 @@
+[
+  {
+    "id": "chanchito-1",
+    "nombre": "Educación",
+    "montoActual": 1500.00,
+    "metaMonto": 5000.00,
+    "icono": "school",
+    "color": "#3B82F6"
+  },
+  {
+    "id": "chanchito-2",
+    "nombre": "Ahorro General",
+    "montoActual": 3200.50,
+    "metaMonto": 10000.00,
+    "icono": "savings",
+    "color": "#10B981"
+  },
+  {
+    "id": "chanchito-3",
+    "nombre": "Auto",
+    "montoActual": 8500.00,
+    "metaMonto": 20000.00,
+    "icono": "directions_car",
+    "color": "#F59E0B"
+  },
+  {
+    "id": "chanchito-4",
+    "nombre": "Casa",
+    "montoActual": 12000.00,
+    "metaMonto": 50000.00,
+    "icono": "home",
+    "color": "#8B5CF6"
+  },
+  {
+    "id": "chanchito-5",
+    "nombre": "Viaje",
+    "montoActual": 2500.00,
+    "metaMonto": 8000.00,
+    "icono": "flight",
+    "color": "#EC4899"
+  }
+]

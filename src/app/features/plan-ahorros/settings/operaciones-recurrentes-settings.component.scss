@@ -1,0 +1,508 @@
+@import '../../../../styles/variables';
+@import '../../../../styles/mixins';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.operaciones-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background-color: #f6f8f7;
+  overflow: hidden;
+  position: relative;
+
+  @include dark-mode {
+    background-color: #102217;
+  }
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  height: 4rem;
+  align-items: center;
+  border-bottom: 1px solid rgba(229, 231, 235, 0.8);
+  background-color: rgba(246, 248, 247, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 0 1rem;
+
+  @include dark-mode {
+    border-bottom-color: rgba(55, 65, 81, 0.8);
+    background-color: rgba(16, 34, 23, 0.8);
+  }
+
+  .back-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    flex-shrink: 0;
+    border-radius: 50%;
+    color: #1f2937;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+
+    @include dark-mode {
+      color: #e5e7eb;
+    }
+
+    .material-symbols-outlined {
+      font-size: 1.5rem;
+    }
+  }
+
+  .header-title {
+    flex: 1;
+    text-align: center;
+    font-size: 1.125rem;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    color: #111827;
+    padding-right: 2.5rem;
+    margin: 0;
+
+    @include dark-mode {
+      color: #f9fafb;
+    }
+  }
+}
+
+.content {
+  flex: 1;
+  padding-top: 1rem;
+  padding-bottom: 5rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.operaciones-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0 1rem;
+}
+
+.operacion-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 0.75rem;
+  background-color: white;
+  padding: 1rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+
+  @include dark-mode {
+    background-color: #1f2937;
+  }
+}
+
+.operacion-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background-color: rgba(14, 170, 76, 0.1);
+  color: #0eaa4c;
+
+  @include dark-mode {
+    background-color: rgba(14, 170, 76, 0.2);
+  }
+
+  .material-symbols-outlined {
+    font-size: 1.5rem;
+  }
+}
+
+.operacion-info {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.operacion-nombre {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #111827;
+  margin: 0;
+
+  @include dark-mode {
+    color: #f9fafb;
+  }
+}
+
+.operacion-detalle {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin: 0;
+
+  @include dark-mode {
+    color: #9ca3af;
+  }
+}
+
+.operacion-monto {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  margin: 0;
+
+  @include dark-mode {
+    color: #d1d5db;
+  }
+}
+
+.operacion-actions {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 0.5rem;
+}
+
+.action-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  .material-symbols-outlined {
+    font-size: 1.25rem;
+  }
+
+  &.edit {
+    color: #6b7280;
+    background: transparent;
+
+    @include dark-mode {
+      color: #d1d5db;
+    }
+
+    &:hover {
+      background-color: #f3f4f6;
+
+      @include dark-mode {
+        background-color: #374151;
+      }
+    }
+  }
+
+  &.delete {
+    color: #dc2626;
+    background: transparent;
+
+    @include dark-mode {
+      color: #f87171;
+    }
+
+    &:hover {
+      background-color: #fef2f2;
+
+      @include dark-mode {
+        background-color: rgba(220, 38, 38, 0.1);
+      }
+    }
+  }
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 5rem 1.5rem;
+}
+
+.empty-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  background-color: #e5e7eb;
+  color: #6b7280;
+  margin-bottom: 1.5rem;
+
+  @include dark-mode {
+    background-color: #374151;
+    color: #9ca3af;
+  }
+
+  .material-symbols-outlined {
+    font-size: 2.5rem;
+  }
+}
+
+.empty-state h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 0.5rem;
+
+  @include dark-mode {
+    color: #e5e7eb;
+  }
+}
+
+.empty-state p {
+  margin-top: 0.5rem;
+  color: #6b7280;
+
+  @include dark-mode {
+    color: #9ca3af;
+  }
+}
+
+.fab-button {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 4rem;
+  width: 4rem;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 50%;
+  background-color: #0eaa4c;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: none;
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  .material-symbols-outlined {
+    font-size: 2rem;
+  }
+}
+
+// Modal styles
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.modal-content {
+  background-color: white;
+  border-radius: 0.75rem;
+  max-width: 28rem;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+
+  @include dark-mode {
+    background-color: #1f2937;
+  }
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+
+  @include dark-mode {
+    border-bottom-color: #374151;
+  }
+
+  h2 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0;
+
+    @include dark-mode {
+      color: #f9fafb;
+    }
+  }
+
+  .close-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    color: #6b7280;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+
+    @include dark-mode {
+      color: #9ca3af;
+    }
+
+    &:hover {
+      background-color: #f3f4f6;
+
+      @include dark-mode {
+        background-color: #374151;
+      }
+    }
+  }
+}
+
+.modal-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 0.5rem;
+
+    @include dark-mode {
+      color: #d1d5db;
+    }
+  }
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  color: #111827;
+  background-color: white;
+
+  @include dark-mode {
+    border-color: #4b5563;
+    background-color: #374151;
+    color: #f9fafb;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: #0eaa4c;
+    box-shadow: 0 0 0 3px rgba(14, 170, 76, 0.1);
+  }
+
+  &.with-prefix {
+    padding-left: 2.5rem;
+  }
+}
+
+.input-with-prefix {
+  position: relative;
+
+  .prefix {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6b7280;
+    font-weight: 500;
+
+    @include dark-mode {
+      color: #9ca3af;
+    }
+  }
+}
+
+.modal-footer {
+  display: flex;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  border-top: 1px solid #e5e7eb;
+
+  @include dark-mode {
+    border-top-color: #374151;
+  }
+}
+
+.button-secondary {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #374151;
+  background-color: white;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  @include dark-mode {
+    border-color: #4b5563;
+    background-color: #374151;
+    color: #d1d5db;
+  }
+
+  &:hover {
+    background-color: #f9fafb;
+
+    @include dark-mode {
+      background-color: #4b5563;
+    }
+  }
+}
+
+.button-primary {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background-color: #0eaa4c;
+  cursor: pointer;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}

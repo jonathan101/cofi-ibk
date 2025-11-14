@@ -6,6 +6,41 @@
 @import 'styles/variables';
 @import 'styles/mixins';
 
+// Variables CSS para Light/Dark Mode
+:root {
+  // Colores principales
+  --color-primary: #{$color-primary};
+  --color-primary-rgb: 0, 166, 81;
+  --color-primary-dark: #{$color-primary-dark};
+  --color-primary-light: #{$color-primary-light};
+  
+  // Fondos
+  --color-bg-light: #{$color-bg-light};
+  --color-bg-light-rgb: 250, 250, 250;
+  --color-bg-dark: #{$color-bg-dark};
+  --color-bg-dark-rgb: 51, 51, 51;
+  --color-white: #{$color-white};
+  
+  // Textos
+  --color-text-primary: #{$color-text-primary};
+  --color-text-secondary: #{$color-text-secondary};
+  
+  // Grises
+  --color-gray-50: #{$color-gray-50};
+  --color-gray-100: #{$color-gray-100};
+  --color-gray-100-rgb: 243, 244, 246;
+  --color-gray-200: #{$color-gray-200};
+  --color-gray-200-rgb: 229, 231, 235;
+  --color-gray-300: #{$color-gray-300};
+  --color-gray-400: #{$color-gray-400};
+  --color-gray-500: #{$color-gray-500};
+  --color-gray-600: #{$color-gray-600};
+  --color-gray-700: #{$color-gray-700};
+  --color-gray-800: #{$color-gray-800};
+  --color-gray-800-rgb: 31, 41, 55;
+  --color-gray-900: #{$color-gray-900};
+}
+
 // Reset y Estilos Base
 * {
   margin: 0;
@@ -13,10 +48,37 @@
   box-sizing: border-box;
 }
 
+// Material Symbols Configuration
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'liga';
+  
+  // Default settings
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+}
+
 html {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100%;
 }
 
 body {
@@ -27,6 +89,17 @@ body {
   color: $color-text-primary;
   background-color: $color-bg-secondary;
   overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+// App root debe ocupar todo el espacio
+app-root {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 100vh;
 }
 
 // Tipografía

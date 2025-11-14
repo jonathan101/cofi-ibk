@@ -1,0 +1,35 @@
+<div class="settings-container">
+  <header class="settings-header">
+    <button class="back-button" (click)="goBack()" aria-label="Volver">
+      <span class="material-symbols-outlined">arrow_back_ios_new</span>
+    </button>
+    <h1 class="settings-title">Configuración del Plan</h1>
+    <div class="header-spacer"></div>
+  </header>
+
+  <main class="settings-content">
+    <button class="ai-chat-button" (click)="openAIChat()">
+      <span class="material-symbols-outlined">smart_toy</span>
+      <span>Chatear con la IA para configurar tu plan</span>
+    </button>
+
+    <div class="config-menu-card">
+      <ul class="config-menu-list">
+        <li 
+          *ngFor="let item of menuItems" 
+          class="config-menu-item"
+          (click)="navigateTo(item.route)">
+          <div class="menu-item-content">
+            <span 
+              class="material-symbols-outlined menu-icon"
+              [class.filled]="item.filled">
+              {{ item.icon }}
+            </span>
+            <span class="menu-label">{{ item.label }}</span>
+          </div>
+          <span class="material-symbols-outlined chevron-icon">chevron_right</span>
+        </li>
+      </ul>
+    </div>
+  </main>
+</div>

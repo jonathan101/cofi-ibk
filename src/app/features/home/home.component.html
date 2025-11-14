@@ -1,164 +1,116 @@
-<app-mobile-container>
-  <div class="home-container">
-    <!-- Header -->
-    <header class="home-header">
-      <div class="header-content">
-        <div class="greeting">
-          <h1>Hola, {{ userName }}</h1>
-          <p class="subtitle">Bienvenido a Interbank</p>
-        </div>
-        <div class="header-actions">
-          <button class="icon-button" aria-label="Notificaciones">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/>
-            </svg>
+<div class="home-container">
+  <!-- Header -->
+  <header class="home-header">
+    <button class="icon-button" (click)="toggleSidebar()" aria-label="Menú">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
+
+    <img 
+      src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmwqnFWgxP-MIfxvcI5-h-PCQqux5Mrh_qZehZeL874gPw5Z5POi0Ki_xY8tEOUX0KO1uSw69aAigURJae5LYfH3whY7skz8XBTfLmpW05EvnYt9jtPFpiHMDxuaewN7AM36FRqzCd4_j_h_JjP-jReFCbFn6iQmEpPliKfBvmDpeHUH9oRYTnXw2cFvZJE0V4fO-QO62pIi3wYGLeSQJhIUv3kSXO68ONOvHAospqdlCmt7jc1zAgA6Crryew9Ce8qxCvFkwDjZo" 
+      alt="Interbank Logo" 
+      class="logo"
+    />
+
+    <button class="icon-button notification-button" aria-label="Notificaciones">
+      <span class="material-symbols-outlined">notifications</span>
+      <span class="notification-badge"></span>
+    </button>
+  </header>
+
+  <!-- Main Content -->
+  <main class="home-content">
+    <!-- Título Principal -->
+    <h1 class="main-title">¿A quién le vas a Plinear hoy?</h1>
+
+    <!-- Sección de Plin -->
+    <section class="plin-section">
+      <div class="plin-contacts">
+        <div 
+          *ngFor="let contacto of contactosPlin; let i = index" 
+          class="plin-contact"
+        >
+          <button 
+            class="plin-button"
+            [class.plin-button-primary]="i === 0"
+            [class.plin-button-add]="i > 0"
+            (click)="i === 0 ? onPlinearClick() : onAgregarContactoClick()"
+          >
+            <img 
+              *ngIf="i === 0"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_7zqiJDHR1tCm8HYJdfQ6gJDXFL65qgvrgo93a1JJpTzZvuygXFE1XSgr2pRB5Vw0yoGNKggEtFn_mmeM_dZgBwh8Rv85RRxxqk2ecjFWw4mgLbF4okRNsZ3fQU8uqvKa2-_CYtYuhuJdHFxtfFXlqgjMgcbVyzQ3AIHg9d43qjtwmJo9N1Cb8eehEhaXq9A6bw0Q9J_0aB5JijpiiVNb4bsd52VDS_xa3ShL-RvALKrgh2G3lyjY4-R33KFsEpEFqOHrV4VhL6Y"
+              alt="Plin logo"
+              class="plin-logo"
+            />
+            <span *ngIf="i > 0" class="material-symbols-outlined">add</span>
           </button>
+          <span class="plin-label" [class.plin-label-primary]="i === 0">
+            {{ contacto.nombre }}
+          </span>
         </div>
       </div>
-    </header>
+    </section>
 
-    <!-- Main Content -->
-    <main class="home-content">
-      <!-- Tipo de Cambio -->
-      <section class="exchange-rate-section">
-        <div class="exchange-rate-card">
-          <div class="exchange-rate-header">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/>
-            </svg>
-            <span>Tipo de Cambio</span>
-          </div>
-          <div class="exchange-rate-values">
-            <div class="rate-item">
-              <span class="rate-label">Compra</span>
-              <span class="rate-value">S/ {{ tipoCambio.compra }}</span>
-            </div>
-            <div class="rate-divider"></div>
-            <div class="rate-item">
-              <span class="rate-label">Venta</span>
-              <span class="rate-value">S/ {{ tipoCambio.venta }}</span>
-            </div>
-          </div>
+    <!-- Tipo de Cambio -->
+    <p class="exchange-rate-text">
+      T.C. referencial: Compra: <strong>{{ tipoCambio.compra }}</strong> Venta: <strong>{{ tipoCambio.venta }}</strong>
+    </p>
+
+    <!-- Productos Bancarios -->
+    <section class="products-section">
+      <div class="products-card">
+        <div class="products-header">
+          <h2 class="products-title">Productos</h2>
+          <button class="edit-button" (click)="onEditarProductosClick()" aria-label="Editar productos">
+            <span class="material-symbols-outlined fill-icon">edit</span>
+          </button>
         </div>
-      </section>
 
-      <!-- Cuentas -->
-      <section class="products-section">
-        <h2 class="section-title">Mis Cuentas</h2>
-        <div class="products-grid">
-          <div class="product-card" *ngFor="let cuenta of cuentas">
-            <div class="product-header">
-              <div class="product-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
-                </svg>
-              </div>
-              <div class="product-info">
-                <h3 class="product-type">{{ cuenta.tipo }}</h3>
-                <p class="product-number">{{ cuenta.numero }}</p>
-              </div>
-            </div>
-            <div class="product-balance">
-              <span class="balance-label">Saldo disponible</span>
-              <span class="balance-amount">{{ cuenta.moneda }} {{ formatCurrency(cuenta.saldo) }}</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Tarjetas -->
-      <section class="products-section">
-        <h2 class="section-title">Mis Tarjetas</h2>
-        <div class="products-grid">
-          <div class="product-card" *ngFor="let tarjeta of tarjetas">
-            <div class="product-header">
-              <div class="product-icon card-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
-                </svg>
-              </div>
-              <div class="product-info">
-                <h3 class="product-type">{{ tarjeta.tipo }}</h3>
-                <p class="product-number">{{ tarjeta.numero }}</p>
-              </div>
+        <div class="products-list">
+          <a 
+            *ngFor="let producto of productos" 
+            class="product-item"
+            (click)="onProductoClick(producto)"
+          >
+            <div class="product-icon-wrapper">
+              <span 
+                class="material-symbols-outlined product-icon" 
+                [style.color]="producto.iconoColor"
+              >
+                {{ producto.icono }}
+              </span>
             </div>
             
-            <!-- Tarjeta de Crédito -->
-            <div class="product-balance" *ngIf="tarjeta.limite">
-              <span class="balance-label">Línea disponible</span>
-              <span class="balance-amount">{{ tarjeta.moneda }} {{ formatCurrency(tarjeta.disponible) }}</span>
-              <div class="credit-progress">
-                <div class="progress-bar">
-                  <div 
-                    class="progress-fill" 
-                    [style.width.%]="getProgressPercentage(tarjeta.disponible, tarjeta.limite)">
-                  </div>
-                </div>
-                <span class="progress-label">
-                  {{ formatCurrency(tarjeta.limite - tarjeta.disponible) }} / {{ formatCurrency(tarjeta.limite) }}
-                </span>
-              </div>
+            <div class="product-details">
+              <p class="product-name">{{ producto.nombre }}</p>
+              <p class="product-description">{{ producto.descripcion }}</p>
             </div>
-            
-            <!-- Tarjeta de Débito -->
-            <div class="product-balance" *ngIf="tarjeta.vinculada">
-              <span class="balance-label">Vinculada a</span>
-              <span class="linked-account">{{ tarjeta.vinculada }}</span>
+
+            <div class="product-actions">
+              <p class="product-balance">•••••</p>
+              <span class="material-symbols-outlined chevron-icon">chevron_right</span>
             </div>
-          </div>
+          </a>
         </div>
-      </section>
+      </div>
+    </section>
+  </main>
 
-      <!-- Acciones Rápidas -->
-      <section class="quick-actions-section">
-        <h2 class="section-title">Acciones Rápidas</h2>
-        <div class="quick-actions-grid">
-          <button class="quick-action-button">
-            <div class="action-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/>
-              </svg>
-            </div>
-            <span class="action-label">Pagar</span>
-          </button>
-          
-          <button class="quick-action-button">
-            <div class="action-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/>
-              </svg>
-            </div>
-            <span class="action-label">Transferir</span>
-          </button>
-          
-          <button class="quick-action-button">
-            <div class="action-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M19 14V6c0-1.1-.9-2-2-2H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zm-2 0H3V6h14v8zm-7-7c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zm13 0v11c0 1.1-.9 2-2 2H4v-2h17V7h2z"/>
-              </svg>
-            </div>
-            <span class="action-label">Recargar</span>
-          </button>
-          
-          <button class="quick-action-button">
-            <div class="action-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
-              </svg>
-            </div>
-            <span class="action-label">Mis Tarjetas</span>
-          </button>
-        </div>
-      </section>
-    </main>
+  <!-- Botón Flotante de Chat (Chanchito Verde) -->
+  <button 
+    class="chat-floating-button" 
+    (click)="onChatButtonClick()"
+    aria-label="Abrir chat"
+  >
+    <span class="material-symbols-outlined">savings</span>
+    <span *ngIf="notificationCount > 0" class="chat-badge">{{ notificationCount }}</span>
+  </button>
 
-    <!-- Botón Flotante de Chicho -->
-    <app-floating-button
-      [notificationCount]="notificationCount"
-      (onClick)="onFloatingButtonClick()">
-    </app-floating-button>
+  <!-- Navegación Inferior -->
+  <app-bottom-navigation></app-bottom-navigation>
+</div>
 
-    <!-- Navegación Inferior -->
-    <app-bottom-navigation></app-bottom-navigation>
-  </div>
-</app-mobile-container>
+<!-- Sidebar Menu -->
+<app-sidebar-menu 
+  *ngIf="showSidebar"
+  (close)="closeSidebar()">
+</app-sidebar-menu>

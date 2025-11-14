@@ -200,10 +200,9 @@ export class OperacionesRecurrentesService {
         fecha: fechaOperacion,
         operacion: recurrente.titulo,
         monto: recurrente.monto,
-        categoria: 'cobro_automatico',
+        categoria: 'pago_financiero',
         categoriaUsuario: 'operacion_recurrente',
         tipoProducto: 'TD',
-        automatico: true,
         estado: 'pendiente',
         fechaPagoMaxima: fechaOperacion,
         operacionRecurrenteId: recurrente.id,
@@ -228,7 +227,7 @@ export class OperacionesRecurrentesService {
         const recurrente = operaciones.find(op => op.id === recurrenteId);
         if (recurrente) {
           // Verificar si ya existe
-          const existe = recurrente.operacionesGeneradas.some(og => og.operacionId === operacionId);
+          const existe = recurrente.operacionesGeneradas.some((og: { mes: string; operacionId: string; vinculada: boolean }) => og.operacionId === operacionId);
           
           if (!existe) {
             recurrente.operacionesGeneradas.push({
@@ -264,7 +263,7 @@ export class OperacionesRecurrentesService {
     return this.getOperacionesRecurrentes().pipe(
       map(operaciones => {
         return operaciones.some(rec => 
-          rec.operacionesGeneradas.some(og => og.operacionId === operacionId && og.vinculada)
+          rec.operacionesGeneradas.some((og: { mes: string; operacionId: string; vinculada: boolean }) => og.operacionId === operacionId && og.vinculada)
         );
       })
     );

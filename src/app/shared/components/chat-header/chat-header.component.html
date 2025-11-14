@@ -1,0 +1,25 @@
+<div class="chat-header">
+  <button class="btn-close" (click)="handleClose()" aria-label="Cerrar chat">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <line x1="18" y1="6" x2="6" y2="18"></line>
+      <line x1="6" y1="6" x2="18" y2="18"></line>
+    </svg>
+  </button>
+
+  <div class="header-content">
+    <div class="avatar">
+      <img src="/assets/images/avatar-chicho.svg" alt="Chicho" />
+    </div>
+    <div class="header-info">
+      <h2>Chicho</h2>
+      <p class="subtitle">Tu asistente de ahorro</p>
+    </div>
+  </div>
+
+  <button class="btn-config" (click)="handleConfig()" aria-label="Configuración">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="12" cy="12" r="3"></circle>
+      <path d="M12 1v6m0 6v6m8.66-15.66l-4.24 4.24m-4.24 4.24l-4.24 4.24m15.66-8.66l-6 0m-6 0l-6 0m15.66 8.66l-4.24-4.24m-4.24-4.24l-4.24-4.24"></path>
+    </svg>
+  </button>
+</div>

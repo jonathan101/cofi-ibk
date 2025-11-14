@@ -1,0 +1,28 @@
+<div class="promocion-card">
+  <div class="promocion-image" *ngIf="recompensa.imageUrl">
+    <img [src]="recompensa.imageUrl" [alt]="recompensa.title">
+    <div class="discount-badge" *ngIf="hasDiscount()">
+      <span class="discount-text">{{ getDiscountText() }}</span>
+    </div>
+  </div>
+  
+  <div class="promocion-content">
+    <div class="promocion-header">
+      <div class="promocion-icon" *ngIf="recompensa.iconName && !recompensa.imageUrl">
+        <span>{{ recompensa.iconName }}</span>
+      </div>
+      <h3 class="promocion-title">{{ recompensa.title }}</h3>
+    </div>
+    
+    <p class="promocion-description">{{ recompensa.description }}</p>
+    
+    <div class="promocion-conditions" *ngIf="recompensa.conditions">
+      <span class="conditions-label">Condiciones:</span>
+      <p class="conditions-text">{{ recompensa.conditions }}</p>
+    </div>
+    
+    <button class="promocion-action" (click)="handleAction()">
+      {{ recompensa.actionLabel }}
+    </button>
+  </div>
+</div>

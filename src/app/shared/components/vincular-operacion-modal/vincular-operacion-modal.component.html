@@ -1,0 +1,129 @@
+<div class="modal-overlay" *ngIf="show" (click)="cerrarModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <!-- Header -->
+    <div class="modal-header">
+      <h2>Vincular Operación</h2>
+      <button class="btn-close" (click)="cerrarModal()">×</button>
+    </div>
+
+    <!-- Operación a vincular -->
+    <div class="operacion-info" *ngIf="operacion">
+      <h3>Operación seleccionada</h3>
+      <div class="operacion-card">
+        <div class="operacion-details">
+          <p class="operacion-nombre">{{ operacion.operacion }}</p>
+          <p class="operacion-monto">S/ {{ operacion.monto.toFixed(2) }}</p>
+        </div>
+        <div class="operacion-meta">
+          <span class="badge" *ngIf="isOperacionVinculada()">Ya vinculada</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Advertencia si ya está vinculada -->
+    <div class="warning-message" *ngIf="isOperacionVinculada()">
+      <span class="warning-icon">⚠️</span>
+      <p>Esta operación ya está vinculada a una operación recurrente</p>
+    </div>
+
+    <!-- Error message -->
+    <div class="error-message" *ngIf="error">
+      {{ error }}
+    </div>
+
+    <!-- Loading -->
+    <div class="loading" *ngIf="loading">
+      <div class="spinner"></div>
+      <p>Procesando...</p>
+    </div>
+
+    <!-- Lista de operaciones recurrentes -->
+    <div class="recurrentes-section" *ngIf="!loading && !showConfirmation">
+      <h3>Selecciona la operación recurrente</h3>
+
+      <div class="empty-state" *ngIf="operacionesRecurrentes.length === 0">
+        <p>No hay operaciones recurrentes activas</p>
+      </div>
+
+      <div class="recurrentes-list" *ngIf="operacionesRecurrentes.length > 0">
+        <div
+          *ngFor="let recurrente of operacionesRecurrentes"
+          class="recurrente-card"
+          [class.selected]="recurrenteSeleccionada === recurrente.id"
+          (click)="seleccionarRecurrente(recurrente.id)"
+        >
+          <div class="recurrente-header">
+            <h4>{{ recurrente.titulo }}</h4>
+            <span class="recurrente-monto">S/ {{ recurrente.monto.toFixed(2) }}</span>
+          </div>
+          <div class="recurrente-details">
+            <p class="detail-item">
+              <span class="label">Período:</span>
+              <span class="value">{{ formatDate(recurrente.fechaInicio) }} - {{ formatDate(recurrente.fechaFin) }}</span>
+            </p>
+            <p class="detail-item">
+              <span class="label">Día de pago:</span>
+              <span class="value">{{ formatDiaDelMes(recurrente.diaDelMes) }}</span>
+            </p>
+          </div>
+          <div class="selection-indicator" *ngIf="recurrenteSeleccionada === recurrente.id">
+            <span class="check-icon">✓</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Botones -->
+      <div class="form-actions" *ngIf="operacionesRecurrentes.length > 0">
+        <button type="button" class="btn-secondary" (click)="cerrarModal()">
+          Cancelar
+        </button>
+        <button
+          type="button"
+          class="btn-primary"
+          (click)="mostrarConfirmacion()"
+          [disabled]="!recurrenteSeleccionada || isOperacionVinculada()"
+        >
+          Vincular
+        </button>
+      </div>
+    </div>
+
+    <!-- Confirmación -->
+    <div class="confirmation-section" *ngIf="showConfirmation && !loading">
+      <div class="confirmation-icon">⚠️</div>
+      <h3>Confirmar vinculación</h3>
+      <p class="confirmation-text">
+        ¿Estás seguro de vincular esta operación con "{{ getRecurrenteSeleccionada()?.titulo }}"?
+      </p>
+      <div class="confirmation-details">
+        <div class="detail-row">
+          <span class="label">Operación:</span>
+          <span class="value">{{ operacion?.operacion }}</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">Monto:</span>
+          <span class="value">S/ {{ operacion?.monto.toFixed(2) }}</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">Recurrente:</span>
+          <span class="value">{{ getRecurrenteSeleccionada()?.titulo }}</span>
+        </div>
+      </div>
+      <div class="info-note">
+        <span class="info-icon">ℹ️</span>
+        <p>
+          Al vincular, esta operación se moverá a la sección de Operaciones Recurrentes
+          y no se duplicará en los cálculos.
+        </p>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn-secondary" (click)="cancelarConfirmacion()">
+          Cancelar
+        </button>
+        <button type="button" class="btn-primary" (click)="confirmarVinculacion()">
+          Confirmar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

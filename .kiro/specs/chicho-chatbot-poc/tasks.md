@@ -180,13 +180,20 @@ Este plan de implementación convierte el diseño aprobado en tareas incremental
   - Aplicar estilos Interbank
   - _Requirements: 1, 18_
 
-- [ ] 6. Implementar módulo Chat
+- [x] 6. Implementar módulo Chat
+
+
+
+
+
   - Crear vista de chat con Chicho
   - Implementar lista unificada de mensajes
   - Implementar filtros de configuración
   - _Requirements: 2, 3, 4, 5_
 
-- [ ] 6.1 Implementar ChatComponent completo con lista unificada
+- [x] 6.1 Implementar ChatComponent completo con lista unificada
+
+
   - Actualizar `src/app/features/chat/chat.component.ts` con template completo
   - Crear `src/app/shared/components/chat-header/chat-header.component.ts` con avatar y botón de configuración
   - Crear `src/app/shared/components/chat-messages/chat-messages.component.ts` con scroll automático
@@ -196,21 +203,29 @@ Este plan de implementación convierte el diseño aprobado en tareas incremental
   - Implementar animación de apertura desde parte inferior
   - _Requirements: 2, 3, 4_
 
-- [ ] 6.2 Crear ChatConfigModalComponent
+- [x] 6.2 Crear ChatConfigModalComponent
+
+
   - Crear `src/app/shared/components/chat-config-modal/chat-config-modal.component.ts`
   - Implementar checklist con opciones: alertas, recompensas, conversaciones
   - Guardar configuración en ChatService
   - Aplicar filtros a lista unificada
   - _Requirements: 5_
 
-- [ ] 7. Implementar módulo Plan de Ahorros - Parte 1 (Vista principal)
+- [x] 7. Implementar módulo Plan de Ahorros - Parte 1 (Vista principal)
+
+
+
+
   - Crear vista principal con cálculos financieros
   - Implementar navegación entre meses
   - Implementar secciones colapsables
   - Mostrar pills de alerta en totales
   - _Requirements: 31, 32, 33, 35, 36, 45, 48_
 
-- [ ] 7.1 Implementar PlanAhorrosComponent con cálculos dinámicos
+- [x] 7.1 Implementar PlanAhorrosComponent con cálculos dinámicos
+
+
   - Actualizar `src/app/features/plan-ahorros/plan-ahorros.component.ts` con template completo
   - Crear `src/app/shared/components/selector-mes/selector-mes.component.ts` para navegar entre Agosto-Noviembre
   - Cargar datos del mes seleccionado desde PlanAhorrosService
@@ -220,7 +235,9 @@ Este plan de implementación convierte el diseño aprobado en tareas incremental
   - Mostrar saldoChanchitos separado del saldoActual
   - _Requirements: 31, 32, 35, 41_
 
-- [ ] 7.2 Implementar subsecciones de Gastos con pills
+- [x] 7.2 Implementar subsecciones de Gastos con pills
+
+
   - Mostrar subsecciones: Cobros Automáticos, Gastos Hormiga, Gastos Medios, Gastos Excepcionales
   - Para cada subsección mostrar: Consumo TD (texto normal), Consumo TC (texto normal), Total (con pill)
   - Implementar lógica de pills: normal (<90%), ámbar (90-100%), rojo (>100%)
@@ -229,7 +246,9 @@ Este plan de implementación convierte el diseño aprobado en tareas incremental
   - Pills solo se muestran si la categoría tiene tope configurado
   - _Requirements: 45, 46, 48_
 
-- [ ] 7.3 Implementar secciones colapsables y operaciones atrasadas
+- [x] 7.3 Implementar secciones colapsables y operaciones atrasadas
+
+
   - Gestionar estado de colapso de cada sección
   - Botón global para colapsar/descolapsar todas
   - Aplicar transiciones smooth (300ms ease-in-out) usando variables SCSS
@@ -237,13 +256,20 @@ Este plan de implementación convierte el diseño aprobado en tareas incremental
   - Indicador visual destacado (color rojo o badge) para atrasadas
   - _Requirements: 33, 36_
 
-- [ ] 8. Implementar módulo Plan de Ahorros - Parte 2 (Configuración)
+- [x] 8. Implementar módulo Plan de Ahorros - Parte 2 (Configuración)
+
+
+
+
+
   - Crear vistas de configuración manual
   - Implementar configuración de topes mensuales
   - Implementar configuración de clasificación de gastos
   - _Requirements: 42, 43, 46, 47_
 
-- [ ] 8.1 Implementar ConfigurarPlanComponent
+- [x] 8.1 Implementar ConfigurarPlanComponent
+
+
   - Actualizar `src/app/features/plan-ahorros/configurar-plan/configurar-plan.component.ts` con template completo
   - Mostrar fecha de vigencia automática (mes actual)
   - Permitir editar ingreso neto mensual
@@ -256,7 +282,9 @@ Este plan de implementación convierte el diseño aprobado en tareas incremental
   - Botón para volver a hablar con Chicho
   - _Requirements: 42, 43_
 
-- [ ] 8.2 Implementar TopesMensualesComponent
+- [x] 8.2 Implementar TopesMensualesComponent
+
+
   - Actualizar `src/app/features/plan-ahorros/configurar-plan/topes-mensuales/topes-mensuales.component.ts`
   - Mostrar topes para: Cobros Automáticos, Gastos Hormiga, Gastos Medios, Gastos Excepcionales, Carga Financiera, Movimientos de Caja, Operaciones Recurrentes
   - Para cada tope: Porcentaje del ingreso, Monto Fijo, o Sin Tope
@@ -266,7 +294,9 @@ Este plan de implementación convierte el diseño aprobado en tareas incremental
   - Guardar configuración
   - _Requirements: 46_
 
-- [ ] 8.3 Implementar ClasificacionGastosComponent
+- [x] 8.3 Implementar ClasificacionGastosComponent
+
+
   - Actualizar `src/app/features/plan-ahorros/configurar-plan/clasificacion-gastos/clasificacion-gastos.component.ts`
   - Configurar tope para clasificar gasto como "Hormiga" (20% ingreso diario)
   - Configurar tope para clasificar gasto como "Medio" (50% ingreso diario)
@@ -276,12 +306,15 @@ Este plan de implementación convierte el diseño aprobado en tareas incremental
   - _Requirements: 47_
 
 - [ ] 9. Implementar módulo Plan de Ahorros - Parte 3 (Detalle y listas)
+
   - Crear vista de detalle de gastos con filtro y gráfico
   - Crear vistas de listas de movimientos
   - Implementar recategorización
   - _Requirements: 27, 28_
 
-- [ ] 9.1 Implementar DetalleGastosComponent
+
+- [x] 9.1 Implementar DetalleGastosComponent
+
   - Actualizar `src/app/features/plan-ahorros/detalle-gastos/detalle-gastos.component.ts` con template completo
   - Implementar filtro: Todos, Gastos Hormiga, Gastos Medios, Gastos Excepcionales
   - Renderizar gráfico de barras horizontales con 9 tipos de consumo + Otros
@@ -291,7 +324,9 @@ Este plan de implementación convierte el diseño aprobado en tareas incremental
   - Mostrar comentario resumen generado por IA (mock)
   - _Requirements: 27_
 
-- [ ] 9.2 Implementar ListaMovimientosComponent
+- [x] 9.2 Implementar ListaMovimientosComponent
+
+
   - Actualizar `src/app/features/plan-ahorros/lista-movimientos/lista-movimientos.component.ts`
   - Mostrar lista cronológica de movimientos por categoría (desde route params)
   - Botones para recategorizar en: "Pago Financiero - Otro Banco", "Ingresos", "Operaciones Regulares"
@@ -299,21 +334,29 @@ Este plan de implementación convierte el diseño aprobado en tareas incremental
   - Actualizar lista al categorizar
   - _Requirements: 28_
 
-- [ ] 9.3 Implementar MovimientosCajaDetalleComponent
+- [x] 9.3 Implementar MovimientosCajaDetalleComponent
+
+
   - Actualizar `src/app/features/plan-ahorros/movimientos-caja-detalle/movimientos-caja-detalle.component.ts`
   - Mostrar título del tipo seleccionado (Transferencias, Retiros, Depósitos, Otros) desde route params
   - Mostrar lista cronológica con nombre, monto, fecha
   - Botones para recategorizar en: "Pago Financiero - Otro Banco", "Ingresos", "Operaciones Regulares"
   - _Requirements: 28_
 
-- [ ] 10. Implementar módulo Plan de Ahorros - Parte 4 (Operaciones recurrentes y chanchitos)
+- [x] 10. Implementar módulo Plan de Ahorros - Parte 4 (Operaciones recurrentes y chanchitos)
+
+
+
+
   - Crear vista CRUD de operaciones recurrentes
   - Implementar transferencia a chanchitos
   - Implementar drag-to-save
   - Implementar vinculación de operaciones
   - _Requirements: 29, 37, 38, 44_
 
-- [ ] 10.1 Implementar OperacionesRecurrentesComponent
+- [x] 10.1 Implementar OperacionesRecurrentesComponent
+
+
   - Actualizar `src/app/features/plan-ahorros/operaciones-recurrentes/operaciones-recurrentes.component.ts`
   - Listar operaciones recurrentes programadas
   - Permitir crear nueva operación (título, monto, fechas, día del mes o "fin_de_mes")
@@ -324,7 +367,9 @@ Este plan de implementación convierte el diseño aprobado en tareas incremental
   - Generar automáticamente operaciones mensuales entre fechaInicio y fechaFin
   - _Requirements: 37_
 
-- [ ] 10.2 Crear componentes de ahorro
+- [x] 10.2 Crear componentes de ahorro
+
+
   - Crear `src/app/shared/components/transferencia-ahorro-modal/transferencia-ahorro-modal.component.ts`
   - Crear `src/app/shared/components/drag-to-save/drag-to-save.component.ts` con gesto de arrastre
   - Mostrar campo para ingresar monto y selector de chanchito
@@ -333,7 +378,9 @@ Este plan de implementación convierte el diseño aprobado en tareas incremental
   - Drag-to-save solo aparece en mes actual
   - _Requirements: 29, 44_
 
-- [ ] 10.3 Crear VincularOperacionModalComponent
+- [x] 10.3 Crear VincularOperacionModalComponent
+
+
   - Crear `src/app/shared/components/vincular-operacion-modal/vincular-operacion-modal.component.ts`
   - Mostrar lista de operaciones recurrentes activas
   - Permitir seleccionar una para vincular
@@ -343,13 +390,19 @@ Este plan de implementación convierte el diseño aprobado en tareas incremental
   - Mostrar indicador visual de que operación está vinculada
   - _Requirements: 38_
 
-- [ ] 11. Implementar módulo Plan de Ahorros - Parte 5 (Interacciones avanzadas)
+- [x] 11. Implementar módulo Plan de Ahorros - Parte 5 (Interacciones avanzadas)
+
+
+
+
   - Implementar pull-to-refresh
   - Implementar modal de categorización
   - Pulir transiciones y animaciones
   - _Requirements: 30, 40_
 
-- [ ] 11.1 Implementar pull-to-refresh en PlanAhorrosComponent
+- [x] 11.1 Implementar pull-to-refresh en PlanAhorrosComponent
+
+
   - Detectar gesto de arrastre hacia abajo (pull-to-refresh)
   - Llamar a `refreshPlanAhorros()` del servicio
   - Mostrar indicador de carga
@@ -357,7 +410,9 @@ Este plan de implementación convierte el diseño aprobado en tareas incremental
   - Funcionalidad debe trabajar en móvil y desktop
   - _Requirements: 30_
 
-- [ ] 11.2 Crear CategorizarMovimientoModalComponent
+- [x] 11.2 Crear CategorizarMovimientoModalComponent
+
+
   - Crear `src/app/shared/components/categorizar-movimiento-modal/categorizar-movimiento-modal.component.ts`
   - Mostrar lista de movimientos sin categorizar
   - Permitir seleccionar categoría: Ingresos, Operaciones Regulares, Pagos Financieros (Otros Bancos)
@@ -365,12 +420,18 @@ Este plan de implementación convierte el diseño aprobado en tareas incremental
   - Cerrar modal
   - _Requirements: 40_
 
-- [ ] 12. Implementar módulos Alertas y Recompensas
+- [x] 12. Implementar módulos Alertas y Recompensas
+
+
+
+
   - Crear vistas de alertas y recompensas
   - Integrar con servicios
   - _Requirements: 3, 5_
 
-- [ ] 12.1 Implementar AlertasComponent
+- [x] 12.1 Implementar AlertasComponent
+
+
   - Actualizar `src/app/features/alertas/alertas.component.ts` con template completo
   - Mostrar lista de alertas por severidad
   - Crear `src/app/shared/components/alerta-detail/alerta-detail.component.ts` para detalle
@@ -379,7 +440,9 @@ Este plan de implementación convierte el diseño aprobado en tareas incremental
   - Integrar con AlertasService
   - _Requirements: 3_
 
-- [ ] 12.2 Implementar RecompensasComponent
+- [x] 12.2 Implementar RecompensasComponent
+
+
   - Actualizar `src/app/features/recompensas/recompensas.component.ts` con template completo
   - Mostrar categorías de beneficios: descuentos, promociones, ampliación TC, tipo de cambio
   - Crear `src/app/shared/components/recompensa-category/recompensa-category.component.ts` por categoría
@@ -387,33 +450,55 @@ Este plan de implementación convierte el diseño aprobado en tareas incremental
   - Integrar con RecompensasService
   - _Requirements: 5_
 
-- [ ] 13. Organizar assets y documentación
+- [x] 13. Organizar assets y documentación
+
+
+
   - Organizar iconos SVG
   - Organizar imágenes
   - Crear README.md por carpeta de assets
   - _Requirements: 6, 16_
 
-- [ ] 13.1 Organizar assets/icons/
+- [x] 13.1 Organizar assets/icons/
+
+
   - Agregar iconos SVG necesarios: chicho.svg, alert-warning.svg, alert-danger.svg, alert-info.svg, reward.svg, piggy-bank.svg, home.svg, chat.svg, menu.svg, close.svg, send.svg, search.svg, filter.svg, check.svg, arrow-right.svg, settings.svg, plus.svg, back.svg, edit.svg
   - Crear `src/assets/icons/README.md` con instrucciones de reemplazo
   - Todos los iconos deben ser SVG 24x24px con currentColor
   - _Requirements: 6_
 
-- [ ] 13.2 Organizar assets/images/
+- [x] 13.2 Organizar assets/images/
+
+
   - Agregar avatar-chicho.png para chat
   - Agregar empty-state-plan.svg para estado sin plan
   - Agregar gradient-promo.png para cards de promoción
   - Crear `src/assets/images/README.md` con instrucciones de dimensiones y formatos
   - _Requirements: 6_
 
-- [ ]* 14. Testing y validación
+- [x] 14. Testing y validación
+
+
+
+
+
+
   - Validar cálculos financieros
   - Validar navegación entre meses
   - Validar saldos multi-mes
   - Validar pills de alerta
   - _Requirements: 31, 32, 35, 36, 39, 45_
 
-- [ ]* 14.1 Validar cálculos del plan de ahorros
+- [x] 14.1 Validar cálculos del plan de ahorros
+
+
+
+
+
+
+
+
+
   - Verificar cálculo de saldo actual (excluye operaciones vinculadas)
   - Verificar cálculo de "Por Pagar" (incluye atrasadas)
   - Verificar clasificación de gastos (hormiga/medio/excepcional) con fórmula automática
@@ -421,27 +506,52 @@ Este plan de implementación convierte el diseño aprobado en tareas incremental
   - Verificar que pills solo se muestran en categorías con tope configurado
   - _Requirements: 31, 32, 40, 45, 46_
 
-- [ ]* 14.2 Validar navegación y consistencia multi-mes
+- [x] 14.2 Validar navegación y consistencia multi-mes
+
+
+
+
+
+
   - Verificar navegación entre Agosto-Noviembre
   - Validar que saldoInicial de mes N = saldoFinal de mes N-1
   - Verificar operaciones atrasadas del mes anterior
   - Verificar mensaje de error si hay inconsistencias en validacionSaldos
   - _Requirements: 35, 36, 39_
 
-- [ ]* 15. Deploy a Vercel
+- [x] 15. Deploy a Vercel
+
+
+
+
+
+
   - Configurar proyecto en Vercel
   - Verificar build de producción
   - Verificar routing en producción
   - _Requirements: 17_
 
-- [ ]* 15.1 Preparar build de producción
+- [x] 15.1 Preparar build de producción
+
+
+
+
+
+
+
   - Ejecutar `ng build --configuration production`
   - Verificar que no hay errores de compilación
   - Verificar tamaño de bundles
   - Verificar que vercel.json está configurado correctamente
   - _Requirements: 17_
 
-- [ ]* 15.2 Deploy a Vercel
+- [x] 15.2 Deploy a Vercel
+
+
+
+
+
+
   - Conectar repositorio con Vercel
   - Configurar variables de entorno si es necesario
   - Verificar que la aplicación funciona en producción

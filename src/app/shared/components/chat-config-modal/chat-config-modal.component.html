@@ -1,0 +1,82 @@
+<div class="modal-backdrop" (click)="handleBackdropClick($event)">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Configuración del Chat</h2>
+      <button class="btn-close" (click)="handleClose()" aria-label="Cerrar">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <p class="description">Selecciona qué tipos de comunicación quieres ver en el chat:</p>
+
+      <div class="config-options">
+        <label class="checkbox-option">
+          <input 
+            type="checkbox" 
+            [(ngModel)]="config.showConversations"
+            id="show-conversations"
+          />
+          <span class="checkbox-label">
+            <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span class="label-text">
+              <strong>Conversaciones</strong>
+              <small>Mensajes del chat con Chicho</small>
+            </span>
+          </span>
+        </label>
+
+        <label class="checkbox-option">
+          <input 
+            type="checkbox" 
+            [(ngModel)]="config.showAlerts"
+            id="show-alerts"
+          />
+          <span class="checkbox-label">
+            <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+              <line x1="12" y1="9" x2="12" y2="13"></line>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+            <span class="label-text">
+              <strong>Alertas</strong>
+              <small>Notificaciones sobre tu plan de ahorro</small>
+            </span>
+          </span>
+        </label>
+
+        <label class="checkbox-option">
+          <input 
+            type="checkbox" 
+            [(ngModel)]="config.showRewards"
+            id="show-rewards"
+          />
+          <span class="checkbox-label">
+            <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="8" r="7"></circle>
+              <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+            </svg>
+            <span class="label-text">
+              <strong>Recompensas</strong>
+              <small>Descuentos y promociones disponibles</small>
+            </span>
+          </span>
+        </label>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn btn-secondary" (click)="handleClose()">
+        Cancelar
+      </button>
+      <button class="btn btn-primary" (click)="handleSave()">
+        Guardar
+      </button>
+    </div>
+  </div>
+</div>

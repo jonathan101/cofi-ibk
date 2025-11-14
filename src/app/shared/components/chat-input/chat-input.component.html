@@ -1,0 +1,23 @@
+<div class="chat-input">
+  <div class="input-container">
+    <input 
+      type="text" 
+      [(ngModel)]="messageText"
+      (keypress)="handleKeyPress($event)"
+      placeholder="Escribe un mensaje..."
+      class="message-input"
+      aria-label="Escribe un mensaje"
+    />
+    <button 
+      class="btn-send" 
+      (click)="handleSend()"
+      [disabled]="!messageText.trim()"
+      aria-label="Enviar mensaje"
+    >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="22" y1="2" x2="11" y2="13"></line>
+        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+      </svg>
+    </button>
+  </div>
+</div>

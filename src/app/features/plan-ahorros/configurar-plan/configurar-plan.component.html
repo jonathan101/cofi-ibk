@@ -1,0 +1,165 @@
+<div class="configurar-plan-container" *ngIf="configuracion">
+  <!-- Header -->
+  <div class="header">
+    <button class="btn-back" (click)="volver()">
+      <span class="icon-back">←</span>
+    </button>
+    <h1 class="title">Configurar Plan</h1>
+  </div>
+
+  <!-- Fecha de Vigencia -->
+  <div class="vigencia-info">
+    <div class="vigencia-label">Configuración Vigente - Desde:</div>
+    <div class="vigencia-mes">{{ mesActual }}</div>
+  </div>
+
+  <!-- Advertencia -->
+  <div class="advertencia">
+    <span class="icon-warning">⚠️</span>
+    <p>Esta configuración aplicará desde {{ mesActual }} en adelante. Los meses anteriores mantendrán su configuración original.</p>
+  </div>
+
+  <!-- Formulario de Configuración -->
+  <form class="config-form" (ngSubmit)="guardarConfiguracion()">
+    
+    <!-- Ingreso Neto Mensual -->
+    <div class="form-section">
+      <label class="form-label">Ingreso Neto Mensual</label>
+      <div class="input-group">
+        <span class="input-prefix">S/</span>
+        <input 
+          type="number" 
+          class="form-input" 
+          [(ngModel)]="configuracion.ingresoNetoMensual"
+          name="ingresoNeto"
+          min="0"
+          step="0.01"
+          required
+        />
+      </div>
+    </div>
+
+    <!-- Meta de Ahorro -->
+    <div class="form-section">
+      <label class="form-label">Meta de Ahorro Mensual</label>
+      <div class="input-group">
+        <span class="input-prefix">S/</span>
+        <input 
+          type="number" 
+          class="form-input" 
+          [(ngModel)]="configuracion.metaAhorro"
+          name="metaAhorro"
+          min="0"
+          step="0.01"
+          required
+        />
+      </div>
+      <div class="form-hint">
+        {{ (configuracion.metaAhorro / configuracion.ingresoNetoMensual * 100).toFixed(1) }}% de tu ingreso neto
+      </div>
+    </div>
+
+    <!-- Tiempo de Alerta -->
+    <div class="form-section">
+      <label class="form-label">Tiempo de Espera de Alerta ante Compras Altas</label>
+      <div class="input-group">
+        <input 
+          type="number" 
+          class="form-input" 
+          [(ngModel)]="configuracion.tiempoAlertaCompraAlta"
+          name="tiempoAlerta"
+          min="1"
+          max="120"
+          required
+        />
+        <span class="input-suffix">minutos</span>
+      </div>
+      <div class="form-hint">
+        Tiempo que esperará Chicho antes de alertarte sobre una compra alta en TC/TD
+      </div>
+    </div>
+
+    <!-- Cuentas Excluidas -->
+    <div class="form-section">
+      <label class="form-label">Cuentas Excluidas del Saldo Inicial</label>
+      <div class="form-hint">
+        Selecciona las cuentas que no quieres incluir en el cálculo del saldo inicial
+      </div>
+      <div class="checkbox-group">
+        <label class="checkbox-item">
+          <input type="checkbox" disabled />
+          <span>Cuenta de Ahorros Principal (S/ 5,000)</span>
+        </label>
+        <label class="checkbox-item">
+          <input type="checkbox" disabled />
+          <span>Cuenta Corriente (S/ 2,500)</span>
+        </label>
+        <label class="checkbox-item">
+          <input type="checkbox" disabled />
+          <span>Cuenta en Dólares ($ 1,000)</span>
+        </label>
+      </div>
+      <div class="form-hint">
+        Funcionalidad de selección disponible próximamente
+      </div>
+    </div>
+
+    <!-- Links a Sub-Configuraciones -->
+    <div class="config-links">
+      <button type="button" class="link-card" (click)="navegarATopesMensuales()">
+        <div class="link-content">
+          <div class="link-icon">📊</div>
+          <div class="link-text">
+            <div class="link-title">Topes Mensuales</div>
+            <div class="link-description">Configura límites para cada categoría de gasto</div>
+          </div>
+        </div>
+        <span class="link-arrow">→</span>
+      </button>
+
+      <button type="button" class="link-card" (click)="navegarAClasificacionGastos()">
+        <div class="link-content">
+          <div class="link-icon">🏷️</div>
+          <div class="link-text">
+            <div class="link-title">Clasificación de Gastos</div>
+            <div class="link-description">Define cómo se clasifican gastos hormiga, medios y excepcionales</div>
+          </div>
+        </div>
+        <span class="link-arrow">→</span>
+      </button>
+
+      <button type="button" class="link-card" (click)="navegarAOperacionesRecurrentes()">
+        <div class="link-content">
+          <div class="link-icon">🔄</div>
+          <div class="link-text">
+            <div class="link-title">Operaciones Recurrentes</div>
+            <div class="link-description">Gestiona pagos y operaciones que se repiten cada mes</div>
+          </div>
+        </div>
+        <span class="link-arrow">→</span>
+      </button>
+    </div>
+
+    <!-- Mensaje de Éxito -->
+    <div class="mensaje-exito" *ngIf="mensajeExito">
+      <span class="icon-check">✓</span>
+      {{ mensajeExito }}
+    </div>
+
+    <!-- Botones de Acción -->
+    <div class="action-buttons">
+      <button type="button" class="btn-secondary" (click)="hablarConChicho()">
+        <span class="icon-chat">💬</span>
+        Hablar con Chicho
+      </button>
+      <button type="submit" class="btn-primary" [disabled]="guardando">
+        {{ guardando ? 'Guardando...' : 'Guardar Configuración' }}
+      </button>
+    </div>
+  </form>
+</div>
+
+<div class="loading-container" *ngIf="!configuracion">
+  <div class="loading-spinner"></div>
+  <p>Cargando configuración...</p>
+</div>

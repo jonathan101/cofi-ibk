@@ -1,0 +1,39 @@
+<div class="ingreso-neto-container">
+  <header class="header">
+    <button class="back-button" (click)="goBack()" aria-label="Volver">
+      <span class="material-symbols-outlined">arrow_back</span>
+    </button>
+    <h2 class="header-title">Ingreso Mensual</h2>
+  </header>
+
+  <main class="content">
+    <h1 class="headline">Tu Ingreso Mensual</h1>
+    
+    <p class="description">
+      Para crear tu plan, necesitamos saber cuál es tu ingreso neto mensual.
+    </p>
+
+    <div class="input-group">
+      <label class="input-label">
+        <p class="label-text">Ingreso Neto Mensual</p>
+        <input 
+          type="number" 
+          class="input-field"
+          [(ngModel)]="ingresoNeto"
+          placeholder="S/ 0.00"
+          inputmode="decimal"
+        />
+      </label>
+    </div>
+
+    <a class="info-link" (click)="showInfoIngresoNeto()">
+      ¿Qué es el ingreso neto?
+    </a>
+  </main>
+
+  <footer class="footer">
+    <button class="btn-primary" (click)="guardarIngreso()">
+      Guardar Ingreso
+    </button>
+  </footer>
+</div>

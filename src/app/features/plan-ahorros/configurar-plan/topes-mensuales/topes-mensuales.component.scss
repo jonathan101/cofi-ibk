@@ -1,0 +1,301 @@
+@import '../../../../../styles/variables';
+@import '../../../../../styles/mixins';
+
+.topes-mensuales-container {
+  padding: $spacing-lg;
+  max-width: 700px;
+  margin: 0 auto;
+  padding-bottom: 100px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  margin-bottom: $spacing-lg;
+
+  .btn-back {
+    background: none;
+    border: none;
+    font-size: $font-size-2xl;
+    cursor: pointer;
+    padding: $spacing-xs;
+    color: $color-text-primary;
+    transition: transform $transition-fast;
+
+    &:hover {
+      transform: translateX(-4px);
+    }
+
+    .icon-back {
+      display: block;
+    }
+  }
+
+  .title {
+    font-size: $font-size-2xl;
+    font-weight: 700;
+    color: $color-text-primary;
+    margin: 0;
+  }
+}
+
+.description {
+  font-size: $font-size-base;
+  color: $color-text-secondary;
+  line-height: 1.6;
+  margin-bottom: $spacing-xl;
+}
+
+.topes-form {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xl;
+}
+
+.tope-section {
+  background-color: $color-bg-primary;
+  border: 2px solid $color-bg-tertiary;
+  border-radius: $border-radius-md;
+  padding: $spacing-lg;
+
+  .section-title {
+    font-size: $font-size-lg;
+    font-weight: 600;
+    color: $color-text-primary;
+    margin: 0 0 $spacing-md 0;
+  }
+
+  .tope-options {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+  }
+}
+
+.radio-option {
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-md;
+  padding: $spacing-md;
+  background-color: $color-bg-secondary;
+  border-radius: $border-radius-sm;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background-color: $color-bg-tertiary;
+  }
+
+  input[type="radio"] {
+    margin-top: 2px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: $color-primary;
+    flex-shrink: 0;
+  }
+
+  .option-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+  }
+
+  .option-label {
+    font-size: $font-size-base;
+    font-weight: 500;
+    color: $color-text-primary;
+  }
+
+  .input-row {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    margin-top: $spacing-xs;
+
+    .input-prefix,
+    .input-unit {
+      font-size: $font-size-base;
+      font-weight: 600;
+      color: $color-text-secondary;
+    }
+
+    .input-small {
+      width: 80px;
+      padding: $spacing-sm $spacing-md;
+      border: 2px solid $color-bg-tertiary;
+      border-radius: $border-radius-sm;
+      font-size: $font-size-base;
+      color: $color-text-primary;
+      background-color: $color-bg-primary;
+      transition: border-color $transition-fast;
+
+      &:focus {
+        outline: none;
+        border-color: $color-primary;
+      }
+    }
+
+    .input-medium {
+      width: 150px;
+      padding: $spacing-sm $spacing-md;
+      border: 2px solid $color-bg-tertiary;
+      border-radius: $border-radius-sm;
+      font-size: $font-size-base;
+      color: $color-text-primary;
+      background-color: $color-bg-primary;
+      transition: border-color $transition-fast;
+
+      &:focus {
+        outline: none;
+        border-color: $color-primary;
+      }
+    }
+
+    .calculated-amount {
+      font-size: $font-size-sm;
+      color: $color-primary;
+      font-weight: 600;
+      margin-left: $spacing-sm;
+    }
+  }
+}
+
+.mensaje-exito {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  padding: $spacing-md;
+  background-color: #D4EDDA;
+  border-left: 4px solid $color-primary;
+  border-radius: $border-radius-sm;
+  color: $color-text-primary;
+  font-size: $font-size-base;
+  animation: slideIn $transition-normal;
+
+  .icon-check {
+    font-size: $font-size-xl;
+    color: $color-primary;
+  }
+}
+
+.action-buttons {
+  display: flex;
+  gap: $spacing-md;
+  margin-top: $spacing-xl;
+
+  button {
+    flex: 1;
+    padding: $spacing-md $spacing-lg;
+    border-radius: $border-radius-md;
+    font-size: $font-size-base;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+
+  .btn-primary {
+    background-color: $color-primary;
+    color: white;
+    border: none;
+
+    &:hover:not(:disabled) {
+      background-color: darken($color-primary, 5%);
+      transform: translateY(-2px);
+      box-shadow: $shadow-md;
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0);
+    }
+  }
+
+  .btn-secondary {
+    background-color: $color-bg-primary;
+    color: $color-text-primary;
+    border: 2px solid $color-bg-tertiary;
+
+    &:hover:not(:disabled) {
+      background-color: $color-bg-tertiary;
+      transform: translateY(-2px);
+      box-shadow: $shadow-md;
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0);
+    }
+  }
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-2xl;
+  gap: $spacing-lg;
+
+  .loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid $color-bg-tertiary;
+    border-top-color: $color-primary;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  p {
+    font-size: $font-size-base;
+    color: $color-text-secondary;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .topes-mensuales-container {
+    padding: $spacing-md;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+
+    button {
+      width: 100%;
+    }
+  }
+
+  .radio-option {
+    .input-row {
+      flex-wrap: wrap;
+
+      .calculated-amount {
+        width: 100%;
+        margin-left: 0;
+        margin-top: $spacing-xs;
+      }
+    }
+  }
+}

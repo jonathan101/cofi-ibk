@@ -1,0 +1,351 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+// Host del componente - CRÍTICO para que obedezca al wrapper
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-bg-light);
+  position: relative;
+  overflow: hidden;
+  animation: slideUp $transition-normal;
+
+  @include dark-mode {
+    background-color: var(--color-bg-dark);
+  }
+}
+
+.chat-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: $spacing-2;
+  padding: $spacing-4;
+  padding-bottom: $spacing-3;
+  background-color: rgba(var(--color-bg-light-rgb), 0.8);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(var(--color-gray-200-rgb), 0.8);
+
+  @include dark-mode {
+    background-color: rgba(var(--color-bg-dark-rgb), 0.8);
+    border-bottom-color: rgba(var(--color-gray-800-rgb), 0.8);
+  }
+}
+
+.icon-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  @include dark-mode {
+    color: var(--color-gray-400);
+  }
+
+  &:hover {
+    background-color: rgba(var(--color-gray-200-rgb), 0.5);
+
+    @include dark-mode {
+      background-color: rgba(var(--color-gray-800-rgb), 0.5);
+    }
+  }
+
+  .material-symbols-outlined {
+    font-size: 24px;
+  }
+}
+
+.search-container {
+  flex: 1;
+  min-width: 0;
+}
+
+.search-input-wrapper {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  border-radius: $border-radius-sm;
+  background-color: var(--color-gray-100);
+  overflow: hidden;
+
+  @include dark-mode {
+    background-color: var(--color-gray-800);
+  }
+}
+
+.search-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: $spacing-3;
+  color: var(--color-text-secondary);
+  font-size: 20px;
+
+  @include dark-mode {
+    color: var(--color-gray-400);
+  }
+}
+
+.search-input {
+  flex: 1;
+  height: 100%;
+  min-width: 0;
+  padding: 0 $spacing-3;
+  border: none;
+  background: transparent;
+  color: var(--color-text-primary);
+  font-size: $font-size-base;
+  font-weight: $font-weight-normal;
+  outline: none;
+
+  @include dark-mode {
+    color: var(--color-gray-200);
+  }
+
+  &::placeholder {
+    color: var(--color-text-secondary);
+
+    @include dark-mode {
+      color: var(--color-gray-400);
+    }
+  }
+}
+
+.filter-menu {
+  position: absolute;
+  top: 60px;
+  right: $spacing-4;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  min-width: 240px;
+  padding: $spacing-3;
+  background-color: var(--color-white);
+  border-radius: $border-radius-sm;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: fadeInDown 0.2s ease-out;
+
+  @include dark-mode {
+    background-color: var(--color-gray-800);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  }
+}
+
+.filter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $spacing-2 $spacing-3 $spacing-3;
+  border-bottom: 1px solid var(--color-gray-200);
+  margin-bottom: $spacing-2;
+
+  @include dark-mode {
+    border-bottom-color: var(--color-gray-700);
+  }
+
+  span:first-child {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: var(--color-text-primary);
+
+    @include dark-mode {
+      color: var(--color-gray-100);
+    }
+  }
+
+  .filter-hint {
+    font-size: $font-size-xs;
+    color: var(--color-text-secondary);
+
+    @include dark-mode {
+      color: var(--color-gray-400);
+    }
+  }
+}
+
+.filter-option {
+  display: flex;
+  align-items: center;
+  gap: $spacing-3;
+  padding: $spacing-3 $spacing-3;
+  border: none;
+  border-radius: $border-radius;
+  background: transparent;
+  color: var(--color-text-primary);
+  font-size: $font-size-base;
+  font-weight: $font-weight-medium;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  @include dark-mode {
+    color: var(--color-gray-200);
+  }
+
+  &:hover {
+    background-color: var(--color-gray-100);
+
+    @include dark-mode {
+      background-color: var(--color-gray-700);
+    }
+  }
+
+  &.checkbox-option {
+    position: relative;
+    padding-left: $spacing-8;
+
+    input[type="checkbox"] {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .checkbox-custom {
+      position: absolute;
+      left: $spacing-3;
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--color-gray-400);
+      border-radius: 4px;
+      background-color: transparent;
+      transition: all 0.2s ease;
+
+      @include dark-mode {
+        border-color: var(--color-gray-600);
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        display: none;
+        left: 5px;
+        top: 2px;
+        width: 4px;
+        height: 8px;
+        border: solid white;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+      }
+    }
+
+    input[type="checkbox"]:checked ~ .checkbox-custom {
+      background-color: var(--color-primary);
+      border-color: var(--color-primary);
+
+      &::after {
+        display: block;
+      }
+    }
+  }
+
+  .material-symbols-outlined {
+    font-size: 20px;
+  }
+}
+
+.chat-messages-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: $spacing-4;
+}
+
+.chat-footer {
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  padding: $spacing-4;
+  padding-top: $spacing-3;
+  background-color: rgba(var(--color-bg-light-rgb), 0.8);
+  backdrop-filter: blur(8px);
+  border-top: 1px solid rgba(var(--color-gray-200-rgb), 0.8);
+
+  @include dark-mode {
+    background-color: rgba(var(--color-bg-dark-rgb), 0.8);
+    border-top-color: rgba(var(--color-gray-800-rgb), 0.8);
+  }
+}
+
+.loading-indicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(var(--color-primary-rgb), 0.2);
+    border-top-color: var(--color-primary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.filter-footer {
+  padding: $spacing-3 $spacing-3 $spacing-2;
+  border-top: 1px solid var(--color-gray-200);
+  margin-top: $spacing-2;
+
+  @include dark-mode {
+    border-top-color: var(--color-gray-700);
+  }
+
+  small {
+    font-size: $font-size-xs;
+    color: var(--color-text-secondary);
+    font-style: italic;
+
+    @include dark-mode {
+      color: var(--color-gray-400);
+    }
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

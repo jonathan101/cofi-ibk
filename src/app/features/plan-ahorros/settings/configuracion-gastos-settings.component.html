@@ -1,0 +1,147 @@
+<div class="config-gastos-container">
+  <header class="header">
+    <div class="back-button" (click)="goBack()">
+      <span class="material-symbols-outlined">arrow_back</span>
+    </div>
+    <h1 class="header-title">Categorizar mis Gastos</h1>
+    <div class="header-spacer"></div>
+  </header>
+
+  <main class="content">
+    <p class="description">
+      Define los montos para clasificar automáticamente tus consumos y entender mejor tus hábitos.
+    </p>
+
+    <!-- Gastos Hormiga -->
+    <div class="category-card">
+      <div class="category-header">
+        <div class="icon-container">
+          <span class="material-symbols-outlined">bug_report</span>
+        </div>
+        <div class="category-info">
+          <p class="category-title">Gastos Hormiga</p>
+          <p class="category-subtitle">Pequeños consumos diarios.</p>
+        </div>
+      </div>
+      
+      <div class="input-row">
+        <label class="input-group">
+          <p class="input-label">Desde</p>
+          <div class="input-wrapper">
+            <span class="currency-symbol">S/</span>
+            <input 
+              type="number" 
+              class="input-field disabled" 
+              value="0" 
+              disabled
+            />
+          </div>
+        </label>
+        
+        <label class="input-group">
+          <p class="input-label">Hasta</p>
+          <div class="input-wrapper">
+            <span class="currency-symbol">S/</span>
+            <input 
+              type="number" 
+              class="input-field" 
+              [(ngModel)]="topeHormiga"
+              placeholder="50.00"
+              step="0.01"
+              min="0.01"
+            />
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <!-- Gastos Regulares -->
+    <div class="category-card">
+      <div class="category-header">
+        <div class="icon-container">
+          <span class="material-symbols-outlined">shopping_cart</span>
+        </div>
+        <div class="category-info">
+          <p class="category-title">Gastos Regulares</p>
+          <p class="category-subtitle">Compras y pagos recurrentes.</p>
+        </div>
+      </div>
+      
+      <div class="input-row">
+        <label class="input-group">
+          <p class="input-label">Desde</p>
+          <div class="input-wrapper">
+            <span class="currency-symbol">S/</span>
+            <input 
+              type="number" 
+              class="input-field disabled" 
+              [value]="topeHormiga + 0.01"
+              disabled
+            />
+          </div>
+        </label>
+        
+        <label class="input-group">
+          <p class="input-label">Hasta</p>
+          <div class="input-wrapper">
+            <span class="currency-symbol">S/</span>
+            <input 
+              type="number" 
+              class="input-field" 
+              [(ngModel)]="topeMedio"
+              placeholder="500.00"
+              step="0.01"
+              [min]="topeHormiga + 0.01"
+            />
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <!-- Gastos Excepcionales -->
+    <div class="category-card">
+      <div class="category-header">
+        <div class="icon-container">
+          <span class="material-symbols-outlined">star</span>
+        </div>
+        <div class="category-info">
+          <p class="category-title">Gastos Excepcionales</p>
+          <p class="category-subtitle">Compras grandes o inesperadas.</p>
+        </div>
+      </div>
+      
+      <div class="input-row">
+        <label class="input-group">
+          <p class="input-label">Desde</p>
+          <div class="input-wrapper">
+            <span class="currency-symbol">S/</span>
+            <input 
+              type="number" 
+              class="input-field disabled" 
+              [value]="topeMedio + 0.01"
+              disabled
+            />
+          </div>
+        </label>
+        
+        <label class="input-group">
+          <p class="input-label">Hasta</p>
+          <div class="input-wrapper">
+            <input 
+              type="text" 
+              class="input-field disabled" 
+              value="Más"
+              disabled
+            />
+          </div>
+        </label>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <button class="btn-primary" (click)="guardarConfiguracion()">
+      Guardar Categorías
+    </button>
+  </footer>
+</div>

@@ -1,0 +1,31 @@
+<div class="sidebar-overlay" (click)="onClose()"></div>
+
+<aside class="sidebar-menu">
+  <div class="sidebar-content">
+    <!-- User Profile Section -->
+    <div class="user-profile">
+      <img [src]="userProfile.avatar" [alt]="userProfile.name" class="user-avatar" />
+      <div class="user-info">
+        <p class="user-name">{{ userProfile.name }}</p>
+        <p class="user-link">Ver perfil</p>
+      </div>
+    </div>
+
+    <!-- Menu Items -->
+    <nav class="menu-nav">
+      <ul class="menu-list">
+        <li *ngFor="let item of menuItems" class="menu-item">
+          <a 
+            [routerLink]="item.route" 
+            [class.active]="isActive(item.route)"
+            (click)="onMenuItemClick()"
+            class="menu-link"
+          >
+            <span class="material-symbols-outlined menu-icon">{{ item.icon }}</span>
+            <span class="menu-label">{{ item.label }}</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</aside>

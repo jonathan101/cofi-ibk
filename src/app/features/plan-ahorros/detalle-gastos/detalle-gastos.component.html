@@ -1,0 +1,62 @@
+<div class="detalle-gastos-container">
+  <!-- Header -->
+  <header class="header">
+    <button class="btn-back" (click)="volver()">
+      <span class="material-symbols-outlined">arrow_back</span>
+    </button>
+    <h1 class="title">{{ detalleGastos?.titulo || 'Detalle de Gastos' }}</h1>
+    <div class="spacer"></div>
+  </header>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-container">
+    <p>Cargando...</p>
+  </div>
+
+  <!-- Content -->
+  <div *ngIf="!loading && detalleGastos" class="content">
+    <!-- Resumen -->
+    <div class="resumen-card">
+      <h2 class="resumen-titulo">{{ detalleGastos.titulo }}</h2>
+      <div class="resumen-monto">
+        <span class="monto">{{ formatearMonto(detalleGastos.totalMonto) }}</span>
+        <span class="porcentaje">{{ detalleGastos.totalPorcentaje.toFixed(1) }}%</span>
+      </div>
+    </div>
+
+    <!-- Lista de Subcategorías -->
+    <div class="subcategorias-list">
+      <div 
+        *ngFor="let subcategoria of detalleGastos.subcategorias" 
+        class="subcategoria-item"
+        (click)="verDetalleSubcategoria(subcategoria)">
+        <div class="subcategoria-header">
+          <div class="subcategoria-info">
+            <span class="material-symbols-outlined icon">{{ subcategoria.icono }}</span>
+            <span class="nombre">{{ subcategoria.nombre }}</span>
+          </div>
+          <div class="subcategoria-monto">
+            <span class="monto">{{ formatearMonto(subcategoria.monto) }}</span>
+            <span class="material-symbols-outlined arrow">chevron_right</span>
+          </div>
+        </div>
+        <div class="subcategoria-bar">
+          <div 
+            class="bar-fill" 
+            [style.width.%]="getBarWidth(subcategoria)"
+            [style.background-color]="subcategoria.color">
+          </div>
+        </div>
+        <div class="subcategoria-footer">
+          <span class="porcentaje">{{ subcategoria.porcentaje.toFixed(1) }}% del total</span>
+          <span class="operaciones-count">{{ subcategoria.operaciones.length }} operaciones</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="!loading && !detalleGastos" class="empty-state">
+    <p>No hay datos disponibles</p>
+  </div>
+</div>

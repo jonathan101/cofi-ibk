@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Elige tu Chanchito - Plan de Ahorro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#009445",
+            "background-light": "#f5f8f7",
+            "background-dark": "#0f2318",
+          },
+          fontFamily: {
+            "display": ["Inter", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
+<div class="relative flex h-screen w-full flex-col group/design-root overflow-hidden">
+<!-- Top App Bar -->
+<header class="flex items-center bg-background-light dark:bg-background-dark p-4 pb-2 justify-between sticky top-0 z-10 border-b border-gray-200 dark:border-gray-800">
+<div class="text-gray-800 dark:text-gray-200 flex size-12 shrink-0 items-center justify-center">
+<span class="material-symbols-outlined text-2xl">arrow_back</span>
+</div>
+<h1 class="text-gray-900 dark:text-gray-100 text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-12">Elige tu Chanchito</h1>
+</header>
+<!-- Main Content -->
+<main class="flex-1 overflow-y-auto">
+<!-- Image Grid -->
+<div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4">
+<!-- Selected Item -->
+<div class="flex flex-col gap-3 text-center cursor-pointer">
+<div class="px-4">
+<div class="relative w-full bg-center bg-no-repeat aspect-square bg-cover rounded-full p-1 ring-2 ring-primary ring-offset-2 ring-offset-background-light dark:ring-offset-background-dark" data-alt="Piggy bank icon with a graduation cap">
+<div class="w-full h-full bg-center bg-no-repeat aspect-square bg-cover rounded-full" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAoIASPyK6X0_nxJbrvM8DDAiKvt9GrAc0vPphJTp38miVKzUx0k2ddJQj3qAVG4c7kyaTE_z7gWC06WO92tERlyzCr3G_yV5iMGRBToYv82qBwvstZCbngZKEvNtWk4tHtMMMycSddQG5sYm47C6I95oRy52DMTIW_L65dNYbN1GgPczMHGxk1nylqbZGgb0Nl4-JPJSFObSOaBYi9xfTbfRLP4lecVX2cNUN3nT3vQ1hD3I_X6V0laNdGATrx95f540L1b7cnMuU");'></div>
+<div class="absolute -top-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full bg-primary text-white">
+<span class="material-symbols-outlined text-base">check</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Other Items -->
+<div class="flex flex-col gap-3 text-center cursor-pointer">
+<div class="px-4">
+<div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-full" data-alt="Classic pink piggy bank icon" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD7vBNUN7UPVdrjsSEzIrVi17Fu1lYrGmcu8SflTcV4OSpJ6K8muEWiG5DytaOhKTyIHTOg4k5hCmrcsM_Llxt7dPO-jLxgZGMVIV6Cxy2yi5CQ-InsKbgmEPHRiS0bpqPpcMCdnhyuJS4l7uE4VWlqqVlXjcBfWw70cWQgX-kquLft8n_G8vZ_8ug-IhFd0rRzIVIoljEAXQPMWv4M7O_UIclctEIOx8VQq2gHO2XLMVZVEU0JWkiC3XhiGOgvsnrnSBSn3y3pWgc");'></div>
+</div>
+</div>
+<div class="flex flex-col gap-3 text-center cursor-pointer">
+<div class="px-4">
+<div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-full" data-alt="Piggy bank icon with a car on top" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAX1N3qMNojM-gaghvO92ES9yy2YytBOSvQxzD0mK3tubaAqFOOfrBR21JlnTu6XUKYOW5Slr7BMmdhhibcjFQzcJ_4NehNccVyRaIZnH2GzsObNIqwc8ux9zroznOWpeaQHCmG3Cv5G8NaLLIdFdmVNfu3LqjsBKzok3RKVZJXQOmxd3d27rwcwXiw0zpq-VdDGBsHWp2qzxgakDeIkOn_SnNbIoZvOHVuhOeRoz-D5d18lYLjKlm591qzLxGMj4FuVhRQPicWh1g");'></div>
+</div>
+</div>
+<div class="flex flex-col gap-3 text-center cursor-pointer">
+<div class="px-4">
+<div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-full" data-alt="Piggy bank icon with a small house on top" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB6cLvzIWR8luHYfwrBvRAW33QtycKHs7zngiR35pTl9axlgrql9RXyEP_S77SzwruOrpltBTbMwHrU6awR8K8G1FHufOeNG0_SwYXVi5_nWgm4n65DaJjHvNqN4X42ZwskJJs3NTSGZY-JYRaKcc1YL2E2oN3Y4_W687AuRMThRGxD_wotE0j9yvQ_t1C_7RtZMw9JDL6hnj5hI93Z53DiGdp6XCr6xWcMS4dHJphFXFCKYgGPwQaujTubjTziO7umexKaaeb7xWk");'></div>
+</div>
+</div>
+<div class="flex flex-col gap-3 text-center cursor-pointer">
+<div class="px-4">
+<div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-full" data-alt="Piggy bank icon with a plane on top for travel" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBea94Kh_wo8JDeC4atrEAbiR3llLk6g1-6M4L__OQ69zeb-fycSSh6sRy3XadXjqvlseImPdfSI9ytFgHQO7UQhsA3jtHYPpe6gn5xoG3rl0b4OvutWvrJnd5gfyfK6oeHKIM72iQXiezutzvrDVrXK_O1d_U-nRUOHW-kU0TsMoaF_5-juSrPwbWBtETPChXw0xMIEQ-KLSlWKsmR3tonKwLweZRnY6C9xqkcVI_z-U3hwAJ92LeWyqfdi-OYaZyvBrJWu7RZqpg");'></div>
+</div>
+</div>
+<div class="flex flex-col gap-3 text-center cursor-pointer">
+<div class="px-4">
+<div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-full" data-alt="Piggy bank icon with a heart for special occasions" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA-AuACBN5lYC3LUei-sQqAkHNKqcFPLX43-PeHyCOW_PxijSXdGce-cBaShLO3gdPn9J0EVH3lz4JcQIX1qxWtsbwfsqvzxcwsSSxv3Q8mZWXQoPboTVKqQ-6iKWDcC4lmMZpan5ipirPubajIvhfvFPbLYQJlUPphSpZ-GELV9NlvjDkIqtfeNfwRGdJpfobtZ3FKg3CxaLb4T2DAyB2wPILRkxRKJ4tgLCVB45vW1gngLEF90RCYlMozsiscTLd8XvBNhdDQ53M");'></div>
+</div>
+</div>
+</div>
+<!-- Add New Button -->
+<div class="flex px-4 py-3">
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 flex-1 bg-transparent text-primary dark:text-primary border-2 border-primary gap-2 text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/10">
+<div class="text-primary">
+<span class="material-symbols-outlined text-2xl">add_circle</span>
+</div>
+<span class="truncate">Añadir nuevo Chanchito</span>
+</button>
+</div>
+</main>
+<!-- Sticky Footer with Primary Button -->
+<footer class="sticky bottom-0 z-10 bg-background-light dark:bg-background-dark w-full p-4 border-t border-gray-200 dark:border-gray-800">
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 flex-1 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] shadow-lg shadow-primary/30 hover:bg-green-700">
+<span class="truncate">Confirmar Selección</span>
+</button>
+</footer>
+</div>
+</body></html>

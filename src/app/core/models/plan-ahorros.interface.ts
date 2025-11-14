@@ -85,6 +85,8 @@ export interface SubcategoriaGasto {
   monto: number;
   porcentaje: number;
   color: string;
+  icono?: string; // Material Icon name (opcional para compatibilidad)
+  operaciones?: any[]; // Operaciones de esta subcategoría (opcional)
 }
 
 export interface PasoFlujo {
@@ -149,6 +151,7 @@ export interface FiltroOperacion {
   categoriaUsuario?: string | string[] | null; // null para "sin categoría usuario"
   estado?: 'pagado' | 'pendiente' | 'todos';
   tipo?: 'ingreso' | 'egreso' | 'todos';
+  tipoProducto?: 'TC' | 'TD';             // Filtrar por tipo de producto
   fechaDesde?: Date;
   fechaHasta?: Date;
   montoMin?: number;
@@ -162,4 +165,28 @@ export interface CondicionCustom {
   campo: string;                          // Nombre del campo a evaluar
   operador: '=' | '!=' | '>' | '<' | '>=' | '<=' | 'contains' | 'in' | 'not_in';
   valor: any;
+}
+
+/**
+ * Detalle completo de un tipo de gasto con sus subcategorías
+ * Requirements: 1.2
+ */
+export interface TipoGastoDetalle {
+  tipo: 'automaticos' | 'hormigas' | 'medios' | 'excepcionales';
+  titulo: string; // Ej: "Cobros Automáticos", "Gastos Hormiga"
+  totalMonto: number;
+  totalPorcentaje: number; // Porcentaje respecto al total de gastos
+  subcategorias: SubcategoriaGastoDetalle[];
+}
+
+/**
+ * Subcategoría de gasto con sus operaciones
+ */
+export interface SubcategoriaGastoDetalle {
+  nombre: string;
+  monto: number;
+  porcentaje: number;
+  color: string;
+  icono: string; // Material Icon name
+  operaciones: any[]; // OperacionFinanciera[] - usando any para evitar imports circulares
 }

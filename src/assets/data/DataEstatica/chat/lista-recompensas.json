@@ -6,8 +6,8 @@
     "leido": false,
     "tituloRecompensa": "20% de descuento en Wong",
     "subtituloRecompensa": "Válido hasta fin de mes",
-    "iconoRecompensa": "reward",
-    "imagenRecompensa": "/assets/images/promo-wong.png",
+    "iconoRecompensa": "/assets/icons/reward.svg",
+    "imagenRecompensa": "/assets/images/promo-wong.jpeg",
     "textoBotonRecompensa": "Activar descuento"
   },
   {
@@ -17,7 +17,7 @@
     "leido": false,
     "tituloRecompensa": "Tipo de cambio preferencial",
     "subtituloRecompensa": "Compra dólares a S/ 3.70",
-    "iconoRecompensa": "reward",
+    "iconoRecompensa": "/assets/icons/reward.svg",
     "imagenRecompensa": null,
     "textoBotonRecompensa": "Ver más"
   },
@@ -28,7 +28,7 @@
     "leido": false,
     "tituloRecompensa": "Ampliación de línea TC",
     "subtituloRecompensa": "Aumenta tu línea hasta S/ 10,000",
-    "iconoRecompensa": "reward",
+    "iconoRecompensa": "/assets/icons/reward.svg",
     "imagenRecompensa": null,
     "textoBotonRecompensa": "Solicitar"
   }

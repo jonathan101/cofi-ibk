@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, HostBinding } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -10,6 +10,11 @@ import { CommonModule } from '@angular/common';
 })
 export class MobileContainerComponent {
   isMobile = false;
+
+  @HostBinding('class.mobile-mode')
+  get mobileMode() {
+    return this.isMobile;
+  }
 
   constructor() {
     this.detectDevice();

@@ -1,0 +1,47 @@
+<div class="alerta-detail" [class]="getSeverityClass()" [class.expanded]="expanded" [class.unread]="!alert.isRead">
+  <div class="alerta-header" (click)="toggle()">
+    <div class="alerta-icon">
+      <span class="severity-emoji">{{ getSeverityIcon() }}</span>
+    </div>
+    
+    <div class="alerta-info">
+      <div class="alerta-title-row">
+        <h3 class="alerta-title">{{ alert.title }}</h3>
+        <span class="alerta-date">{{ formatDate(alert.date) }}</span>
+      </div>
+      
+      <p class="alerta-description">{{ alert.description }}</p>
+      
+      <div class="alerta-meta" *ngIf="alert.amount || alert.category">
+        <span class="alerta-amount" *ngIf="alert.amount">{{ formatAmount(alert.amount) }}</span>
+        <span class="alerta-category">{{ alert.category }}</span>
+      </div>
+    </div>
+    
+    <div class="alerta-toggle">
+      <span class="toggle-icon">{{ expanded ? '▼' : '▶' }}</span>
+    </div>
+  </div>
+  
+  <div class="alerta-actions" *ngIf="expanded">
+    <button 
+      class="action-button primary" 
+      *ngIf="alert.actionLabel"
+      (click)="executeAction()">
+      {{ alert.actionLabel }}
+    </button>
+    
+    <button 
+      class="action-button secondary" 
+      *ngIf="!alert.isRead"
+      (click)="markAsRead()">
+      Marcar como leída
+    </button>
+    
+    <button 
+      class="action-button dismiss" 
+      (click)="dismiss()">
+      Descartar
+    </button>
+  </div>
+</div>

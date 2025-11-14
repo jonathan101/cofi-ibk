@@ -1,0 +1,115 @@
+<div class="modal-overlay" *ngIf="isOpen" (click)="cerrarModal()">
+  <div class="modal-content" (click)="onContentClick($event)">
+    
+    <!-- Header -->
+    <div class="modal-header">
+      <h2>Categorizar Movimientos</h2>
+      <button class="btn-close" (click)="cerrarModal()" aria-label="Cerrar">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Body -->
+    <div class="modal-body">
+      
+      <!-- Sin movimientos -->
+      <div *ngIf="movimientos.length === 0" class="empty-state">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+          <path d="M9 12h6m-6 4h6"/>
+        </svg>
+        <p>No hay movimientos sin categorizar</p>
+        <button class="btn-primary" (click)="cerrarModal()">Cerrar</button>
+      </div>
+
+      <!-- Lista de movimientos sin categorizar -->
+      <div *ngIf="movimientos.length > 0 && !movimientoSeleccionado" class="movimientos-lista">
+        <p class="instrucciones">Selecciona un movimiento para categorizarlo:</p>
+        
+        <div class="movimiento-card" 
+             *ngFor="let movimiento of movimientos"
+             (click)="seleccionarMovimiento(movimiento)">
+          <div class="movimiento-info">
+            <span class="movimiento-nombre">{{ movimiento.operacion }}</span>
+            <span class="movimiento-fecha">{{ formatDate(movimiento.fecha) }}</span>
+          </div>
+          <div class="movimiento-monto">
+            <span [class.positive]="movimiento.monto > 0" [class.negative]="movimiento.monto < 0">
+              {{ formatCurrency(movimiento.monto) }}
+            </span>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Categorización de movimiento seleccionado -->
+      <div *ngIf="movimientoSeleccionado" class="categorizacion-form">
+        
+        <!-- Movimiento seleccionado -->
+        <div class="movimiento-seleccionado">
+          <button class="btn-back" (click)="cancelarCategorizacion()">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"/>
+            </svg>
+            Volver
+          </button>
+          
+          <div class="movimiento-detalle">
+            <div class="detalle-row">
+              <span class="label">Operación:</span>
+              <span class="value">{{ movimientoSeleccionado.operacion }}</span>
+            </div>
+            <div class="detalle-row">
+              <span class="label">Fecha:</span>
+              <span class="value">{{ formatDate(movimientoSeleccionado.fecha) }}</span>
+            </div>
+            <div class="detalle-row">
+              <span class="label">Monto:</span>
+              <span class="value" [class.positive]="movimientoSeleccionado.monto > 0" [class.negative]="movimientoSeleccionado.monto < 0">
+                {{ formatCurrency(movimientoSeleccionado.monto) }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Selector de categoría -->
+        <div class="categorias-selector">
+          <p class="instrucciones">Selecciona la categoría correcta:</p>
+          
+          <div class="categoria-option"
+               *ngFor="let categoria of categorias"
+               [class.selected]="categoriaSeleccionada === categoria.value"
+               (click)="seleccionarCategoria(categoria.value)">
+            <div class="categoria-icon">{{ categoria.icon }}</div>
+            <div class="categoria-info">
+              <span class="categoria-label">{{ categoria.label }}</span>
+            </div>
+            <div class="categoria-check">
+              <svg *ngIf="categoriaSeleccionada === categoria.value" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 6L9 17l-5-5"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Botones de acción -->
+        <div class="form-actions">
+          <button class="btn-secondary" (click)="cancelarCategorizacion()">
+            Cancelar
+          </button>
+          <button class="btn-primary" 
+                  [disabled]="!categoriaSeleccionada"
+                  (click)="guardarCategorizacion()">
+            Guardar Categorización
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

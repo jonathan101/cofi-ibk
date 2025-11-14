@@ -1,0 +1,105 @@
+<div class="chat-container">
+  <!-- Pull Down Handle -->
+  <app-pull-down-handle (pullDown)="onPullDown()"></app-pull-down-handle>
+
+  <!-- Header with Menu, Search, and Filter -->
+  <header class="chat-header">
+    <button class="icon-button" (click)="toggleSidebar()" aria-label="Abrir menú">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
+
+    <div class="search-container">
+      <div class="search-input-wrapper">
+        <span class="material-symbols-outlined search-icon">search</span>
+        <input 
+          type="text" 
+          class="search-input" 
+          placeholder="Buscar en el chat..."
+          [(ngModel)]="searchText"
+          (ngModelChange)="onSearchChange()"
+        />
+      </div>
+    </div>
+
+    <button class="icon-button" (click)="toggleFilterMenu()" aria-label="Filtrar">
+      <span class="material-symbols-outlined">tune</span>
+    </button>
+
+    <!-- Filter Dropdown Menu (Selección Múltiple) -->
+    <div class="filter-menu" *ngIf="showFilterMenu">
+      <div class="filter-header">
+        <span>Filtrar por:</span>
+        <span class="filter-hint">Selección múltiple</span>
+      </div>
+      
+      <label class="filter-option checkbox-option">
+        <input 
+          type="checkbox" 
+          [checked]="isFilterActive('alerts')"
+          (change)="toggleFilter('alerts')"
+        />
+        <span class="checkbox-custom"></span>
+        <span class="material-symbols-outlined">notifications</span>
+        <span>Alertas</span>
+      </label>
+      
+      <label class="filter-option checkbox-option">
+        <input 
+          type="checkbox" 
+          [checked]="isFilterActive('rewards')"
+          (change)="toggleFilter('rewards')"
+        />
+        <span class="checkbox-custom"></span>
+        <span class="material-symbols-outlined">workspace_premium</span>
+        <span>Recompensas</span>
+      </label>
+      
+      <label class="filter-option checkbox-option">
+        <input 
+          type="checkbox" 
+          [checked]="isFilterActive('history')"
+          (change)="toggleFilter('history')"
+        />
+        <span class="checkbox-custom"></span>
+        <span class="material-symbols-outlined">history</span>
+        <span>Historial de chat</span>
+      </label>
+      
+      <div class="filter-footer">
+        <small>Sin selección: solo chats de hoy</small>
+      </div>
+    </div>
+  </header>
+
+  <!-- Messages Area -->
+  <main class="chat-messages-area">
+    <app-chat-messages
+      [messages]="filteredMessages">
+    </app-chat-messages>
+  </main>
+
+  <!-- Input Area -->
+  <footer class="chat-footer">
+    <app-chat-input
+      (onSendMessage)="handleSendMessage($event)">
+    </app-chat-input>
+  </footer>
+
+  <!-- Loading indicator -->
+  <div *ngIf="isLoading" class="loading-indicator">
+    <div class="spinner"></div>
+  </div>
+</div>
+
+<!-- Sidebar Menu -->
+<app-sidebar-menu 
+  *ngIf="showSidebar"
+  (close)="closeSidebar()">
+</app-sidebar-menu>
+
+<!-- Config Modal -->
+<app-chat-config-modal
+  *ngIf="showConfigModal"
+  (onClose)="handleCloseConfig()"
+  (onSave)="handleConfigChange()">
+</app-chat-config-modal>

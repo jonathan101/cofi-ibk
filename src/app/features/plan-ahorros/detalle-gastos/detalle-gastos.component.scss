@@ -1,0 +1,244 @@
+.detalle-gastos-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  height: 100%;
+  background-color: var(--background-light, #F4F4F4);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: var(--background-light, #F4F4F4);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.btn-back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: none;
+  background: transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  .material-symbols-outlined {
+    font-size: 1.5rem;
+    color: var(--text-primary-light, #333333);
+  }
+}
+
+.title {
+  flex: 1;
+  text-align: center;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary-light, #333333);
+  margin: 0;
+}
+
+.spacer {
+  width: 2.5rem;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 1rem;
+  
+  p {
+    color: var(--text-secondary-light, #757575);
+  }
+}
+
+.content {
+  flex: 1;
+  padding: 0 1rem 2rem 1rem;
+  overflow-y: auto;
+}
+
+.resumen-card {
+  background-color: white;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.resumen-titulo {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary-light, #333333);
+  margin: 0 0 1rem 0;
+}
+
+.resumen-monto {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+
+  .monto {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary, #008479);
+  }
+
+  .porcentaje {
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: var(--text-secondary-light, #757575);
+  }
+}
+
+.subcategorias-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.subcategoria-item {
+  background-color: white;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.subcategoria-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.subcategoria-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  .icon {
+    font-size: 1.5rem;
+    color: var(--primary, #008479);
+  }
+
+  .nombre {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-primary-light, #333333);
+  }
+}
+
+.subcategoria-monto {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  .monto {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary-light, #333333);
+  }
+
+  .arrow {
+    font-size: 1.25rem;
+    color: var(--text-secondary-light, #757575);
+  }
+}
+
+.subcategoria-bar {
+  height: 0.5rem;
+  background-color: #E0E0E0;
+  border-radius: 0.25rem;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.bar-fill {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.subcategoria-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.875rem;
+  color: var(--text-secondary-light, #757575);
+}
+
+.empty-state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 1rem;
+  
+  p {
+    color: var(--text-secondary-light, #757575);
+  }
+}
+
+// Dark mode support
+@media (prefers-color-scheme: dark) {
+  .detalle-gastos-container {
+    background-color: var(--background-dark, #1a1a1a);
+  }
+
+  .header {
+    background-color: var(--background-dark, #1a1a1a);
+  }
+
+  .btn-back {
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .material-symbols-outlined {
+      color: var(--text-primary-dark, #E0E0E0);
+    }
+  }
+
+  .title {
+    color: var(--text-primary-dark, #E0E0E0);
+  }
+
+  .resumen-card,
+  .subcategoria-item {
+    background-color: var(--card-dark, #2c2c2c);
+  }
+
+  .resumen-titulo,
+  .subcategoria-info .nombre,
+  .subcategoria-monto .monto {
+    color: var(--text-primary-dark, #E0E0E0);
+  }
+
+  .resumen-monto .porcentaje,
+  .subcategoria-footer,
+  .subcategoria-monto .arrow {
+    color: var(--text-secondary-dark, #A0A0A0);
+  }
+}

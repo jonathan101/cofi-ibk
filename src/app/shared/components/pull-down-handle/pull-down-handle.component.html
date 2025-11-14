@@ -1,0 +1,18 @@
+<div 
+  class="pull-down-handle"
+  [style]="getHandleStyle()"
+  (touchstart)="onTouchStart($event)"
+  (touchmove)="onTouchMove($event)"
+  (touchend)="onTouchEnd()"
+  (mousedown)="onMouseDown($event)"
+>
+  <div class="handle-bar" [class.active]="pullDistance > 0"></div>
+  <p class="handle-text" *ngIf="pullDistance === 0">Arrastra hacia abajo para volver</p>
+  <p class="handle-text active" *ngIf="pullDistance > 0 && pullDistance < THRESHOLD">
+    Sigue arrastrando... {{ getProgressPercentage() | number:'1.0-0' }}%
+  </p>
+  <p class="handle-text success" *ngIf="pullDistance >= THRESHOLD">
+    ¡Suelta para volver al home!
+  </p>
+  <span class="material-symbols-outlined handle-icon" [class.active]="pullDistance > 0">expand_more</span>
+</div>

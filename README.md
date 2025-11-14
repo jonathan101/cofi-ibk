@@ -124,11 +124,43 @@ Ambos archivos incluyen:
 
 ## 📦 Deployment en Vercel
 
-El proyecto está configurado para deployment automático en Vercel:
+El proyecto está listo para deployment en Vercel. Ver documentación completa en:
+- **[DEPLOYMENT.md](./DEPLOYMENT.md)** - Guía completa de deployment
+- **[VERCEL_DEPLOYMENT_CHECKLIST.md](./VERCEL_DEPLOYMENT_CHECKLIST.md)** - Checklist de verificación
 
-1. Conectar repositorio con Vercel
-2. Vercel detectará automáticamente la configuración de Angular
-3. El archivo `vercel.json` maneja el routing SPA
+### Quick Start
+
+**Opción 1: Vercel Dashboard (Recomendado)**
+1. Ve a [vercel.com](https://vercel.com) e inicia sesión
+2. Click "Add New..." → "Project"
+3. Selecciona tu repositorio Git
+4. Vercel detectará automáticamente Angular
+5. Click "Deploy"
+
+**Opción 2: Vercel CLI**
+```bash
+npm install -g vercel
+vercel login
+vercel --prod
+```
+
+### Configuración
+
+El proyecto incluye `vercel.json` con:
+- ✅ Routing SPA configurado (fallback a index.html)
+- ✅ Security headers (X-Frame-Options, CSP, etc.)
+- ✅ Cache optimization para assets
+- ✅ Build command y output directory
+
+### Verificación Post-Deployment
+
+Después del deployment, verifica:
+- [ ] Todas las rutas funcionan (navegación directa)
+- [ ] Assets se cargan correctamente
+- [ ] Estilos Interbank se aplican
+- [ ] Datos mock se cargan desde `/assets/data/`
+
+Ver checklist completo en [VERCEL_DEPLOYMENT_CHECKLIST.md](./VERCEL_DEPLOYMENT_CHECKLIST.md)
 
 ## 🎯 Próximos Pasos
 

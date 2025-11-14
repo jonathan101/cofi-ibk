@@ -3,7 +3,7 @@
     "id": "oct-001",
     "fecha": "2024-10-01T10:30:00.000Z",
     "operacion": "Sueldo mensual",
-    "monto": 4000,
+    "monto": 4800,
     "categoria": "ingresos",
     "tipoProducto": "TD"
   },
@@ -199,7 +199,7 @@
     "id": "oct-011",
     "fecha": "2024-10-12T17:42:00.000Z",
     "operacion": "Cuota préstamo vehicular",
-    "monto": -1031,
+    "monto": -450,
     "categoria": "pago_financiero",
     "tipoProducto": "TD",
     "estado": "pagado"
@@ -328,7 +328,7 @@
     "id": "oct-009",
     "fecha": "2024-10-21T13:58:00.000Z",
     "operacion": "Pago tarjeta de crédito Visa",
-    "monto": -508,
+    "monto": -250,
     "categoria": "pago_financiero",
     "tipoProducto": "TD",
     "estado": "pagado"
@@ -361,7 +361,7 @@
     "id": "oct-010",
     "fecha": "2024-10-20T18:5:00.000Z",
     "operacion": "Pago tarjeta de crédito Mastercard",
-    "monto": -830,
+    "monto": -350,
     "categoria": "pago_financiero",
     "tipoProducto": "TD",
     "estado": "pagado"

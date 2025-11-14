@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Detalle de Gastos</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#008479",
+              "background-light": "#F4F4F4",
+              "background-dark": "#1a1a1a",
+              "card-light": "#FFFFFF",
+              "card-dark": "#2c2c2c",
+              "text-primary-light": "#333333",
+              "text-primary-dark": "#E0E0E0",
+              "text-secondary-light": "#757575",
+              "text-secondary-dark": "#A0A0A0",
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="flex items-center bg-background-light dark:bg-background-dark p-4 pb-2 justify-between sticky top-0 z-10">
+<button class="text-text-primary-light dark:text-text-primary-dark flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined text-2xl">arrow_back</span>
+</button>
+<h1 class="text-text-primary-light dark:text-text-primary-dark text-lg font-semibold leading-tight tracking-tight flex-1 text-center">Detalle de Gastos</h1>
+<div class="size-10 shrink-0"></div> <!-- Spacer to balance the back button -->
+</header>
+<main class="flex-1">
+<!-- HeadlineText -->
+<h2 class="text-text-primary-light dark:text-text-primary-dark tracking-tight text-[32px] font-bold leading-tight px-4 text-left pb-3 pt-4">Gastos Hormiga</h2>
+<!-- Summary Card -->
+<div class="p-4 pt-0 @container">
+<div class="flex flex-col items-stretch justify-start rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.05)] bg-card-light dark:bg-card-dark p-6">
+<p class="text-primary text-3xl font-bold leading-tight tracking-[-0.015em]">S/ 250.40</p>
+<div class="flex items-end gap-3 justify-between mt-2">
+<div class="flex flex-col gap-1">
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-sm font-normal leading-normal">Monto Total en esta Categoría</p>
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-sm font-normal leading-normal">Representa el 15% del total</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Expense List -->
+<div class="flex flex-col px-4 space-y-2 pb-6">
+<!-- ListItem: Viajes -->
+<div class="flex items-center gap-4 bg-card-light dark:bg-card-dark px-4 min-h-[64px] justify-between rounded-lg">
+<div class="flex items-center gap-4">
+<div class="text-text-primary-light dark:text-text-primary-dark flex items-center justify-center rounded-full bg-background-light dark:bg-background-dark shrink-0 size-10">
+<span class="material-symbols-outlined text-xl">flight_takeoff</span>
+</div>
+<p class="text-text-primary-light dark:text-text-primary-dark text-base font-medium leading-normal flex-1 truncate">Viajes</p>
+</div>
+<div class="shrink-0">
+<p class="text-text-primary-light dark:text-text-primary-dark text-base font-medium leading-normal">S/ 80.00</p>
+</div>
+</div>
+<!-- ListItem: Restaurantes -->
+<div class="flex items-center gap-4 bg-card-light dark:bg-card-dark px-4 min-h-[64px] justify-between rounded-lg">
+<div class="flex items-center gap-4">
+<div class="text-text-primary-light dark:text-text-primary-dark flex items-center justify-center rounded-full bg-background-light dark:bg-background-dark shrink-0 size-10">
+<span class="material-symbols-outlined text-xl">restaurant</span>
+</div>
+<p class="text-text-primary-light dark:text-text-primary-dark text-base font-medium leading-normal flex-1 truncate">Restaurantes</p>
+</div>
+<div class="shrink-0">
+<p class="text-text-primary-light dark:text-text-primary-dark text-base font-medium leading-normal">S/ 55.50</p>
+</div>
+</div>
+<!-- ListItem: Delivery -->
+<div class="flex items-center gap-4 bg-card-light dark:bg-card-dark px-4 min-h-[64px] justify-between rounded-lg">
+<div class="flex items-center gap-4">
+<div class="text-text-primary-light dark:text-text-primary-dark flex items-center justify-center rounded-full bg-background-light dark:bg-background-dark shrink-0 size-10">
+<span class="material-symbols-outlined text-xl">moped</span>
+</div>
+<p class="text-text-primary-light dark:text-text-primary-dark text-base font-medium leading-normal flex-1 truncate">Delivery</p>
+</div>
+<div class="shrink-0">
+<p class="text-text-primary-light dark:text-text-primary-dark text-base font-medium leading-normal">S/ 42.90</p>
+</div>
+</div>
+<!-- ListItem: Compras -->
+<div class="flex items-center gap-4 bg-card-light dark:bg-card-dark px-4 min-h-[64px] justify-between rounded-lg">
+<div class="flex items-center gap-4">
+<div class="text-text-primary-light dark:text-text-primary-dark flex items-center justify-center rounded-full bg-background-light dark:bg-background-dark shrink-0 size-10">
+<span class="material-symbols-outlined text-xl">shopping_bag</span>
+</div>
+<p class="text-text-primary-light dark:text-text-primary-dark text-base font-medium leading-normal flex-1 truncate">Compras</p>
+</div>
+<div class="shrink-0">
+<p class="text-text-primary-light dark:text-text-primary-dark text-base font-medium leading-normal">S/ 35.00</p>
+</div>
+</div>
+<!-- ListItem: Taxis -->
+<div class="flex items-center gap-4 bg-card-light dark:bg-card-dark px-4 min-h-[64px] justify-between rounded-lg">
+<div class="flex items-center gap-4">
+<div class="text-text-primary-light dark:text-text-primary-dark flex items-center justify-center rounded-full bg-background-light dark:bg-background-dark shrink-0 size-10">
+<span class="material-symbols-outlined text-xl">local_taxi</span>
+</div>
+<p class="text-text-primary-light dark:text-text-primary-dark text-base font-medium leading-normal flex-1 truncate">Taxis</p>
+</div>
+<div class="shrink-0">
+<p class="text-text-primary-light dark:text-text-primary-dark text-base font-medium leading-normal">S/ 21.00</p>
+</div>
+</div>
+<!-- ListItem: Supermercado -->
+<div class="flex items-center gap-4 bg-card-light dark:bg-card-dark px-4 min-h-[64px] justify-between rounded-lg">
+<div class="flex items-center gap-4">
+<div class="text-text-primary-light dark:text-text-primary-dark flex items-center justify-center rounded-full bg-background-light dark:bg-background-dark shrink-0 size-10">
+<span class="material-symbols-outlined text-xl">shopping_cart</span>
+</div>
+<p class="text-text-primary-light dark:text-text-primary-dark text-base font-medium leading-normal flex-1 truncate">Supermercado</p>
+</div>
+<div class="shrink-0">
+<p class="text-text-primary-light dark:text-text-primary-dark text-base font-medium leading-normal">S/ 12.00</p>
+</div>
+</div>
+<!-- ListItem: Farmacia -->
+<div class="flex items-center gap-4 bg-card-light dark:bg-card-dark px-4 min-h-[64px] justify-between rounded-lg">
+<div class="flex items-center gap-4">
+<div class="text-text-primary-light dark:text-text-primary-dark flex items-center justify-center rounded-full bg-background-light dark:bg-background-dark shrink-0 size-10">
+<span class="material-symbols-outlined text-xl">pill</span>
+</div>
+<p class="text-text-primary-light dark:text-text-primary-dark text-base font-medium leading-normal flex-1 truncate">Farmacia</p>
+</div>
+<div class="shrink-0">
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-base font-medium leading-normal">S/ 0.00</p>
+</div>
+</div>
+<!-- ListItem: Entretenimiento -->
+<div class="flex items-center gap-4 bg-card-light dark:bg-card-dark px-4 min-h-[64px] justify-between rounded-lg">
+<div class="flex items-center gap-4">
+<div class="text-text-primary-light dark:text-text-primary-dark flex items-center justify-center rounded-full bg-background-light dark:bg-background-dark shrink-0 size-10">
+<span class="material-symbols-outlined text-xl">movie</span>
+</div>
+<p class="text-text-primary-light dark:text-text-primary-dark text-base font-medium leading-normal flex-1 truncate">Entretenimiento</p>
+</div>
+<div class="shrink-0">
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-base font-medium leading-normal">S/ 0.00</p>
+</div>
+</div>
+<!-- ListItem: Otros -->
+<div class="flex items-center gap-4 bg-card-light dark:bg-card-dark px-4 min-h-[64px] justify-between rounded-lg">
+<div class="flex items-center gap-4">
+<div class="text-text-primary-light dark:text-text-primary-dark flex items-center justify-center rounded-full bg-background-light dark:bg-background-dark shrink-0 size-10">
+<span class="material-symbols-outlined text-xl">more_horiz</span>
+</div>
+<p class="text-text-primary-light dark:text-text-primary-dark text-base font-medium leading-normal flex-1 truncate">Otros</p>
+</div>
+<div class="shrink-0">
+<p class="text-text-primary-light dark:text-text-primary-dark text-base font-medium leading-normal">S/ 4.00</p>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

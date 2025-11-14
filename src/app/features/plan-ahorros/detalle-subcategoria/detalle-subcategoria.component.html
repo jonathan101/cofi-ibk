@@ -1,0 +1,47 @@
+<div class="detalle-subcategoria-container">
+  <!-- Header -->
+  <header class="header">
+    <button class="btn-back" (click)="volver()">
+      <span class="material-symbols-outlined">arrow_back</span>
+    </button>
+    <h1 class="title">{{ getNombreSubcategoria() }}</h1>
+    <div class="spacer"></div>
+  </header>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-container">
+    <p>Cargando...</p>
+  </div>
+
+  <!-- Content -->
+  <div *ngIf="!loading" class="content">
+    <!-- Resumen -->
+    <div class="resumen-card">
+      <h2 class="resumen-titulo">{{ getNombreSubcategoria() }}</h2>
+      <div class="resumen-monto">
+        <span class="monto">{{ formatearMonto(getTotalMonto()) }}</span>
+      </div>
+      <div class="resumen-info">
+        <span class="operaciones-count">{{ operaciones.length }} operaciones</span>
+      </div>
+    </div>
+
+    <!-- Lista de Operaciones -->
+    <div class="operaciones-list">
+      <div *ngFor="let operacion of operaciones" class="operacion-item">
+        <div class="operacion-header">
+          <span class="descripcion">{{ operacion.operacion }}</span>
+          <span class="monto">{{ formatearMonto(operacion.monto) }}</span>
+        </div>
+        <div class="operacion-footer">
+          <span class="fecha">{{ formatearFecha(operacion.fecha) }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="operaciones.length === 0" class="empty-state">
+      <p>No hay operaciones en esta subcategoría</p>
+    </div>
+  </div>
+</div>

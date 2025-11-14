@@ -1,7 +1,7 @@
 @import '../../../../styles/variables';
 
 .floating-button {
-  position: fixed;
+  position: absolute;
   bottom: $floating-button-bottom;
   right: $floating-button-right;
   width: $floating-button-size;

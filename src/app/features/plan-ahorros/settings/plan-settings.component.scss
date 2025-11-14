@@ -1,0 +1,238 @@
+@import '../../../../styles/variables';
+@import '../../../../styles/mixins';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.settings-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background-color: #F6F8F7;
+
+  @include dark-mode {
+    background-color: #101822;
+  }
+}
+
+.settings-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(246, 248, 247, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 1rem;
+  padding-bottom: 0.75rem;
+
+  @include dark-mode {
+    background-color: rgba(16, 24, 34, 0.8);
+  }
+
+  .back-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.5rem;
+    width: 2.5rem;
+    color: #1C2D3A;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+
+    @include dark-mode {
+      color: #f6f7f8;
+    }
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+
+      @include dark-mode {
+        background-color: rgba(255, 255, 255, 0.05);
+      }
+    }
+
+    .material-symbols-outlined {
+      font-size: 1.875rem;
+    }
+  }
+
+  .settings-title {
+    flex: 1;
+    text-align: center;
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.25;
+    color: #1C2D3A;
+    margin: 0;
+
+    @include dark-mode {
+      color: #f6f7f8;
+    }
+  }
+
+  .header-spacer {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}
+
+.settings-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.ai-chat-button {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  border-radius: 1rem;
+  background-color: #05be50;
+  padding: 1rem;
+  text-align: center;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &:active {
+    opacity: 0.8;
+  }
+
+  .material-symbols-outlined {
+    font-size: 1.5rem;
+  }
+}
+
+.config-menu-card {
+  overflow: hidden;
+  border-radius: 1rem;
+  background-color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+  @include dark-mode {
+    background-color: #1f2937;
+  }
+}
+
+.config-menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid #e5e7eb;
+
+  @include dark-mode {
+    border-top-color: #374151;
+  }
+
+  &:first-child {
+    border-top: none;
+  }
+}
+
+.config-menu-item {
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  transition: background-color 0.15s;
+  border-bottom: 1px solid #e5e7eb;
+
+  @include dark-mode {
+    border-bottom-color: #374151;
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background-color: #f9fafb;
+
+    @include dark-mode {
+      background-color: #374151;
+    }
+  }
+
+  &:active {
+    background-color: #f3f4f6;
+
+    @include dark-mode {
+      background-color: #4b5563;
+    }
+  }
+
+  .menu-item-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .menu-icon {
+    font-size: 1.5rem;
+    color: #0039a6;
+
+    &.filled {
+      font-variation-settings: 'FILL' 1;
+    }
+
+    @include dark-mode {
+      color: #60a5fa;
+    }
+  }
+
+  .menu-label {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #1C2D3A;
+
+    @include dark-mode {
+      color: #f6f7f8;
+    }
+  }
+
+  .chevron-icon {
+    font-size: 1.25rem;
+    color: #9ca3af;
+
+    @include dark-mode {
+      color: #6b7280;
+    }
+  }
+}

@@ -165,7 +165,7 @@
 // Mixin para Card
 @mixin card {
   background-color: $color-bg-primary;
-  border-radius: $border-radius-lg;
+  border-radius: $border-radius-sm;
   padding: $spacing-lg;
   @include card-shadow('md');
 }
@@ -290,5 +290,23 @@
   
   &:active {
     transform: scale(0.95);
+  }
+}
+
+// Mixin para estilos solo en móvil
+@mixin mobile-only {
+  @media (max-width: $breakpoint-mobile) {
+    @content;
+  }
+}
+
+// Mixin para Dark Mode
+@mixin dark-mode {
+  @media (prefers-color-scheme: dark) {
+    @content;
+  }
+  
+  .dark & {
+    @content;
   }
 }

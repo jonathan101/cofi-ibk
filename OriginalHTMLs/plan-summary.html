@@ -42,6 +42,7 @@
               "piggy-bank-bg-blue": "#CDEBFF",
               // New color for filled piggy bank icon
               "piggy-bank-icon-pink": "#FF5BAB",
+              "red-dismiss": "#EF4444", // A shade of red for the dismiss icon
             },
             fontFamily: {
               display: ["Inter", "sans-serif"],
@@ -113,41 +114,6 @@
       }
     </style>
 <style>
-      body {
-        min-height: max(884px, 100dvh);
-      }
-    </style>
-<style>
-      body {
-        min-height: max(884px, 100dvh);
-      }
-    </style>
-<style>
-      body {
-        min-height: max(884px, 100dvh);
-      }
-    </style>
-<style>
-      body {
-        min-height: max(884px, 100dvh);
-      }
-    </style>
-<style>
-      body {
-        min-height: max(884px, 100dvh);
-      }
-    </style>
-<style>
-      body {
-        min-height: max(884px, 100dvh);
-      }
-    </style>
-<style>
-    body {
-      min-height: max(884px, 100dvh);
-    }
-  </style>
-<style>
     body {
       min-height: max(884px, 100dvh);
     }
@@ -211,6 +177,14 @@
                   S/ 1,500.00
                 </p>
 </div>
+<div class="flex items-center justify-between">
+<p class="text-secondary-text-light dark:text-secondary-text-dark text-sm leading-normal">
+                  Falta Pagar
+                </p>
+<p class="text-alert-red dark:text-alert-red text-base font-semibold leading-normal">
+                  -S/ 1,300.00
+                </p>
+</div>
 </div>
 <hr class="border-t border-gray-200 dark:border-gray-700 my-2"/>
 <div class="flex flex-col items-center gap-4 py-2">
@@ -258,66 +232,42 @@
 </div>
 <div class="flex flex-col gap-2 rounded-xl bg-white dark:bg-gray-800 p-4 shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
 <div class="flex items-center justify-between">
-<p class="text-primary-text-light dark:text-primary-text-dark text-base font-semibold leading-tight">
-                Ingresos
-              </p>
+<h3 class="text-primary-text-light dark:text-primary-text-dark text-base font-semibold leading-tight">
+                Pagos Atrasados
+              </h3>
 <div class="flex items-center gap-1">
 <p class="text-primary-text-light dark:text-primary-text-dark text-base font-semibold leading-tight">
-                  +S/ 8,217.68
+                  -S/ 900
                 </p>
 <span class="material-symbols-outlined text-xl">expand_less</span>
 </div>
 </div>
 <ul class="divide-y divide-gray-200 dark:divide-gray-700">
-<li class="flex justify-between items-center py-2">
+<li class="flex justify-between items-center py-3">
 <p class="text-primary-text-light dark:text-primary-text-dark text-sm leading-normal">
-                  Pago de Quincena
-                </p>
+                  Alquiler Atrasado
+                  <span class="text-primary-text-light dark:text-primary-text-dark ml-2">-S/ 700</span>
+</p>
 <div class="flex items-center gap-2">
-<p class="text-primary-text-light dark:text-primary-text-dark text-sm leading-normal font-semibold">
-                    +S/ 4,500
-                  </p>
-<button class="text-secondary-text-light dark:text-secondary-text-dark hover:text-alert-red transition-colors duration-200">
-<span class="material-symbols-outlined text-xl">delete</span>
+<button class="px-3 py-1 rounded-full text-xs font-medium bg-primary text-white hover:bg-primary-dark transition-colors duration-200">
+                    Pagar
+                  </button>
+<button class="text-secondary-text-light dark:text-secondary-text-dark hover:text-interbank-blue transition-colors duration-200">
+<span class="material-symbols-outlined text-xl">edit</span>
 </button>
 </div>
 </li>
-<li class="flex justify-between items-center py-2">
+<li class="flex justify-between items-center py-3">
 <p class="text-primary-text-light dark:text-primary-text-dark text-sm leading-normal">
-                  Pago del Mes
-                </p>
+                  Pago TC anterior mes
+                  <span class="text-primary-text-light dark:text-primary-text-dark ml-2">-S/ 200</span>
+</p>
 <div class="flex items-center gap-2">
-<p class="text-primary-text-light dark:text-primary-text-dark text-sm leading-normal font-semibold">
-                    +S/ 3,000
-                  </p>
-<button class="text-secondary-text-light dark:text-secondary-text-dark hover:text-alert-red transition-colors duration-200">
-<span class="material-symbols-outlined text-xl">delete</span>
-</button>
-</div>
-</li>
-<li class="flex justify-between items-center py-2">
-<p class="text-primary-text-light dark:text-primary-text-dark text-sm leading-normal">
-                  Gratificación
-                </p>
-<div class="flex items-center gap-2">
-<p class="text-primary-text-light dark:text-primary-text-dark text-sm leading-normal font-semibold">
-                    +S/ 500
-                  </p>
-<button class="text-secondary-text-light dark:text-secondary-text-dark hover:text-alert-red transition-colors duration-200">
-<span class="material-symbols-outlined text-xl">delete</span>
-</button>
-</div>
-</li>
-<li class="flex justify-between items-center py-2">
-<p class="text-primary-text-light dark:text-primary-text-dark text-sm leading-normal">
-                  Bono
-                </p>
-<div class="flex items-center gap-2">
-<p class="text-primary-text-light dark:text-primary-text-dark text-sm leading-normal font-semibold">
-                    +S/ 217.68
-                  </p>
-<button class="text-secondary-text-light dark:text-secondary-text-dark hover:text-alert-red transition-colors duration-200">
-<span class="material-symbols-outlined text-xl">delete</span>
+<button class="px-3 py-1 rounded-full text-xs font-medium bg-primary text-white hover:bg-primary-dark transition-colors duration-200">
+                    Pagar
+                  </button>
+<button class="text-secondary-text-light dark:text-secondary-text-dark hover:text-interbank-blue transition-colors duration-200">
+<span class="material-symbols-outlined text-xl">edit</span>
 </button>
 </div>
 </li>
@@ -326,7 +276,7 @@
 <div class="flex flex-col gap-2 rounded-xl bg-white dark:bg-gray-800 p-4 shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
 <div class="flex items-center justify-between">
 <h3 class="text-primary-text-light dark:text-primary-text-dark text-base font-semibold leading-tight">
-                Transacciones Recurrentes
+                Operaciones Recurrentes
               </h3>
 <div class="flex items-center gap-1">
 <p class="text-primary-text-light dark:text-primary-text-dark text-base font-semibold leading-tight">
@@ -366,9 +316,78 @@
                   <span class="text-primary-text-light dark:text-primary-text-dark ml-2">-S/ 100</span>
 </p>
 <div class="flex items-center gap-2">
-<button class="px-3 py-1 rounded-full text-xs font-medium bg-primary text-white hover:bg-primary-dark transition-colors duration-200">Pagar</button>
+<button class="px-3 py-1 rounded-full text-xs font-medium bg-primary text-white hover:bg-primary-dark transition-colors duration-200">
+                    Pagar
+                  </button>
 <button class="text-secondary-text-light dark:text-secondary-text-dark hover:text-interbank-blue transition-colors duration-200">
 <span class="material-symbols-outlined text-xl">edit</span>
+</button>
+</div>
+</li>
+</ul>
+</div>
+<div class="flex flex-col gap-2 rounded-xl bg-white dark:bg-gray-800 p-4 shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
+<div class="flex items-center justify-between">
+<p class="text-primary-text-light dark:text-primary-text-dark text-base font-semibold leading-tight">
+                Ingresos
+              </p>
+<div class="flex items-center gap-1">
+<p class="text-primary-text-light dark:text-primary-text-dark text-base font-semibold leading-tight">
+                  +S/ 8,217.68
+                </p>
+<span class="material-symbols-outlined text-xl">expand_less</span>
+</div>
+</div>
+<ul class="divide-y divide-gray-200 dark:divide-gray-700">
+<li class="flex justify-between items-center py-2">
+<p class="text-primary-text-light dark:text-primary-text-dark text-sm leading-normal">
+                  Pago de Quincena
+                </p>
+<div class="flex items-center gap-2">
+<p class="text-primary-text-light dark:text-primary-text-dark text-sm leading-normal font-semibold">
+                    +S/ 4,500
+                  </p>
+<button aria-label="Remove" class="relative flex items-center justify-center w-6 h-6 rounded-full bg-red-dismiss text-white hover:opacity-80 transition-colors duration-200">
+<span class="material-symbols-outlined text-sm font-bold">remove</span>
+</button>
+</div>
+</li>
+<li class="flex justify-between items-center py-2">
+<p class="text-primary-text-light dark:text-primary-text-dark text-sm leading-normal">
+                  Pago del Mes
+                </p>
+<div class="flex items-center gap-2">
+<p class="text-primary-text-light dark:text-primary-text-dark text-sm leading-normal font-semibold">
+                    +S/ 3,000
+                  </p>
+<button aria-label="Remove" class="relative flex items-center justify-center w-6 h-6 rounded-full bg-red-dismiss text-white hover:opacity-80 transition-colors duration-200">
+<span class="material-symbols-outlined text-sm font-bold">remove</span>
+</button>
+</div>
+</li>
+<li class="flex justify-between items-center py-2">
+<p class="text-primary-text-light dark:text-primary-text-dark text-sm leading-normal">
+                  Gratificación
+                </p>
+<div class="flex items-center gap-2">
+<p class="text-primary-text-light dark:text-primary-text-dark text-sm leading-normal font-semibold">
+                    +S/ 500
+                  </p>
+<button aria-label="Remove" class="relative flex items-center justify-center w-6 h-6 rounded-full bg-red-dismiss text-white hover:opacity-80 transition-colors duration-200">
+<span class="material-symbols-outlined text-sm font-bold">remove</span>
+</button>
+</div>
+</li>
+<li class="flex justify-between items-center py-2">
+<p class="text-primary-text-light dark:text-primary-text-dark text-sm leading-normal">
+                  Bono
+                </p>
+<div class="flex items-center gap-2">
+<p class="text-primary-text-light dark:text-primary-text-dark text-sm leading-normal font-semibold">
+                    +S/ 217.68
+                  </p>
+<button aria-label="Remove" class="relative flex items-center justify-center w-6 h-6 rounded-full bg-red-dismiss text-white hover:opacity-80 transition-colors duration-200">
+<span class="material-symbols-outlined text-sm font-bold">remove</span>
 </button>
 </div>
 </li>
@@ -381,125 +400,100 @@
               </h3>
 <div class="flex items-center gap-1">
 <p class="text-primary-text-light dark:text-primary-text-dark text-base font-semibold leading-tight">
-                  -S/ 2,010
+                  -S/ 1,510
                 </p>
 <span class="material-symbols-outlined text-xl">expand_less</span>
 </div>
 </div>
-<div class="overflow-x-auto -mx-4 px-4">
-<table class="min-w-full text-left text-sm">
-<thead class="border-b border-gray-200 dark:border-gray-700">
-<tr>
-<th class="py-2 pr-4 font-semibold text-secondary-text-light dark:text-secondary-text-dark" scope="col">
-                      Categoría
-                    </th>
-<th class="py-2 px-4 font-semibold text-secondary-text-light dark:text-secondary-text-dark text-center" scope="col">
-                      Débito
-                    </th>
-<th class="py-2 px-4 font-semibold text-secondary-text-light dark:text-secondary-text-dark text-center" scope="col">
-                      TC Actual
-                    </th>
-<th class="py-2 px-4 font-semibold text-secondary-text-light dark:text-secondary-text-dark text-center" scope="col">
-                      TC Próx Mes
-                    </th>
-<th class="py-2 pl-4 font-semibold text-secondary-text-light dark:text-secondary-text-dark text-center" scope="col">
-                      Total
-                    </th>
-</tr>
-</thead>
-<tbody class="divide-y divide-gray-200 dark:divide-gray-700">
-<tr>
-<td class="py-3 pr-4 text-primary-text-light dark:text-primary-text-dark">
-                      Automaticos
-                    </td>
-<td class="py-3 px-4 text-center">
-<span class="inline-flex items-center rounded-full px-3 py-0.5 text-sm font-bold bg-alert-pill-amber-bg text-alert-pill-amber-text">-S/ 300</span>
-</td>
-<td class="py-3 px-4 text-center">
-<span class="inline-flex items-center rounded-full px-3 py-0.5 text-sm font-bold bg-alert-pill-amber-bg text-alert-pill-amber-text">-S/ 300</span>
-</td>
-<td class="py-3 px-4 text-center">
-<span class="inline-flex items-center rounded-full px-3 py-0.5 text-sm font-bold bg-alert-pill-amber-bg text-alert-pill-amber-text">-S/ 100</span>
-</td>
-<td class="py-3 pl-4 text-primary-text-light dark:text-primary-text-dark text-right font-bold">
-                      -S/ 700
-                    </td>
-</tr>
-<tr>
-<td class="py-3 pr-4 text-primary-text-light dark:text-primary-text-dark">
-                      Hormigas
-                    </td>
-<td class="py-3 px-4 text-center text-primary-text-light dark:text-primary-text-dark text-sm font-normal">
-                      -S/ 820
-                    </td>
-<td class="py-3 px-4 text-secondary-text-light dark:text-secondary-text-dark text-center">
-                      -
-                    </td>
-<td class="py-3 px-4 text-secondary-text-light dark:text-secondary-text-dark text-center">
-                      -
-                    </td>
-<td class="py-3 pl-4 text-primary-text-light dark:text-primary-text-dark text-right font-bold">
-                      -S/ 820
-                    </td>
-</tr>
-<tr>
-<td class="py-3 pr-4 text-primary-text-light dark:text-primary-text-dark">
-                      Regulares
-                    </td>
-<td class="py-3 px-4 text-center">
-<span class="inline-flex items-center rounded-full px-3 py-0.5 text-sm font-bold bg-alert-pill-amber-bg text-alert-pill-amber-text">-S/ 210</span>
-</td>
-<td class="py-3 px-4 text-center">
-<span class="inline-flex items-center rounded-full px-3 py-0.5 text-sm font-bold bg-alert-pill-amber-bg text-alert-pill-amber-text">-S/ 200</span>
-</td>
-<td class="py-3 px-4 text-center text-primary-text-light dark:text-primary-text-dark text-sm font-normal">
-                      -S/ 200
-                    </td>
-<td class="py-3 pl-4 text-primary-text-light dark:text-primary-text-dark text-right font-bold">
-                      -S/ 610
-                    </td>
-</tr>
-<tr>
-<td class="py-3 pr-4 text-primary-text-light dark:text-primary-text-dark">
-                      Excepcionales
-                    </td>
-<td class="py-3 px-4 text-center text-primary-text-light dark:text-primary-text-dark text-sm font-normal">
-                      -S/ 180
-                    </td>
-<td class="py-3 px-4 text-secondary-text-light dark:text-secondary-text-dark text-center">
-                      -
-                    </td>
-<td class="py-3 px-4 text-secondary-text-light dark:text-secondary-text-dark text-center">
-                      -
-                    </td>
-<td class="py-3 pl-4 text-primary-text-light dark:text-primary-text-dark text-right font-bold">
-                      -S/ 180
-                    </td>
-</tr>
-</tbody>
-<tfoot>
-<tr class="border-t border-gray-200 dark:border-gray-700">
-<td class="py-3 pr-4 text-primary-text-light dark:text-primary-text-dark font-bold">
-</td>
-<td class="py-3 px-4 text-center text-primary-text-light dark:text-primary-text-dark font-bold">
-                      -S/ 1,510
-                    </td>
-<td class="py-3 px-4 text-center text-primary-text-light dark:text-primary-text-dark font-bold">
-                      -S/ 500
-                    </td>
-<td class="py-3 px-4 text-center text-primary-text-light dark:text-primary-text-dark font-bold">
-                      -S/ 300
-                    </td>
-<td class="py-3 pl-4 text-primary-text-light dark:text-primary-text-dark text-right font-bold">
-                      -S/ 2,310
-                    </td>
-</tr>
-</tfoot>
-</table>
+<div class="flex flex-col divide-y divide-gray-200 dark:divide-gray-700">
+<div class="py-3">
+<div class="flex justify-between items-center">
+<h4 class="text-primary-text-light dark:text-primary-text-dark text-sm font-semibold leading-normal">
+                    Automáticos
+                  </h4>
+<div class="flex items-center gap-2">
+<p class="text-primary-text-light dark:text-primary-text-dark text-sm font-semibold">
+                      -S/ 600
+                    </p>
+<button class="text-brand-green text-sm font-semibold flex items-center gap-1">
+                      Ver más
+                      <span class="material-symbols-outlined text-base">chevron_right</span>
+</button>
 </div>
-<div class="flex justify-end pt-2">
-<a class="text-brand-green text-sm font-semibold flex items-center gap-1" href="#">Ver más
-                <span class="material-symbols-outlined text-base">chevron_right</span></a>
+</div>
+<p class="text-secondary-text-light dark:text-secondary-text-dark text-xs leading-normal mt-1">
+                  Consumo Débito: -S/ 300
+                </p>
+<p class="text-secondary-text-light dark:text-secondary-text-dark text-xs leading-normal">
+                  Consumo TC Actual: -S/ 300
+                </p>
+</div>
+<div class="py-3">
+<div class="flex justify-between items-center">
+<h4 class="text-primary-text-light dark:text-primary-text-dark text-sm font-semibold leading-normal">
+                    Hormigas
+                  </h4>
+<div class="flex items-center gap-2">
+<p class="text-primary-text-light dark:text-primary-text-dark text-sm font-semibold">
+                      -S/ 820
+                    </p>
+<button class="text-brand-green text-sm font-semibold flex items-center gap-1">
+                      Ver más
+                      <span class="material-symbols-outlined text-base">chevron_right</span>
+</button>
+</div>
+</div>
+<p class="text-secondary-text-light dark:text-secondary-text-dark text-xs leading-normal mt-1">
+                  Consumo Débito: -S/ 820
+                </p>
+<p class="text-secondary-text-light dark:text-secondary-text-dark text-xs leading-normal">
+                  Consumo TC Actual: -S/ 0
+                </p>
+</div>
+<div class="py-3">
+<div class="flex justify-between items-center">
+<h4 class="text-primary-text-light dark:text-primary-text-dark text-sm font-semibold leading-normal">
+                    Regulares
+                  </h4>
+<div class="flex items-center gap-2">
+<p class="text-primary-text-light dark:text-primary-text-dark text-sm font-semibold">
+                      -S/ 410
+                    </p>
+<button class="text-brand-green text-sm font-semibold flex items-center gap-1">
+                      Ver más
+                      <span class="material-symbols-outlined text-base">chevron_right</span>
+</button>
+</div>
+</div>
+<p class="text-secondary-text-light dark:text-secondary-text-dark text-xs leading-normal mt-1">
+                  Consumo Débito: -S/ 210
+                </p>
+<p class="text-secondary-text-light dark:text-secondary-text-dark text-xs leading-normal">
+                  Consumo TC Actual: -S/ 200
+                </p>
+</div>
+<div class="py-3">
+<div class="flex justify-between items-center">
+<h4 class="text-primary-text-light dark:text-primary-text-dark text-sm font-semibold leading-normal">
+                    Excepcionales
+                  </h4>
+<div class="flex items-center gap-2">
+<p class="text-primary-text-light dark:text-primary-text-dark text-sm font-semibold">
+                      -S/ 180
+                    </p>
+<button class="text-brand-green text-sm font-semibold flex items-center gap-1">
+                      Ver más
+                      <span class="material-symbols-outlined text-base">chevron_right</span>
+</button>
+</div>
+</div>
+<p class="text-secondary-text-light dark:text-secondary-text-dark text-xs leading-normal mt-1">
+                  Consumo Débito: -S/ 180
+                </p>
+<p class="text-secondary-text-light dark:text-secondary-text-dark text-xs leading-normal">
+                  Consumo TC Actual: -S/ 0
+                </p>
+</div>
 </div>
 </div>
 <div class="flex flex-col gap-2 rounded-xl bg-white dark:bg-gray-800 p-4 shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
@@ -596,7 +590,9 @@
                   Cuota Vehicular -S/ 700
                 </p>
 <div class="flex items-center gap-2">
-<button class="px-3 py-1 rounded-full text-xs font-medium bg-primary text-white hover:bg-primary-dark transition-colors duration-200">Pagar</button>
+<button class="px-3 py-1 rounded-full text-xs font-medium bg-primary text-white hover:bg-primary-dark transition-colors duration-200">
+                    Pagar
+                  </button>
 </div>
 </li>
 <li class="flex justify-between items-center py-2">
@@ -612,7 +608,9 @@
                   Cuota PP Otro Banco -S/ 300
                 </p>
 <div class="flex items-center gap-2">
-<button class="px-3 py-1 rounded-full text-xs font-medium bg-primary text-white hover:bg-primary-dark transition-colors duration-200">Pagar</button>
+<button class="px-3 py-1 rounded-full text-xs font-medium bg-primary text-white hover:bg-primary-dark transition-colors duration-200">
+                    Pagar
+                  </button>
 <button class="text-secondary-text-light dark:text-secondary-text-dark hover:text-interbank-blue transition-colors duration-200">
 <span class="material-symbols-outlined text-xl">edit</span>
 </button>

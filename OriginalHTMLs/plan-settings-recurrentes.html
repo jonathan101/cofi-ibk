@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Operaciones Recurrentes</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#0eaa4c",
+            "background-light": "#f6f8f7",
+            "background-dark": "#102217",
+          },
+          fontFamily: {
+            "display": ["Inter", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24;
+      font-size: 24px;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-display bg-background-light dark:bg-background-dark">
+<div class="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<!-- Top App Bar -->
+<header class="sticky top-0 z-10 flex h-16 items-center border-b border-gray-200/80 dark:border-gray-700/80 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm px-4">
+<button class="flex size-10 shrink-0 items-center justify-center rounded-full text-gray-800 dark:text-gray-200">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="flex-1 text-center text-lg font-bold tracking-tight text-gray-900 dark:text-gray-100 pr-10">Operaciones Recurrentes</h1>
+</header>
+<!-- Main Content -->
+<main class="flex-1 pb-28 pt-4">
+<div class="flex flex-col gap-3 px-4">
+<!-- List Item 1 -->
+<div class="flex items-center gap-4 rounded-xl bg-white dark:bg-gray-800 p-4 shadow-sm">
+<div class="flex size-12 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary dark:bg-primary/20">
+<span class="material-symbols-outlined">lightbulb</span>
+</div>
+<div class="flex flex-1 flex-col justify-center">
+<p class="text-base font-medium text-gray-900 dark:text-gray-100">Pago de Luz - Enel</p>
+<p class="text-sm text-gray-500 dark:text-gray-400">Mensual - Próximo pago: 15 de julio</p>
+<p class="text-sm font-medium text-gray-700 dark:text-gray-300">S/ 120.00</p>
+</div>
+<div class="flex shrink-0 items-center gap-2">
+<button class="flex size-9 items-center justify-center rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="flex size-9 items-center justify-center rounded-full text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/40">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+<!-- List Item 2 -->
+<div class="flex items-center gap-4 rounded-xl bg-white dark:bg-gray-800 p-4 shadow-sm">
+<div class="flex size-12 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary dark:bg-primary/20">
+<span class="material-symbols-outlined">swap_horiz</span>
+</div>
+<div class="flex flex-1 flex-col justify-center">
+<p class="text-base font-medium text-gray-900 dark:text-gray-100">Transferencia a Juan Pérez</p>
+<p class="text-sm text-gray-500 dark:text-gray-400">Mensual - Próximo pago: 15 de julio</p>
+<p class="text-sm font-medium text-gray-700 dark:text-gray-300">$ 50.00</p>
+</div>
+<div class="flex shrink-0 items-center gap-2">
+<button class="flex size-9 items-center justify-center rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="flex size-9 items-center justify-center rounded-full text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/40">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+<!-- List Item 3 -->
+<div class="flex items-center gap-4 rounded-xl bg-white dark:bg-gray-800 p-4 shadow-sm">
+<div class="flex size-12 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary dark:bg-primary/20">
+<span class="material-symbols-outlined">wifi</span>
+</div>
+<div class="flex flex-1 flex-col justify-center">
+<p class="text-base font-medium text-gray-900 dark:text-gray-100">Pago de Internet - Claro</p>
+<p class="text-sm text-gray-500 dark:text-gray-400">Mensual - Próximo pago: 20 de julio</p>
+<p class="text-sm font-medium text-gray-700 dark:text-gray-300">S/ 80.00</p>
+</div>
+<div class="flex shrink-0 items-center gap-2">
+<button class="flex size-9 items-center justify-center rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="flex size-9 items-center justify-center rounded-full text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/40">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+<!-- Empty State Example (Commented out for demonstration) -->
+<!-- 
+        <div class="flex flex-col items-center justify-center text-center pt-20 px-6">
+          <div class="flex size-20 items-center justify-center rounded-full bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400 mb-6">
+            <span class="material-symbols-outlined" style="font-size: 40px;">receipt_long</span>
+          </div>
+          <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200">Aún no tienes operaciones recurrentes</h2>
+          <p class="mt-2 text-gray-600 dark:text-gray-400">Añade tus pagos y transferencias frecuentes para automatizarlos.</p>
+        </div>
+        -->
+</div>
+</main>
+<!-- Floating Action Button -->
+<div class="fixed bottom-6 right-6 z-20">
+<button class="flex h-16 w-16 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-primary text-white shadow-lg transition-transform hover:scale-105 active:scale-95">
+<span class="material-symbols-outlined" style="font-size: 32px;">add</span>
+</button>
+</div>
+</div>
+</body></html>

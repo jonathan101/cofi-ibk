@@ -7,6 +7,7 @@ export interface MensajeUnificado {
   // Si tipo === 'chat'
   texto?: string;
   esIA?: boolean;
+  contenido?: string;
   
   // Si tipo === 'alerta'
   titulo?: string;

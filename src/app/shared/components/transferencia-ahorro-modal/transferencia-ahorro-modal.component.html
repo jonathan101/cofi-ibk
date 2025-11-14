@@ -1,0 +1,141 @@
+<div class="modal-overlay" *ngIf="show" (click)="cerrarModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <!-- Header -->
+    <div class="modal-header">
+      <h2>Transferir al Ahorro</h2>
+      <button class="btn-close" (click)="cerrarModal()">×</button>
+    </div>
+
+    <!-- Loading -->
+    <div class="loading" *ngIf="loading && !success">
+      <div class="spinner"></div>
+      <p>Procesando...</p>
+    </div>
+
+    <!-- Success message -->
+    <div class="success-message" *ngIf="success">
+      <div class="success-icon">
+        <span class="material-symbols-outlined">savings</span>
+      </div>
+      <h3>¡Guardado en el chanchito!</h3>
+      <p>Has transferido {{ formatCurrency(monto) }} a tu ahorro</p>
+      <div class="success-piggy">🐷✨</div>
+    </div>
+
+    <!-- Error message -->
+    <div class="error-message" *ngIf="error">
+      {{ error }}
+    </div>
+
+    <!-- Formulario -->
+    <form *ngIf="!loading && !success" (ngSubmit)="confirmarTransferencia()" class="transfer-form">
+      <!-- Monto con Slider -->
+      <div class="form-group">
+        <label for="monto">¿Cuánto quieres ahorrar?</label>
+        
+        <!-- Monto Display -->
+        <div class="monto-display">
+          <span class="monto-value">{{ formatCurrency(monto) }}</span>
+          <span class="monto-max">de {{ formatCurrency(saldoDisponible) }}</span>
+        </div>
+
+        <!-- Slider -->
+        <div class="slider-container">
+          <div class="slider-track-wrapper">
+            <div class="slider-track-fill" [style.width.%]="getSliderProgress()"></div>
+            <input
+              type="range"
+              id="monto-slider"
+              class="monto-slider"
+              [min]="0"
+              [max]="saldoDisponible"
+              [step]="10"
+              [(ngModel)]="monto"
+              name="monto"
+              (input)="onSliderChange($event)"
+            />
+          </div>
+          <div class="slider-labels">
+            <span>S/ 0</span>
+            <span>{{ formatCurrency(saldoDisponible) }}</span>
+          </div>
+        </div>
+
+        <!-- Input manual (opcional) -->
+        <div class="input-with-prefix">
+          <span class="prefix">S/</span>
+          <input
+            type="number"
+            id="monto"
+            [(ngModel)]="monto"
+            name="monto-input"
+            placeholder="0.00"
+            step="10"
+            [min]="0"
+            [max]="saldoDisponible"
+            [class.error]="formErrors['monto']"
+          />
+        </div>
+        <span class="error-text" *ngIf="formErrors['monto']">{{ formErrors['monto'] }}</span>
+      </div>
+
+      <!-- Selector de chanchito -->
+      <div class="form-group">
+        <label for="chanchito">Selecciona tu chanchito</label>
+        <div class="chanchitos-grid">
+          <div
+            *ngFor="let chanchito of chanchitos"
+            class="chanchito-option"
+            [class.selected]="chanchitoSeleccionado === chanchito.id"
+            (click)="chanchitoSeleccionado = chanchito.id"
+          >
+            <div class="chanchito-icon">
+              <span class="material-symbols-outlined">{{ chanchito.icono }}</span>
+            </div>
+            <div class="chanchito-info">
+              <h4>{{ chanchito.nombre }}</h4>
+              <div class="progress-bar">
+                <div class="progress-fill" [style.width.%]="calcularProgreso(chanchito)"></div>
+              </div>
+              <p class="progress-text">
+                S/ {{ chanchito.montoActual.toFixed(2) }} / S/ {{ chanchito.metaMonto.toFixed(2) }}
+              </p>
+            </div>
+          </div>
+        </div>
+        <span class="error-text" *ngIf="formErrors['chanchito']">{{ formErrors['chanchito'] }}</span>
+      </div>
+
+      <!-- Preview del nuevo progreso -->
+      <div class="preview-section" *ngIf="monto > 0 && getChanchitoSeleccionado()">
+        <h3>Nuevo progreso</h3>
+        <div class="preview-progress">
+          <div class="progress-bar large">
+            <div class="progress-fill" [style.width.%]="calcularNuevoProgreso()"></div>
+          </div>
+          <p class="preview-text">
+            S/ {{ (getChanchitoSeleccionado()!.montoActual + monto).toFixed(2) }} / 
+            S/ {{ getChanchitoSeleccionado()!.metaMonto.toFixed(2) }}
+            ({{ calcularNuevoProgreso().toFixed(1) }}%)
+          </p>
+        </div>
+      </div>
+
+      <!-- Nota importante -->
+      <div class="info-note">
+        <span class="info-icon">ℹ️</span>
+        <p>Esta transferencia es temporal y se reseteará al refrescar la página (PoC)</p>
+      </div>
+
+      <!-- Botones -->
+      <div class="form-actions">
+        <button type="button" class="btn-secondary" (click)="cerrarModal()">
+          Cancelar
+        </button>
+        <button type="submit" class="btn-primary" [disabled]="loading">
+          Transferir
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

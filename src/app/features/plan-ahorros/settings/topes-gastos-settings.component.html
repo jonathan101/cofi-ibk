@@ -1,0 +1,125 @@
+<div class="topes-gastos-container">
+  <header class="header">
+    <button class="back-button" (click)="goBack()">
+      <span class="material-symbols-outlined">arrow_back</span>
+    </button>
+    <h1 class="header-title">Configurar Topes de Consumo</h1>
+  </header>
+
+  <main class="content">
+    <p class="description">Ingresa tu ingreso mensual y define límites para tus gastos.</p>
+
+    <div class="ingreso-section">
+      <p class="ingreso-label">Ingreso Neto Mensual</p>
+      <div class="ingreso-amount">
+        <span class="currency">S/</span>
+        <span class="amount">{{ ingresoNeto.toFixed(0) }}</span>
+        <span class="decimals">.00</span>
+      </div>
+    </div>
+
+    <div class="ingreso-libre-section">
+      <p class="ingreso-label">Ingreso Libre</p>
+      <div class="ingreso-amount ingreso-libre">
+        <span class="currency">S/</span>
+        <span class="amount">{{ calcularIngresoLibre().toFixed(0) }}</span>
+        <span class="decimals">.00</span>
+      </div>
+      <p class="ingreso-libre-description">Lo que te queda después de tus gastos fijos.</p>
+    </div>
+
+    <h2 class="section-title">Gastos</h2>
+
+    <div class="topes-list">
+      <!-- Gastos Hormiga -->
+      <div class="tope-item">
+        <div class="tope-row">
+          <div class="tope-info">
+            <div class="tope-icon">
+              <span class="material-symbols-outlined">coffee</span>
+            </div>
+            <span class="tope-nombre">Gastos Hormiga</span>
+          </div>
+          <div class="tope-controls">
+            <div class="input-wrapper">
+              <span class="input-prefix" *ngIf="topes.gastosHormiga.tipo === 'porcentaje'">%</span>
+              <span class="input-prefix" *ngIf="topes.gastosHormiga.tipo === 'fijo'">S/</span>
+              <input type="number" [(ngModel)]="topes.gastosHormiga.valor" placeholder="10" />
+            </div>
+            <div class="toggle-buttons">
+              <button 
+                [class.active]="topes.gastosHormiga.tipo === 'fijo'"
+                (click)="toggleTipo('gastosHormiga')">S/</button>
+              <button 
+                [class.active]="topes.gastosHormiga.tipo === 'porcentaje'"
+                (click)="toggleTipo('gastosHormiga')">%</button>
+            </div>
+          </div>
+        </div>
+        <p class="tope-calculated">S/ {{ calcularMontoTope('gastosHormiga').toFixed(2) }}</p>
+      </div>
+
+      <!-- Gastos Regulares -->
+      <div class="tope-item">
+        <div class="tope-row">
+          <div class="tope-info">
+            <div class="tope-icon">
+              <span class="material-symbols-outlined">payments</span>
+            </div>
+            <span class="tope-nombre">Gastos Regulares</span>
+          </div>
+          <div class="tope-controls">
+            <div class="input-wrapper">
+              <span class="input-prefix" *ngIf="topes.gastosMedios.tipo === 'porcentaje'">%</span>
+              <span class="input-prefix" *ngIf="topes.gastosMedios.tipo === 'fijo'">S/</span>
+              <input type="number" [(ngModel)]="topes.gastosMedios.valor" placeholder="50" />
+            </div>
+            <div class="toggle-buttons">
+              <button 
+                [class.active]="topes.gastosMedios.tipo === 'fijo'"
+                (click)="toggleTipo('gastosMedios')">S/</button>
+              <button 
+                [class.active]="topes.gastosMedios.tipo === 'porcentaje'"
+                (click)="toggleTipo('gastosMedios')">%</button>
+            </div>
+          </div>
+        </div>
+        <p class="tope-calculated">S/ {{ calcularMontoTope('gastosMedios').toFixed(2) }}</p>
+      </div>
+
+      <!-- Gastos Extraordinarios -->
+      <div class="tope-item">
+        <div class="tope-row">
+          <div class="tope-info">
+            <div class="tope-icon">
+              <span class="material-symbols-outlined">auto_graph</span>
+            </div>
+            <span class="tope-nombre">Gastos Extraordinarios</span>
+          </div>
+          <div class="tope-controls">
+            <div class="input-wrapper">
+              <span class="input-prefix" *ngIf="topes.gastosExcepcionales.tipo === 'porcentaje'">%</span>
+              <span class="input-prefix" *ngIf="topes.gastosExcepcionales.tipo === 'fijo'">S/</span>
+              <input type="number" [(ngModel)]="topes.gastosExcepcionales.valor" placeholder="20" />
+            </div>
+            <div class="toggle-buttons">
+              <button 
+                [class.active]="topes.gastosExcepcionales.tipo === 'fijo'"
+                (click)="toggleTipo('gastosExcepcionales')">S/</button>
+              <button 
+                [class.active]="topes.gastosExcepcionales.tipo === 'porcentaje'"
+                (click)="toggleTipo('gastosExcepcionales')">%</button>
+            </div>
+          </div>
+        </div>
+        <p class="tope-calculated">S/ {{ calcularMontoTope('gastosExcepcionales').toFixed(2) }}</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <button class="btn-primary" (click)="guardarTopes()">
+      Guardar Topes
+    </button>
+  </footer>
+</div>

@@ -13,12 +13,20 @@ import {
   SubcategoriaGasto,
   FiltroGastos,
   MovimientoSinCategorizar,
-  MovimientoCaja
+  MovimientoCaja,
+  TipoGastoDetalle,
+  SubcategoriaGastoDetalle
 } from '../models/plan-ahorros.interface';
+import {
+  RecategorizacionRequest,
+  RecategorizacionResponse,
+  OperacionVinculable
+} from '../models/recategorizacion.interface';
 import { OperacionFinanciera } from '../models/operacion-financiera.interface';
 import { ConfiguracionPlan } from '../models/configuracion-plan.interface';
 import { ChanchitoAhorro, TransferenciaAhorro } from '../models/chanchito-ahorro.interface';
-import { OperacionRecurrenteProgramada } from '../models/operacion-recurrente.interface';
+import { OperacionRecurrente } from '../models/operacion-recurrente.interface';
+import { Chanchito } from '../models/chanchito.interface';
 
 /**
  * Servicio para gestionar el plan de ahorros con sistema de filtros flexible
@@ -205,6 +213,11 @@ export class PlanAhorrosService {
       );
     }
 
+    // Filtro por tipoProducto (TC/TD)
+    if (filtros.tipoProducto) {
+      resultado = resultado.filter(op => op.tipoProducto === filtros.tipoProducto);
+    }
+
     // Condiciones personalizadas
     if (filtros.condiciones && filtros.condiciones.length > 0) {
       resultado = resultado.filter(op => 
@@ -310,10 +323,12 @@ export class PlanAhorrosService {
       }),
       operacionesRegulares: this.sumarOperaciones(mes, { 
         categoriaUsuario: 'operacion_recurrente',
-        vinculadaARecurrente: false 
+        estado:'pagado',
+        vinculadaARecurrente: true 
       }),
       gastosMes: this.sumarOperaciones(mes, { 
         categoria: 'gastos',
+        tipoProducto:'TD',
         vinculadaARecurrente: false 
       }),
       movimientosCaja: this.sumarOperaciones(mes, { 
@@ -478,12 +493,11 @@ export class PlanAhorrosService {
    * Requirement 41, 44: Gestión de chanchitos
    */
   getChanchitosAhorro(): Observable<ChanchitoAhorro[]> {
-    if (this.chanchitosCache) {
-      return of(this.chanchitosCache);
-    }
-
+    // Agregar timestamp para evitar caché del navegador
+    const timestamp = new Date().getTime();
+    
     // TODO: Reemplazar con URL real de API
-    return this.http.get<ChanchitoAhorro[]>(`${this.DATA_PATH}/chanchitos-ahorro.json`)
+    return this.http.get<ChanchitoAhorro[]>(`${this.DATA_PATH}/chanchitos-ahorro.json?t=${timestamp}`)
       .pipe(
         map(chanchitos => {
           this.chanchitosCache = chanchitos;
@@ -640,6 +654,564 @@ export class PlanAhorrosService {
       'Noviembre 2024': 'noviembre-2024'
     };
     return slugs[mes] || 'agosto-2024';
+  }
+
+  /**
+   * Obtiene datos de múltiples meses con validación de consistencia
+   * Requirement 35, 39: Navegación y validación multi-mes
+   */
+  getDatosMultiMes(): Observable<DatosMultiMes> {
+    const meses = this.MESES_DISPONIBLES;
+    
+    // Cargar datos de todos los meses
+    const requests = meses.map(mes => this.getDatosMesCompleto(mes));
+    
+    return forkJoin(requests).pipe(
+      map(datosMeses => {
+        // Validar consistencia de saldos entre meses
+        const validacion = this.validarConsistenciaSaldos(datosMeses);
+        
+        return {
+          meses: datosMeses,
+          mesActual: 'Noviembre 2024',
+          validacionSaldos: validacion
+        };
+      })
+    );
+  }
+
+  /**
+   * Obtiene datos completos de un mes incluyendo saldo final calculado
+   * Requirement 35: Datos completos del mes
+   */
+  private getDatosMesCompleto(mes: string): Observable<DatosSaldoMes> {
+    return forkJoin({
+      operaciones: this.getOperacionesMes(mes),
+      chanchitos: this.getChanchitosAhorro(),
+      config: this.getConfiguracion(),
+      atrasadas: this.getOperacionesAtrasadas(mes)
+    }).pipe(
+      map(({ operaciones, chanchitos, config, atrasadas }) => {
+        // Calcular saldos
+        const saldoChanchitos = chanchitos.reduce((sum, ch) => sum + ch.montoActual, 0);
+        
+        // Obtener saldo inicial del mes
+        const saldoInicial = this.obtenerSaldoInicialMes(mes);
+        
+        // Calcular saldo final del mes
+        const saldoFinal = this.calcularSaldoFinalMes(operaciones, saldoInicial);
+        
+        // Calcular ahorro en chanchitos del mes (mock por ahora)
+        const ahorroChanchitosDelMes = 0;
+        
+        return {
+          mes,
+          saldoInicial,
+          saldoFinal,
+          saldoChanchitos,
+          ahorroChanchitosDelMes,
+          metaAhorro: config.metaAhorro,
+          operaciones: operaciones.map(op => op.id),
+          operacionesAtrasadas: {
+            pagosFinancieros: atrasadas.pagosFinancieros.map(op => op.id),
+            operacionesRecurrentes: atrasadas.operacionesRecurrentes.map(op => op.id)
+          }
+        };
+      })
+    );
+  }
+
+  /**
+   * Obtiene el saldo inicial de un mes
+   * En una implementación real, esto vendría de la API
+   * Requirement 35: Saldo inicial por mes
+   * 
+   * IMPORTANTE: Los saldos de cuentas bancarias nunca pueden ser negativos.
+   * El saldo inicial de cada mes es el saldo final del mes anterior.
+   * 
+   * NARRATIVA DE AHORRO (Meta: S/ 800/mes):
+   * - Agosto: Buen mes, ahorra S/ 900 (supera meta) ✅
+   * - Septiembre: Mes difícil, solo ahorra S/ 300 (no llega) ❌
+   * - Octubre: Se recupera, ahorra S/ 650 (cerca pero no llega) ⚠️
+   * - Noviembre: Excelente mes, ahorra S/ 1,000 (supera meta) ✅
+   */
+  private obtenerSaldoInicialMes(mes: string): number {
+    // Saldos iniciales por mes (cada mes comienza con el saldo final del mes anterior)
+    // Los saldos siempre son >= 0 (no pueden ser negativos en cuentas reales)
+    // 
+    // IMPORTANTE: Estos valores deben ser consistentes con los saldos finales calculados
+    // Saldo Inicial del Mes N = Saldo Final del Mes N-1
+    // 
+    // Fórmula: Saldo Final = Saldo Inicial + Ingresos + Op. Recurrentes + Gastos + Mov. Caja + Carga Financiera
+    // (Los valores negativos ya vienen con signo negativo)
+    // 
+    // Narrativa de ahorro incremental realista (Meta: S/ 800/mes):
+    // Agosto: 4000 -> 4057 (ahorro: 57) - 7% de meta - Primer mes, muchos gastos
+    // Septiembre: 4057 -> 4357 (ahorro: 300) - 37% de meta - Mejorando control de gastos
+    // Octubre: 4357 -> 4907 (ahorro: 550) - 69% de meta - Buen progreso, casi llega
+    // Noviembre: 4907 -> 5757 (ahorro: 850) - 106% de meta - ¡Superó la meta!
+    const saldosIniciales: { [key: string]: number } = {
+      'Agosto 2024': 4000,      // Saldo inicial del primer mes (base)
+      'Septiembre 2024': 4057,  // Saldo final de Agosto (4000 + 57)
+      'Octubre 2024': 4357,     // Saldo final de Septiembre (4057 + 300)
+      'Noviembre 2024': 4907    // Saldo final de Octubre (4357 + 550)
+    };
+    
+    return saldosIniciales[mes] || 4000;
+  }
+
+  /**
+   * Calcula el saldo final de un mes basado en operaciones
+   * Requirement 31: Cálculo de saldo final
+   * 
+   * IMPORTANTE: Para el PoC, usamos saldos finales predefinidos que reflejan
+   * una narrativa realista de ahorro con altibajos.
+   * En producción, esto se calcularía basándose en las operaciones reales.
+   */
+  private calcularSaldoFinalMes(operaciones: OperacionFinanciera[], saldoInicial: number): number {
+    // Calcular saldo final basándose en operaciones reales
+    const operacionesValidas = operaciones.filter(op => {
+      if (op.vinculadaARecurrente) return false;
+      if (op.estado && op.estado === 'pendiente') return false;
+      return true;
+    });
+    
+    const totalOperaciones = operacionesValidas.reduce((sum, op) => sum + op.monto, 0);
+    const saldoCalculado = saldoInicial + totalOperaciones;
+    
+    return Math.max(0, saldoCalculado);
+  }
+
+  /**
+   * Valida la consistencia de saldos entre meses consecutivos
+   * Requirement 39: Validación de consistencia
+   */
+  private validarConsistenciaSaldos(datosMeses: DatosSaldoMes[]): { valido: boolean; errores: string[] } {
+    const errores: string[] = [];
+    
+    // Validar que saldo inicial de mes N = saldo final de mes N-1
+    for (let i = 1; i < datosMeses.length; i++) {
+      const mesAnterior = datosMeses[i - 1];
+      const mesActual = datosMeses[i];
+      
+      const diferencia = Math.abs(mesActual.saldoInicial - mesAnterior.saldoFinal);
+      
+      // Permitir una diferencia mínima por redondeo (0.01)
+      if (diferencia > 0.01) {
+        errores.push(
+          `Inconsistencia detectada: El saldo inicial de ${mesActual.mes} (S/ ${mesActual.saldoInicial.toFixed(2)}) ` +
+          `no coincide con el saldo final de ${mesAnterior.mes} (S/ ${mesAnterior.saldoFinal.toFixed(2)}). ` +
+          `Diferencia: S/ ${diferencia.toFixed(2)}`
+        );
+      }
+    }
+    
+    return {
+      valido: errores.length === 0,
+      errores
+    };
+  }
+
+  /**
+   * Actualiza la configuración del plan (parcial)
+   * Requirement 2, 3, 6, 7: Actualizar configuración
+   */
+  updateConfiguracion(config: Partial<ConfiguracionPlan>): Observable<void> {
+    if (this.configuracionCache) {
+      this.configuracionCache = { ...this.configuracionCache, ...config };
+    }
+    
+    // TODO: Reemplazar con llamada real a API
+    return of(void 0).pipe(delay(300));
+  }
+
+  /**
+   * Obtiene operaciones recurrentes
+   * Requirement 4: Gestión de operaciones recurrentes
+   */
+  getOperacionesRecurrentes(): Observable<OperacionRecurrente[]> {
+    // TODO: Reemplazar con URL real de API
+    return this.http.get<OperacionRecurrente[]>(`${this.DATA_PATH}/operaciones-recurrentes.json`)
+      .pipe(
+        catchError(() => {
+          console.warn('Error cargando operaciones recurrentes, retornando array vacío');
+          return of([]);
+        })
+      );
+  }
+
+  /**
+   * Agrega una operación recurrente
+   * Requirement 4: Agregar operación recurrente
+   */
+  addOperacionRecurrente(op: OperacionRecurrente): Observable<void> {
+    // TODO: Reemplazar con llamada real a API
+    return of(void 0).pipe(delay(300));
+  }
+
+  /**
+   * Actualiza una operación recurrente
+   * Requirement 4: Editar operación recurrente
+   */
+  updateOperacionRecurrente(id: string, op: Partial<OperacionRecurrente>): Observable<void> {
+    // TODO: Reemplazar con llamada real a API
+    return of(void 0).pipe(delay(300));
+  }
+
+  /**
+   * Elimina una operación recurrente
+   * Requirement 4: Eliminar operación recurrente
+   */
+  deleteOperacionRecurrente(id: string): Observable<void> {
+    // TODO: Reemplazar con llamada real a API
+    return of(void 0).pipe(delay(300));
+  }
+
+  /**
+   * Obtiene chanchitos (alias para compatibilidad)
+   * Requirement 5: Obtener lista de chanchitos
+   */
+  getChanchitos(): Observable<Chanchito[]> {
+    return this.http.get<Chanchito[]>(`${this.DATA_PATH}/chanchitos.json`)
+      .pipe(
+        catchError(() => {
+          console.warn('Error cargando chanchitos, retornando array vacío');
+          return of([]);
+        })
+      );
+  }
+
+  /**
+   * Establece un chanchito como principal
+   * Requirement 5: Seleccionar chanchito principal
+   */
+  setChanchitoPrincipal(id: string): Observable<void> {
+    // TODO: Reemplazar con llamada real a API
+    return of(void 0).pipe(delay(300));
+  }
+
+  /**
+   * Obtiene operaciones de gastos con filtro opcional
+   * Requirement 8: Detalle de gastos
+   */
+  getOperacionesGastos(mes: string, filtro?: string): Observable<OperacionFinanciera[]> {
+    const filtroOperacion: FiltroOperacion = {
+      categoria: 'gastos',
+      vinculadaARecurrente: false
+    };
+
+    if (filtro === 'hormiga') {
+      filtroOperacion.condiciones = [{ campo: 'tipoGasto', operador: '=', valor: 'hormiga' }];
+    } else if (filtro === 'medio') {
+      filtroOperacion.condiciones = [{ campo: 'tipoGasto', operador: '=', valor: 'medio' }];
+    } else if (filtro === 'excepcional') {
+      filtroOperacion.condiciones = [{ campo: 'tipoGasto', operador: '=', valor: 'excepcional' }];
+    }
+
+    return this.getOperacionesPorFiltro(mes, filtroOperacion);
+  }
+
+  /**
+   * Obtiene categorías de gastos agrupadas con totales
+   * Requirement 8: Gráfico de categorías
+   */
+  getCategoriasGastos(mes: string): Observable<{ categoria: string, monto: number }[]> {
+    return this.getOperacionesGastos(mes).pipe(
+      map(operaciones => {
+        const grupos = new Map<string, number>();
+        
+        operaciones.forEach(op => {
+          const cat = op.subcategoria || 'otros';
+          grupos.set(cat, (grupos.get(cat) || 0) + Math.abs(op.monto));
+        });
+
+        return Array.from(grupos.entries())
+          .map(([categoria, monto]) => ({ categoria, monto }))
+          .sort((a, b) => b.monto - a.monto);
+      })
+    );
+  }
+
+  /**
+   * Requirement 1.1, 1.2, 1.3: Obtiene detalle de gastos por tipo
+   */
+  getDetalleGastosPorTipo(mes: string, tipo: string): Observable<TipoGastoDetalle> {
+    const tipoGastoMap: { [key: string]: string } = {
+      'automaticos': 'automatico',
+      'hormigas': 'hormiga',
+      'medios': 'medio',
+      'excepcionales': 'excepcional'
+    };
+
+    const tipoFiltro = tipoGastoMap[tipo];
+    
+    const filtro: FiltroOperacion = {
+      categoria: 'gastos',
+      vinculadaARecurrente: false,
+      condiciones: tipoFiltro ? [{ campo: 'tipoGasto', operador: '=', valor: tipoFiltro }] : []
+    };
+
+    return this.getOperacionesPorFiltro(mes, filtro).pipe(
+      map(operaciones => {
+        // Agrupar por subcategoría
+        const grupos = new Map<string, { monto: number; operaciones: OperacionFinanciera[] }>();
+        
+        operaciones.forEach(op => {
+          const subcat = op.subcategoria || 'otros';
+          if (!grupos.has(subcat)) {
+            grupos.set(subcat, { monto: 0, operaciones: [] });
+          }
+          const grupo = grupos.get(subcat)!;
+          grupo.monto += Math.abs(op.monto);
+          grupo.operaciones.push(op);
+        });
+
+        // Calcular total
+        const totalMonto = Array.from(grupos.values()).reduce((sum, g) => sum + g.monto, 0);
+
+        // Mapear iconos por subcategoría
+        const iconosSubcategoria: { [key: string]: string } = {
+          'transporte': 'directions_car',
+          'delivery': 'delivery_dining',
+          'restaurantes': 'restaurant',
+          'supermercado': 'shopping_cart',
+          'entretenimiento': 'movie',
+          'salud': 'local_hospital',
+          'educacion': 'school',
+          'compras': 'shopping_bag',
+          'servicios': 'build',
+          'otros': 'more_horiz'
+        };
+
+        // Convertir a array de subcategorías
+        const subcategorias: SubcategoriaGastoDetalle[] = Array.from(grupos.entries())
+          .map(([nombre, data]) => ({
+            nombre: this.capitalizarTexto(nombre),
+            monto: data.monto,
+            porcentaje: totalMonto > 0 ? (data.monto / totalMonto) * 100 : 0,
+            color: this.getColorSubcategoria(nombre),
+            icono: iconosSubcategoria[nombre.toLowerCase()] || 'category',
+            operaciones: data.operaciones
+          }))
+          .sort((a, b) => b.monto - a.monto);
+
+        const titulosMap: { [key: string]: string } = {
+          'automaticos': 'Cobros Automáticos',
+          'hormigas': 'Gastos Hormiga',
+          'medios': 'Gastos Medios',
+          'excepcionales': 'Gastos Excepcionales'
+        };
+
+        return {
+          tipo: tipo as any,
+          titulo: titulosMap[tipo] || tipo,
+          totalMonto,
+          totalPorcentaje: 100,
+          subcategorias
+        };
+      })
+    );
+  }
+
+  /**
+   * Requirement 2.1, 2.2, 2.3: Obtiene operaciones de una subcategoría específica
+   */
+  getOperacionesPorSubcategoria(mes: string, tipo: string, subcategoria: string): Observable<OperacionFinanciera[]> {
+    const tipoGastoMap: { [key: string]: string } = {
+      'automaticos': 'automatico',
+      'hormigas': 'hormiga',
+      'medios': 'medio',
+      'excepcionales': 'excepcional'
+    };
+
+    const tipoFiltro = tipoGastoMap[tipo];
+    
+    const filtro: FiltroOperacion = {
+      categoria: 'gastos',
+      vinculadaARecurrente: false,
+      condiciones: tipoFiltro ? [{ campo: 'tipoGasto', operador: '=', valor: tipoFiltro }] : []
+    };
+
+    return this.getOperacionesPorFiltro(mes, filtro).pipe(
+      map(operaciones => {
+        // Filtrar por subcategoría
+        const subcatLower = subcategoria.toLowerCase();
+        const filtradas = operaciones.filter(op => 
+          (op.subcategoria || 'otros').toLowerCase() === subcatLower
+        );
+        
+        // Ordenar por fecha descendente
+        return filtradas.sort((a, b) => b.fecha.getTime() - a.fecha.getTime());
+      })
+    );
+  }
+
+  /**
+   * Requirement 3.1, 3.2, 3.4: Obtiene movimientos de caja por tipo
+   */
+  getMovimientosCajaPorTipo(mes: string, tipoMovimiento: string): Observable<MovimientoCaja[]> {
+    // Filtrar solo por categoría movimiento_caja
+    const filtro: FiltroOperacion = {
+      categoria: 'movimiento_caja'
+    };
+
+    return this.getOperacionesPorFiltro(mes, filtro).pipe(
+      map(operaciones => {
+        // Mapear tipos de movimiento
+        const tipoMap: { [key: string]: string } = {
+          'transferencias': 'transferencia',
+          'retiros': 'retiro',
+          'depositos': 'deposito',
+          'otros': 'otros'
+        };
+
+        const tipoFiltro = tipoMap[tipoMovimiento];
+
+        // Filtrar por tipo de movimiento si se especifica un tipo
+        let filtradas = operaciones;
+        if (tipoFiltro) {
+          filtradas = operaciones.filter(op => op.tipoMovimiento === tipoFiltro);
+        }
+
+        // Convertir a MovimientoCaja
+        return filtradas.map(op => ({
+          id: op.id,
+          descripcion: op.operacion,
+          monto: op.monto,
+          fecha: op.fecha,
+          subcategoria: tipoMovimiento as any
+        }));
+      })
+    );
+  }
+
+  /**
+   * Requirement 5.1, 5.2: Obtiene operaciones recurrentes vinculables
+   */
+  getOperacionesRecurrentesVinculables(): Observable<OperacionVinculable[]> {
+    return this.getOperacionesRecurrentes().pipe(
+      map(operaciones => 
+        operaciones.map(op => ({
+          id: op.id,
+          nombre: op.nombre,
+          descripcion: op.categoria || op.nombre,
+          monto: op.monto,
+          tipo: 'operacion_recurrente' as const,
+          icono: 'repeat'
+        }))
+      )
+    );
+  }
+
+  /**
+   * Requirement 5.1, 5.2: Obtiene pagos financieros vinculables
+   */
+  getPagosFinancierosVinculables(): Observable<OperacionVinculable[]> {
+    return this.getConfiguracion().pipe(
+      map(config => {
+        // TODO: Obtener pagos financieros de la configuración o de un endpoint
+        // Por ahora retornamos un array vacío
+        const pagosFinancieros: OperacionVinculable[] = [
+          {
+            id: 'pf-1',
+            nombre: 'Tarjeta de Crédito',
+            descripcion: 'Pago de tarjeta de crédito',
+            tipo: 'pago_financiero',
+            icono: 'credit_card'
+          },
+          {
+            id: 'pf-2',
+            nombre: 'Préstamo Personal',
+            descripcion: 'Cuota de préstamo personal',
+            tipo: 'pago_financiero',
+            icono: 'account_balance'
+          }
+        ];
+        return pagosFinancieros;
+      })
+    );
+  }
+
+  /**
+   * Requirement 6.4: Recategoriza un movimiento de caja
+   */
+  recategorizarMovimiento(request: RecategorizacionRequest): Observable<RecategorizacionResponse> {
+    return this.getOperacionesMes(request.mes).pipe(
+      map(operaciones => {
+        const operacion = operaciones.find(op => op.id === request.operacionId);
+        
+        if (!operacion) {
+          return {
+            success: false,
+            message: 'Operación no encontrada'
+          };
+        }
+
+        // Actualizar la operación según la nueva categoría
+        switch (request.nuevaCategoria) {
+          case 'ingresos':
+            operacion.categoria = 'ingresos';
+            operacion.categoriaUsuario = 'ingreso';
+            operacion.vinculadaARecurrente = false;
+            break;
+          
+          case 'operaciones_recurrentes':
+            operacion.categoria = 'gastos'; // Mantener como gastos pero marcar como vinculada
+            operacion.categoriaUsuario = 'operacion_recurrente';
+            operacion.vinculadaARecurrente = !!request.operacionVinculadaId;
+            // Nota: recurrenteId no existe en la interface, se maneja con vinculadaARecurrente
+            break;
+          
+          case 'pagos_financieros':
+            operacion.categoria = 'pago_financiero';
+            operacion.categoriaUsuario = 'no_aplica';
+            operacion.vinculadaARecurrente = !!request.operacionVinculadaId;
+            // Nota: recurrenteId no existe en la interface, se maneja con vinculadaARecurrente
+            break;
+        }
+
+        // Actualizar caché
+        this.operacionesCache.set(request.mes, operaciones);
+
+        return {
+          success: true,
+          message: 'Movimiento recategorizado exitosamente',
+          operacionActualizada: {
+            id: operacion.id,
+            categoria: operacion.categoria,
+            categoriaUsuario: operacion.categoriaUsuario || '',
+            vinculadaARecurrente: operacion.vinculadaARecurrente || false
+          }
+        };
+      }),
+      delay(300) // Simular latencia de API
+    );
+  }
+
+  /**
+   * Capitaliza la primera letra de un texto
+   */
+  private capitalizarTexto(texto: string): string {
+    return texto.charAt(0).toUpperCase() + texto.slice(1);
+  }
+
+  /**
+   * Obtiene un color para una subcategoría
+   */
+  private getColorSubcategoria(subcategoria: string): string {
+    const colores: { [key: string]: string } = {
+      'transporte': '#FF6B6B',
+      'delivery': '#4ECDC4',
+      'restaurantes': '#FFE66D',
+      'supermercado': '#95E1D3',
+      'entretenimiento': '#C7CEEA',
+      'salud': '#FF6B9D',
+      'educacion': '#A8E6CF',
+      'compras': '#FFD3B6',
+      'servicios': '#FFAAA5',
+      'otros': '#B4B4B4'
+    };
+    return colores[subcategoria.toLowerCase()] || '#B4B4B4';
   }
 
   /**

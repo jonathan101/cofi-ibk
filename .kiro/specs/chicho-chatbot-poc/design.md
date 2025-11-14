@@ -1523,7 +1523,7 @@ $spacing-2xl: 3rem;     // 48px
 // Bordes
 $border-radius-sm: 8px;
 $border-radius-md: 12px;
-$border-radius-lg: 16px;
+$border-radius-sm: 16px;
 $border-radius-xl: 24px;
 $border-radius-full: 9999px;
 
@@ -1559,7 +1559,7 @@ $transition-spring: cubic-bezier(0.68, -0.55, 0.265, 1.55); // Efecto spring/bou
   background-color: $color-primary;
   color: white;
   border: none;
-  border-radius: $border-radius-lg;
+  border-radius: $border-radius-sm;
   padding: $spacing-md $spacing-lg;
   font-weight: 600;
   font-size: $font-size-base;
@@ -4087,3 +4087,166 @@ El proyecto está diseñado para que un desarrollador frontend pueda:
 - Debuggear problemas de manera sencilla
 
 La arquitectura es suficientemente robusta para una PoC pero evita complejidad innecesaria que dificultaría el mantenimiento.
+
+
+## Layout y Scroll Architecture
+
+### Estructura de Contenedores
+
+Todas las vistas de la aplicación siguen una estructura consistente para asegurar que el scroll funcione correctamente y todos los elementos de navegación permanezcan dentro del marco del celular:
+
+```
+mobile-container (position: relative, overflow: hidden, height: 100%)
+└── feature-container (position: relative, display: flex, flex-direction: column, height: 100%, overflow: hidden)
+    ├── pull-down-handle (position: relative, flex-shrink: 0) [opcional]
+    ├── header (flex-shrink: 0, z-index: 10)
+    ├── content (flex: 1, overflow-y: auto, overflow-x: hidden)
+    │   └── scrollable-content (padding-bottom: 80-100px)
+    ├── floating-button (position: absolute, bottom: 80px, right: 16px) [opcional]
+    └── bottom-navigation (position: absolute, bottom: 0, flex-shrink: 0, height: 64px)
+```
+
+### Reglas de Posicionamiento
+
+#### 1. Contenedor Principal de Vista
+```scss
+.feature-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden; // CRÍTICO: evita que el contenido se salga del marco
+  background-color: var(--color-bg-light);
+}
+```
+
+#### 2. Header
+```scss
+.feature-header {
+  flex-shrink: 0; // No se encoge durante el scroll
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: var(--color-bg-light);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+```
+
+#### 3. Contenido Scrolleable
+```scss
+.feature-content {
+  flex: 1; // Ocupa todo el espacio disponible
+  overflow-y: auto; // Permite scroll vertical
+  overflow-x: hidden; // Evita scroll horizontal
+  -webkit-overflow-scrolling: touch; // Scroll suave en iOS
+}
+
+.scrollable-content {
+  padding: 1rem;
+  padding-bottom: 100px; // Espacio para bottom nav + botón flotante
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+```
+
+#### 4. Bottom Navigation
+```scss
+.bottom-navigation {
+  position: absolute; // Posición absoluta relativa al contenedor padre
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 64px;
+  background-color: var(--color-bg-primary);
+  border-top: 1px solid var(--color-border-light);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 20;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+  flex-shrink: 0; // No se encoge
+}
+```
+
+#### 5. Botón Flotante
+```scss
+.floating-button {
+  position: absolute; // Posición absoluta relativa al contenedor padre
+  bottom: 80px; // Justo encima del bottom nav (64px + 16px spacing)
+  right: 16px;
+  z-index: 40;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+```
+
+#### 6. Pull-Down Handle
+```scss
+.pull-down-handle {
+  position: relative; // Parte del flujo normal del documento
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background-color: var(--color-white);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  flex-shrink: 0; // No se encoge
+  cursor: grab;
+  user-select: none;
+}
+```
+
+### Comportamiento de Scroll
+
+1. **Scroll Vertical**: Solo el contenido principal (`.feature-content`) tiene scroll vertical
+2. **Elementos Fijos**: Header y bottom navigation permanecen visibles en todo momento
+3. **Padding Bottom**: El contenido scrolleable tiene padding-bottom suficiente para que el último elemento no quede oculto detrás del bottom navigation
+4. **Smooth Scrolling**: Se aplica `-webkit-overflow-scrolling: touch` para iOS
+5. **Overflow Hidden**: El contenedor principal tiene `overflow: hidden` para evitar que elementos se salgan del marco
+
+### Casos Especiales
+
+#### Home Component
+- Incluye botón flotante de chat (chanchito verde)
+- Padding-bottom: 100px (64px nav + 16px spacing + 20px extra)
+
+#### Plan de Ahorros Component
+- Incluye pull-down handle en la parte superior
+- Padding-bottom: 80px (64px nav + 16px spacing)
+- Header no es sticky, es parte del flujo normal
+
+#### Chat Component
+- Incluye pull-down handle en la parte superior
+- Input de chat fijo en la parte inferior (encima del bottom nav)
+- Padding-bottom ajustado para el input
+
+#### Alertas Component
+- Incluye pull-down handle en la parte superior
+- Filtros sticky debajo del header
+- Padding-bottom: 80px
+
+### Testing de Layout
+
+Para verificar que el layout funciona correctamente:
+
+1. **Scroll Test**: Hacer scroll hasta el final del contenido y verificar que el último elemento es visible
+2. **Bottom Nav Test**: Verificar que el bottom navigation está siempre visible en la parte inferior
+3. **Floating Button Test**: Verificar que el botón flotante está dentro del marco del celular
+4. **Header Test**: Verificar que el header no se encoge durante el scroll
+5. **Pull-Down Test**: Verificar que el pull-down handle arrastra toda la vista, no solo el componente
+
+### Errores Comunes a Evitar
+
+1. ❌ **NO usar `position: fixed` en elementos dentro del contenedor móvil** - Esto los saca del marco
+2. ❌ **NO usar `position: sticky` sin `flex-shrink: 0`** - Puede causar problemas de tamaño
+3. ❌ **NO olvidar `overflow: hidden` en el contenedor principal** - El contenido se saldrá del marco
+4. ❌ **NO olvidar `padding-bottom` en el contenido scrolleable** - El último elemento quedará oculto
+5. ❌ **NO usar `height: 100vh` en elementos internos** - Usar `height: 100%` relativo al padre
+6. ❌ **NO olvidar `-webkit-overflow-scrolling: touch`** - El scroll no será suave en iOS
+

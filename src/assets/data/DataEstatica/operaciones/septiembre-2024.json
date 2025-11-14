@@ -3,7 +3,7 @@
     "id": "sep-001",
     "fecha": "2024-09-01T10:30:00.000Z",
     "operacion": "Sueldo mensual",
-    "monto": 4000,
+    "monto": 4500,
     "categoria": "ingresos",
     "tipoProducto": "TD"
   },
@@ -184,7 +184,7 @@
     "id": "sep-009",
     "fecha": "2024-09-16T13:37:00.000Z",
     "operacion": "Pago tarjeta de crédito Mastercard",
-    "monto": -806,
+    "monto": -300,
     "categoria": "pago_financiero",
     "tipoProducto": "TD",
     "estado": "pagado"
@@ -213,7 +213,7 @@
     "id": "sep-012",
     "fecha": "2024-09-18T14:10:00.000Z",
     "operacion": "Pago tarjeta de crédito Mastercard",
-    "monto": -1202,
+    "monto": -400,
     "categoria": "pago_financiero",
     "tipoProducto": "TD",
     "estado": "pagado"
@@ -222,7 +222,7 @@
     "id": "sep-010",
     "fecha": "2024-09-19T17:12:00.000Z",
     "operacion": "Cuota préstamo vehicular",
-    "monto": -1427,
+    "monto": -400,
     "categoria": "pago_financiero",
     "tipoProducto": "TD",
     "estado": "pagado"
@@ -241,7 +241,7 @@
     "id": "sep-011",
     "fecha": "2024-09-20T14:26:00.000Z",
     "operacion": "Cuota préstamo vehicular",
-    "monto": -894,
+    "monto": -250,
     "categoria": "pago_financiero",
     "tipoProducto": "TD",
     "estado": "pagado"

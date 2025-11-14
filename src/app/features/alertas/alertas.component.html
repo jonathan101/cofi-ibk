@@ -1,0 +1,99 @@
+<div class="alertas-container">
+  <!-- Pull Down Handle -->
+  <app-pull-down-handle (pullDown)="onPullDown()"></app-pull-down-handle>
+
+  <!-- Header -->
+  <header class="alertas-header">
+    <button class="icon-button" (click)="toggleSidebar()" aria-label="Menú">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
+    
+    <h1 class="header-title">Alertas</h1>
+    
+    <div class="header-spacer"></div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="alertas-content">
+    <!-- Loading State -->
+    <div *ngIf="loading" class="loading-container">
+      <div class="spinner"></div>
+      <p>Cargando alertas...</p>
+    </div>
+
+    <!-- Alertas List -->
+    <div *ngIf="!loading" class="alertas-list">
+      <!-- Alerta Card -->
+      <div 
+        *ngFor="let alerta of alertasFiltradas" 
+        class="alerta-card"
+        [class.alerta-warning]="alerta.severity === 'warning'"
+        [class.alerta-danger]="alerta.severity === 'danger'"
+        [class.alerta-info]="alerta.severity === 'info'"
+      >
+        <div class="alerta-main">
+          <div class="alerta-icon-wrapper">
+            <div 
+              class="alerta-icon"
+              [class.icon-warning]="alerta.severity === 'warning'"
+              [class.icon-danger]="alerta.severity === 'danger'"
+              [class.icon-info]="alerta.severity === 'info'"
+            >
+              <span 
+                *ngIf="alerta.severity === 'warning'" 
+                class="material-symbols-outlined"
+              >
+                warning
+              </span>
+              <span 
+                *ngIf="alerta.severity === 'danger'" 
+                class="material-symbols-outlined"
+              >
+                priority_high
+              </span>
+              <span 
+                *ngIf="alerta.severity === 'info'" 
+                class="material-symbols-outlined"
+              >
+                credit_card
+              </span>
+            </div>
+          </div>
+
+          <div class="alerta-content-wrapper">
+            <div class="alerta-text">
+              <p class="alerta-title">{{ alerta.title }}</p>
+              <p class="alerta-message">{{ alerta.message }}</p>
+              
+              <!-- Botón de acción si existe -->
+              <button 
+                *ngIf="alerta.actionLabel" 
+                class="alerta-action-button"
+                (click)="ejecutarAccion(alerta.id)"
+              >
+                {{ alerta.actionLabel }}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="alerta-time">
+          <p class="time-text">{{ alerta.timeAgo }}</p>
+        </div>
+      </div>
+
+      <!-- Empty State -->
+      <div *ngIf="alertasFiltradas.length === 0" class="empty-state">
+        <span class="material-symbols-outlined empty-icon">notifications_off</span>
+        <p class="empty-title">No hay alertas</p>
+        <p class="empty-message">No tienes alertas en este momento</p>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Sidebar Menu -->
+<app-sidebar-menu 
+  *ngIf="showSidebar"
+  (close)="closeSidebar()">
+</app-sidebar-menu>

@@ -27,6 +27,7 @@ $color-alert-red: #E53935;      // Pill rojo (>100%)
 $color-bg-primary: #FFFFFF;
 $color-bg-secondary: #F5F5F5;
 $color-bg-tertiary: #E8E8E8;
+$color-bg-light: #FAFAFA;
 $color-bg-dark: #333333;
 
 // Colores de Texto
@@ -37,6 +38,7 @@ $color-text-light: #FFFFFF;
 $color-text-disabled: #CCCCCC;
 
 // Colores de Bordes
+$color-border: #E0E0E0;
 $color-border-light: #E0E0E0;
 $color-border-medium: #CCCCCC;
 $color-border-dark: #999999;
@@ -86,7 +88,7 @@ $spacing-3xl: 4rem;             // 64px
 // Border Radius
 $border-radius-sm: 4px;
 $border-radius-md: 8px;
-$border-radius-lg: 12px;
+$border-radius-sm: 12px;
 $border-radius-xl: 16px;
 $border-radius-2xl: 24px;
 $border-radius-full: 9999px;
@@ -101,6 +103,7 @@ $shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 // Transiciones
 $transition-fast: 150ms ease-in-out;
 $transition-base: 300ms ease-in-out;
+$transition-normal: 300ms ease-in-out; // Alias de transition-base
 $transition-slow: 500ms ease-in-out;
 
 // Z-index
@@ -118,6 +121,7 @@ $breakpoint-sm: 480px;
 $breakpoint-md: 768px;
 $breakpoint-lg: 1024px;
 $breakpoint-xl: 1280px;
+$breakpoint-mobile: 768px;  // Breakpoint para mobile-only mixin
 
 // Dimensiones del Contenedor Móvil
 $mobile-container-min-width: 360px;
@@ -136,3 +140,31 @@ $badge-size: 20px;
 $badge-font-size: 0.75rem;
 $badge-bg: $color-danger;
 $badge-color: $color-text-light;
+
+// Espaciados adicionales
+$spacing-1: 0.25rem;            // 4px
+$spacing-2: 0.5rem;             // 8px
+$spacing-3: 0.75rem;            // 12px
+$spacing-4: 1rem;               // 16px
+$spacing-5: 1.25rem;            // 20px
+$spacing-6: 1.5rem;             // 24px
+$spacing-8: 2rem;               // 32px
+
+// Border Radius adicionales
+$border-radius: 0.25rem;        // 4px
+
+// Colores Grises
+$color-gray-50: #F9FAFB;
+$color-gray-100: #F3F4F6;
+$color-gray-200: #E5E7EB;
+$color-gray-300: #D1D5DB;
+$color-gray-400: #9CA3AF;
+$color-gray-500: #6B7280;
+$color-gray-600: #4B5563;
+$color-gray-700: #374151;
+$color-gray-800: #1F2937;
+$color-gray-900: #111827;
+
+// Colores White
+$color-white: #FFFFFF;
+$color-black: #000000;

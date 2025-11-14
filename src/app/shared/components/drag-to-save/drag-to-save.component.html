@@ -1,0 +1,32 @@
+<div class="drag-to-save-container" *ngIf="mesActual">
+  <!-- Instrucciones -->
+  <div class="instructions" *ngIf="!isDragging">
+    <p>Arrastra el dinero al chanchito para ahorrar</p>
+  </div>
+
+  <!-- Icono de dinero (draggable) -->
+  <div
+    class="money-icon"
+    [class.dragging]="isDragging"
+    [style.transform]="getMoneyIconTransform()"
+    (mousedown)="startDragging($event)"
+    (touchstart)="startDragging($event)"
+  >
+    <span class="icon">💰</span>
+  </div>
+
+  <!-- Icono de chanchito (target) -->
+  <div
+    class="piggy-bank-target"
+    [class.active]="isNearPiggyBank()"
+  >
+    <span class="icon">🐷</span>
+    <p class="label">Ahorro</p>
+  </div>
+
+  <!-- Feedback visual durante drag -->
+  <div class="drag-feedback" *ngIf="isDragging">
+    <p *ngIf="!isNearPiggyBank()">Arrastra hacia el chanchito</p>
+    <p *ngIf="isNearPiggyBank()" class="success">¡Suelta para ahorrar!</p>
+  </div>
+</div>

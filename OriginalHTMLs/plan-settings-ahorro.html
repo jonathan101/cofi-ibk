@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Definir Meta de Ahorro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#00843d",
+              "background-light": "#f6f8f7",
+              "background-dark": "#102219",
+              "warning": "#FFC107",
+              "interbank-green": "#00843d",
+              "text-primary-light": "#333333",
+              "text-primary-dark": "#e0e0e0",
+              "text-secondary-light": "#555555",
+              "text-secondary-dark": "#b0b0b0",
+              "surface-light": "#ffffff",
+              "surface-dark": "#1a2c23",
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"]
+            },
+            borderRadius: {
+              "DEFAULT": "0.25rem",
+              "lg": "0.5rem",
+              "xl": "0.75rem",
+              "full": "9999px"
+            },
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-display bg-background-light dark:bg-background-dark">
+<div class="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="flex items-center bg-background-light dark:bg-background-dark p-4 pb-2 justify-between sticky top-0 z-10">
+<button class="text-text-primary-light dark:text-text-primary-dark flex size-12 shrink-0 items-center justify-start">
+<span class="material-symbols-outlined text-2xl">arrow_back</span>
+</button>
+<h1 class="text-text-primary-light dark:text-text-primary-dark text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center -ml-6">Define tu Meta de Ahorro</h1>
+</header>
+<main class="flex-grow flex flex-col px-4 pt-2 pb-6">
+<!-- DescriptionList -->
+<div class="p-4 bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm mb-6">
+<div class="flex justify-between gap-x-6 py-2 border-b border-gray-200 dark:border-gray-700">
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-sm font-normal leading-normal">Tu Ingreso Neto Mensual</p>
+<p class="text-text-primary-light dark:text-text-primary-dark text-sm font-medium leading-normal text-right">S/ 4,500.00</p>
+</div>
+<div class="flex justify-between gap-x-6 py-2 pt-4">
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-sm font-normal leading-normal">Tus Ingresos Libres</p>
+<p class="text-text-primary-light dark:text-text-primary-dark text-sm font-medium leading-normal text-right">S/ 1,800.00</p>
+</div>
+</div>
+<!-- SectionHeader -->
+<h2 class="text-text-primary-light dark:text-text-primary-dark text-xl font-bold leading-tight tracking-[-0.015em] px-0 pb-3 pt-2 text-center">Elige cuánto quieres ahorrar al mes</h2>
+<!-- HeadlineText -->
+<h3 class="text-interbank-green tracking-light text-[40px] font-bold leading-tight text-center pb-4">S/ 950.00</h3>
+<!-- Slider -->
+<div class="w-full flex flex-col items-center gap-3 pt-4 px-2">
+<div class="flex h-4 w-full items-center">
+<div class="flex h-2 flex-1 rounded-full bg-gray-200 dark:bg-gray-700">
+<div class="h-full rounded-full bg-interbank-green" style="width: 52.77%"></div>
+<div class="relative">
+<div class="absolute -left-3 -top-2.5 size-6 rounded-full bg-interbank-green border-4 border-white dark:border-surface-dark shadow-md cursor-pointer"></div>
+</div>
+</div>
+</div>
+<div class="flex w-full justify-between mt-2">
+<span class="text-text-secondary-light dark:text-text-secondary-dark text-xs font-medium">S/ 10</span>
+<span class="text-text-secondary-light dark:text-text-secondary-dark text-xs font-medium">S/ 1,800</span>
+</div>
+</div>
+<!-- Warning Banner -->
+<div class="mt-8 mx-auto w-full max-w-md">
+<div class="flex items-start gap-3 rounded-lg bg-[#FFC107]/10 dark:bg-[#FFC107]/20 p-4">
+<span class="material-symbols-outlined text-[#FFC107] mt-0.5">warning</span>
+<p class="text-sm text-text-primary-light dark:text-text-primary-dark">Esta meta es ambiciosa y podría ser difícil de alcanzar. ¡Puedes ajustarla cuando quieras!</p>
+</div>
+</div>
+</main>
+<!-- Footer with Primary Button -->
+<footer class="p-4 sticky bottom-0 bg-background-light dark:bg-background-dark">
+<button class="w-full bg-interbank-green text-white font-bold py-4 px-4 rounded-xl text-base hover:bg-opacity-90 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-interbank-green dark:focus:ring-offset-background-dark">
+                Establecer Meta
+            </button>
+</footer>
+</div>
+</body></html>

@@ -1,0 +1,203 @@
+<div class="clasificacion-gastos-container" *ngIf="configuracion">
+  <!-- Header -->
+  <div class="header">
+    <button class="btn-back" (click)="volver()">
+      <span class="icon-back">←</span>
+    </button>
+    <h1 class="title">Clasificación de Gastos</h1>
+  </div>
+
+  <p class="description">
+    Define los topes para clasificar gastos individuales como hormiga, medios o excepcionales. 
+    Puedes usar la fórmula automática o establecer montos personalizados.
+  </p>
+
+  <!-- Información de Fórmulas -->
+  <div class="info-box">
+    <div class="info-title">📊 Fórmulas Automáticas</div>
+    <ul class="info-list">
+      <li><strong>Gasto Hormiga:</strong> 20% del ingreso diario ({{ configuracion.ingresoNetoMensual / 30 | number:'1.2-2' }} × 0.20)</li>
+      <li><strong>Gasto Medio:</strong> 50% del ingreso diario ({{ configuracion.ingresoNetoMensual / 30 | number:'1.2-2' }} × 0.50)</li>
+      <li><strong>Gasto Excepcional:</strong> Cualquier gasto mayor al tope medio</li>
+    </ul>
+    <p class="info-note">Los montos se redondean a la decena hacia abajo para facilitar la clasificación.</p>
+  </div>
+
+  <!-- Formulario -->
+  <form class="clasificacion-form" (ngSubmit)="guardarConfiguracion()">
+    
+    <!-- Tope para Gasto Hormiga -->
+    <div class="clasificacion-section">
+      <h3 class="section-title">Tope para clasificar como Gasto Hormiga</h3>
+      <p class="section-description">
+        Los gastos menores o iguales a este monto se clasificarán como "Gastos Hormiga"
+      </p>
+
+      <div class="radio-options">
+        <label class="radio-option">
+          <input 
+            type="radio" 
+            name="topeHormiga" 
+            [value]="true"
+            [checked]="configuracion.clasificacionGastos.topeHormiga.automatico"
+            (change)="onTopeHormigaChange(true)"
+          />
+          <div class="option-content">
+            <span class="option-label">Automático (fórmula)</span>
+            <div class="calculated-value" *ngIf="configuracion.clasificacionGastos.topeHormiga.automatico">
+              <span class="value-amount">S/ {{ calcularTopeHormigaAutomatico().toFixed(2) }}</span>
+              <span class="value-description">20% del ingreso diario</span>
+            </div>
+          </div>
+        </label>
+
+        <label class="radio-option">
+          <input 
+            type="radio" 
+            name="topeHormiga" 
+            [value]="false"
+            [checked]="!configuracion.clasificacionGastos.topeHormiga.automatico"
+            (change)="onTopeHormigaChange(false)"
+          />
+          <div class="option-content">
+            <span class="option-label">Manual</span>
+            <div class="input-row" *ngIf="!configuracion.clasificacionGastos.topeHormiga.automatico">
+              <span class="input-prefix">S/</span>
+              <input 
+                type="number" 
+                class="form-input" 
+                [(ngModel)]="configuracion.clasificacionGastos.topeHormiga.montoManual"
+                name="montoHormiga"
+                min="0"
+                step="0.01"
+                required
+              />
+            </div>
+          </div>
+        </label>
+      </div>
+
+      <!-- Ejemplo Visual -->
+      <div class="ejemplo-visual">
+        <div class="ejemplo-title">Ejemplo de clasificación:</div>
+        <div class="ejemplo-items">
+          <div class="ejemplo-item hormiga">
+            <span class="ejemplo-label">Gasto Hormiga</span>
+            <span class="ejemplo-range">
+              S/ 0 - S/ {{ configuracion.clasificacionGastos.topeHormiga.automatico 
+                ? calcularTopeHormigaAutomatico().toFixed(2) 
+                : (configuracion.clasificacionGastos.topeHormiga.montoManual || 0).toFixed(2) }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tope para Gasto Medio -->
+    <div class="clasificacion-section">
+      <h3 class="section-title">Tope para clasificar como Gasto Medio</h3>
+      <p class="section-description">
+        Los gastos mayores al tope hormiga y menores o iguales a este monto se clasificarán como "Gastos Medios"
+      </p>
+
+      <div class="radio-options">
+        <label class="radio-option">
+          <input 
+            type="radio" 
+            name="topeMedio" 
+            [value]="true"
+            [checked]="configuracion.clasificacionGastos.topeMedio.automatico"
+            (change)="onTopeMedioChange(true)"
+          />
+          <div class="option-content">
+            <span class="option-label">Automático (fórmula)</span>
+            <div class="calculated-value" *ngIf="configuracion.clasificacionGastos.topeMedio.automatico">
+              <span class="value-amount">S/ {{ calcularTopeMedioAutomatico().toFixed(2) }}</span>
+              <span class="value-description">50% del ingreso diario</span>
+            </div>
+          </div>
+        </label>
+
+        <label class="radio-option">
+          <input 
+            type="radio" 
+            name="topeMedio" 
+            [value]="false"
+            [checked]="!configuracion.clasificacionGastos.topeMedio.automatico"
+            (change)="onTopeMedioChange(false)"
+          />
+          <div class="option-content">
+            <span class="option-label">Manual</span>
+            <div class="input-row" *ngIf="!configuracion.clasificacionGastos.topeMedio.automatico">
+              <span class="input-prefix">S/</span>
+              <input 
+                type="number" 
+                class="form-input" 
+                [(ngModel)]="configuracion.clasificacionGastos.topeMedio.montoManual"
+                name="montoMedio"
+                min="0"
+                step="0.01"
+                required
+              />
+            </div>
+          </div>
+        </label>
+      </div>
+
+      <!-- Ejemplo Visual Completo -->
+      <div class="ejemplo-visual">
+        <div class="ejemplo-title">Clasificación completa:</div>
+        <div class="ejemplo-items">
+          <div class="ejemplo-item hormiga">
+            <span class="ejemplo-label">🐜 Gasto Hormiga</span>
+            <span class="ejemplo-range">
+              S/ 0 - S/ {{ configuracion.clasificacionGastos.topeHormiga.automatico 
+                ? calcularTopeHormigaAutomatico().toFixed(2) 
+                : (configuracion.clasificacionGastos.topeHormiga.montoManual || 0).toFixed(2) }}
+            </span>
+          </div>
+          <div class="ejemplo-item medio">
+            <span class="ejemplo-label">📊 Gasto Medio</span>
+            <span class="ejemplo-range">
+              S/ {{ (configuracion.clasificacionGastos.topeHormiga.automatico 
+                ? calcularTopeHormigaAutomatico() 
+                : (configuracion.clasificacionGastos.topeHormiga.montoManual || 0)) + 0.01 | number:'1.2-2' }} 
+              - S/ {{ configuracion.clasificacionGastos.topeMedio.automatico 
+                ? calcularTopeMedioAutomatico().toFixed(2) 
+                : (configuracion.clasificacionGastos.topeMedio.montoManual || 0).toFixed(2) }}
+            </span>
+          </div>
+          <div class="ejemplo-item excepcional">
+            <span class="ejemplo-label">⚠️ Gasto Excepcional</span>
+            <span class="ejemplo-range">
+              Mayor a S/ {{ configuracion.clasificacionGastos.topeMedio.automatico 
+                ? calcularTopeMedioAutomatico().toFixed(2) 
+                : (configuracion.clasificacionGastos.topeMedio.montoManual || 0).toFixed(2) }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mensaje de Éxito -->
+    <div class="mensaje-exito" *ngIf="mensajeExito">
+      <span class="icon-check">✓</span>
+      {{ mensajeExito }}
+    </div>
+
+    <!-- Botones de Acción -->
+    <div class="action-buttons">
+      <button type="button" class="btn-secondary" (click)="volver()">
+        Cancelar
+      </button>
+      <button type="submit" class="btn-primary" [disabled]="guardando">
+        {{ guardando ? 'Guardando...' : 'Guardar Clasificación' }}
+      </button>
+    </div>
+  </form>
+</div>
+
+<div class="loading-container" *ngIf="!configuracion">
+  <div class="loading-spinner"></div>
+  <p>Cargando configuración...</p>
+</div>

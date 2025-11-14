@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ingreso Mensual</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#00843D",
+              "background-light": "#FFFFFF",
+              "background-dark": "#102216",
+              "text-light": "#111813",
+              "text-dark": "#E1E3E2",
+              "text-secondary-light": "#6b7280",
+              "text-secondary-dark": "#9ca3af",
+              "input-bg-light": "#f0f4f2",
+              "input-bg-dark": "#1a2c20",
+              "placeholder-light": "#61896f",
+              "placeholder-dark": "#82a18e",
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<header class="flex flex-col">
+<!-- TopAppBar -->
+<div class="flex items-center bg-background-light dark:bg-background-dark p-4 pb-2 justify-between">
+<button aria-label="Volver" class="text-text-light dark:text-text-dark flex size-12 shrink-0 items-center justify-start">
+<span class="material-symbols-outlined text-2xl">arrow_back</span>
+</button>
+<h2 class="text-text-light dark:text-text-dark text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-12">Ingreso Mensual</h2>
+</div>
+</header>
+<main class="flex flex-1 flex-col px-4 pt-6 pb-4">
+<!-- HeadlineText -->
+<h1 class="text-text-light dark:text-text-dark tracking-light text-[32px] font-bold leading-tight text-left pb-3">Tu Ingreso Mensual</h1>
+<!-- BodyText -->
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-base font-normal leading-normal pb-3 pt-1">Para crear tu plan, necesitamos saber cuál es tu ingreso neto mensual.</p>
+<!-- TextField -->
+<div class="flex max-w-[480px] flex-wrap items-end gap-4 py-3">
+<label class="flex flex-col min-w-40 flex-1">
+<p class="text-text-light dark:text-text-dark text-base font-medium leading-normal pb-2">Ingreso Neto Mensual</p>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-text-light dark:text-text-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border-none bg-input-bg-light dark:bg-input-bg-dark h-14 placeholder:text-placeholder-light dark:placeholder:text-placeholder-dark p-4 text-base font-normal leading-normal" inputmode="decimal" placeholder="S/ 0.00" type="number" value=""/>
+</label>
+</div>
+<!-- MetaText -->
+<a class="text-primary dark:text-primary text-sm font-normal leading-normal pt-1 underline" href="#">¿Qué es el ingreso neto?</a>
+</main>
+<footer class="sticky bottom-0 bg-background-light dark:bg-background-dark p-4 pt-2 w-full">
+<!-- CTA Button -->
+<button class="flex w-full min-w-0 cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em]">Guardar Ingreso</button>
+</footer>
+</div>
+</body></html>

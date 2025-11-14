@@ -4,7 +4,23 @@ import { Router } from '@angular/router';
 import { MobileContainerComponent } from '../../shared/components/mobile-container/mobile-container.component';
 import { FloatingButtonComponent } from '../../shared/components/floating-button/floating-button.component';
 import { BottomNavigationComponent } from '../../shared/components/bottom-navigation/bottom-navigation.component';
+import { SidebarMenuComponent } from '../../shared/components/sidebar-menu/sidebar-menu.component';
 import { ChatService } from '../../core/services/chat.service';
+
+interface ProductoBancario {
+  nombre: string;
+  tipo: 'cuenta' | 'tarjeta';
+  icono: string;
+  iconoColor: string;
+  descripcion: string;
+  saldoOculto: boolean;
+}
+
+interface ContactoPlin {
+  nombre: string;
+  avatar?: string;
+  esNuevo: boolean;
+}
 
 /**
  * Componente principal de la vista Home
@@ -12,6 +28,8 @@ import { ChatService } from '../../core/services/chat.service';
  * - Mostrar productos bancarios del usuario
  * - Integrar botón flotante de Chicho con badge de notificaciones
  * - Navegación inferior
+ * - Sidebar menu
+ * - Sección de Plin
  */
 @Component({
   selector: 'app-home',
@@ -20,50 +38,72 @@ import { ChatService } from '../../core/services/chat.service';
     CommonModule,
     MobileContainerComponent,
     FloatingButtonComponent,
-    BottomNavigationComponent
+    BottomNavigationComponent,
+    SidebarMenuComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
-  notificationCount = 0;
-  userName = 'Usuario';
+  notificationCount = 3;
+  showSidebar = false;
   
-  // Productos bancarios del usuario
-  cuentas = [
-    {
-      tipo: 'Cuenta de Ahorros',
-      numero: '****1234',
-      saldo: 5420.50,
-      moneda: 'S/'
-    },
-    {
-      tipo: 'Cuenta Corriente',
-      numero: '****5678',
-      saldo: 12350.00,
-      moneda: 'S/'
-    }
+  // Contactos Plin
+  contactosPlin: ContactoPlin[] = [
+    { nombre: 'Plinear a celular', esNuevo: false },
+    { nombre: 'Agregar contacto', esNuevo: true },
+    { nombre: 'Agregar contacto', esNuevo: true },
+    { nombre: 'Agregar contacto', esNuevo: true },
+    { nombre: 'Agregar contacto', esNuevo: true }
   ];
 
-  tarjetas = [
+  // Productos bancarios del usuario
+  productos: ProductoBancario[] = [
     {
-      tipo: 'Tarjeta de Crédito',
-      numero: '****9012',
-      disponible: 8500.00,
-      limite: 10000.00,
-      moneda: 'S/'
+      nombre: 'Personal',
+      tipo: 'cuenta',
+      icono: 'savings',
+      iconoColor: '#f44883',
+      descripcion: 'Saldo disponible',
+      saldoOculto: true
     },
     {
-      tipo: 'Tarjeta de Débito',
-      numero: '****1234',
-      vinculada: 'Cuenta de Ahorros',
-      moneda: 'S/'
+      nombre: 'Esenciales',
+      tipo: 'cuenta',
+      icono: 'savings',
+      iconoColor: '#f44883',
+      descripcion: 'Saldo disponible',
+      saldoOculto: true
+    },
+    {
+      nombre: 'Mascotas',
+      tipo: 'cuenta',
+      icono: 'savings',
+      iconoColor: '#f44883',
+      descripcion: 'Saldo disponible',
+      saldoOculto: true
+    },
+    {
+      nombre: 'Cuenta Simple Dólares',
+      tipo: 'cuenta',
+      icono: 'savings',
+      iconoColor: '#f44883',
+      descripcion: 'Saldo disponible',
+      saldoOculto: true
+    },
+    {
+      nombre: 'The Platinum Card',
+      tipo: 'tarjeta',
+      icono: 'credit_card',
+      iconoColor: '#05be50',
+      descripcion: 'Línea disponible',
+      saldoOculto: true
     }
   ];
 
   tipoCambio = {
-    compra: 3.72,
-    venta: 3.75
+    compra: 3.36,
+    venta: 3.39
   };
 
   constructor(
@@ -78,16 +118,37 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  toggleSidebar(): void {
+    this.showSidebar = !this.showSidebar;
+  }
+
+  closeSidebar(): void {
+    this.showSidebar = false;
+  }
+
   onFloatingButtonClick(): void {
     // Navegar al chat
     this.router.navigate(['/chat']);
   }
 
-  formatCurrency(amount: number): string {
-    return amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  onChatButtonClick(): void {
+    // Navegar al chat
+    this.router.navigate(['/chat']);
   }
 
-  getProgressPercentage(disponible: number, limite: number): number {
-    return ((limite - disponible) / limite) * 100;
+  onPlinearClick(): void {
+    console.log('Plinear a celular');
+  }
+
+  onAgregarContactoClick(): void {
+    console.log('Agregar contacto Plin');
+  }
+
+  onProductoClick(producto: ProductoBancario): void {
+    console.log('Producto seleccionado:', producto.nombre);
+  }
+
+  onEditarProductosClick(): void {
+    console.log('Editar productos');
   }
 }

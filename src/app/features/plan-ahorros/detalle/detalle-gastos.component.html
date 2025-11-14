@@ -1,0 +1,101 @@
+<!-- Pull-down handle -->
+<app-pull-down-handle (pullDown)="onPullDown()"></app-pull-down-handle>
+
+<!-- Header -->
+<header class="detalle-header">
+  <button class="back-button" (click)="goBack()">
+    <span class="material-symbols-outlined">arrow_back</span>
+  </button>
+  <h1>Detalle de Gastos</h1>
+</header>
+
+<!-- Content -->
+<div class="detalle-content">
+  <!-- Filtros de tipo de gasto (chips) -->
+  <div class="filtros-container">
+    <button 
+      class="filtro-chip" 
+      [class.active]="filtroActivo === 'todos'"
+      (click)="aplicarFiltro('todos')">
+      Todos
+    </button>
+    <button 
+      class="filtro-chip" 
+      [class.active]="filtroActivo === 'hormiga'"
+      (click)="aplicarFiltro('hormiga')">
+      Hormiga
+    </button>
+    <button 
+      class="filtro-chip" 
+      [class.active]="filtroActivo === 'medio'"
+      (click)="aplicarFiltro('medio')">
+      Medio
+    </button>
+    <button 
+      class="filtro-chip" 
+      [class.active]="filtroActivo === 'excepcional'"
+      (click)="aplicarFiltro('excepcional')">
+      Excepcional
+    </button>
+  </div>
+
+  <!-- Gráfico de barras horizontales -->
+  <div class="grafico-section">
+    <h2 class="section-title">Gastos por Categoría</h2>
+    <div class="grafico-container">
+      <div class="grafico-item" *ngFor="let dato of datosGrafico">
+        <div class="grafico-label">
+          <span class="categoria-nombre">{{ dato.categoria }}</span>
+          <span class="categoria-monto">S/ {{ dato.monto | number:'1.2-2' }}</span>
+        </div>
+        <div class="grafico-barra-container">
+          <div 
+            class="grafico-barra" 
+            [style.width.%]="dato.porcentaje">
+          </div>
+        </div>
+        <span class="categoria-porcentaje">{{ dato.porcentaje | number:'1.0-0' }}%</span>
+      </div>
+      
+      <!-- Mensaje cuando no hay datos -->
+      <div class="empty-state" *ngIf="datosGrafico.length === 0">
+        <span class="material-symbols-outlined">bar_chart</span>
+        <p>No hay datos para mostrar</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lista cronológica de operaciones -->
+  <div class="operaciones-section">
+    <h2 class="section-title">Operaciones</h2>
+    <div class="operaciones-list">
+      <div 
+        class="operacion-item" 
+        *ngFor="let operacion of operacionesFiltradas"
+        (click)="verDetalleOperacion(operacion)">
+        <div class="operacion-fecha">
+          <span class="fecha-dia">{{ operacion.fecha | date:'dd' }}</span>
+          <span class="fecha-mes">{{ operacion.fecha | date:'MMM' }}</span>
+        </div>
+        <div class="operacion-info">
+          <div class="operacion-header">
+            <span class="operacion-descripcion">{{ operacion.operacion }}</span>
+            <span class="operacion-monto">S/ {{ Math.abs(operacion.monto) | number:'1.2-2' }}</span>
+          </div>
+          <div class="operacion-footer">
+            <span class="operacion-categoria-pill" [attr.data-categoria]="operacion.categoriaUsuario">
+              {{ operacion.categoriaUsuario }}
+            </span>
+            <span class="operacion-tipo-producto">{{ operacion.tipoProducto }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mensaje cuando no hay operaciones -->
+      <div class="empty-state" *ngIf="operacionesFiltradas.length === 0">
+        <span class="material-symbols-outlined">receipt_long</span>
+        <p>No hay operaciones para mostrar</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,522 @@
+<div class="topes-mensuales-container" *ngIf="configuracion">
+  <!-- Header -->
+  <div class="header">
+    <button class="btn-back" (click)="volver()">
+      <span class="icon-back">←</span>
+    </button>
+    <h1 class="title">Topes Mensuales</h1>
+  </div>
+
+  <p class="description">
+    Configura los límites mensuales para cada categoría de gasto. Puedes usar un porcentaje de tu ingreso neto o un monto fijo.
+  </p>
+
+  <!-- Formulario -->
+  <form class="topes-form" (ngSubmit)="guardarConfiguracion()">
+    
+    <!-- Carga Financiera -->
+    <div class="tope-section">
+      <h3 class="section-title">Carga Financiera</h3>
+      <div class="tope-options">
+        <label class="radio-option">
+          <input 
+            type="radio" 
+            name="topeCargaFinanciera" 
+            value="porcentaje"
+            [(ngModel)]="tipoTopeCargaFinanciera"
+            (change)="onTipoTopeChange('cargaFinanciera', 'porcentaje')"
+          />
+          <div class="option-content">
+            <span class="option-label">Porcentaje del ingreso</span>
+            <div class="input-row" *ngIf="tipoTopeCargaFinanciera === 'porcentaje'">
+              <input 
+                type="number" 
+                class="input-small" 
+                [(ngModel)]="configuracion.topesMensuales.cargaFinanciera.porcentaje"
+                name="porcCargaFin"
+                min="0"
+                max="100"
+                step="1"
+              />
+              <span class="input-unit">%</span>
+              <span class="calculated-amount">
+                = S/ {{ calcularMontoDesdePorcentaje(configuracion.topesMensuales.cargaFinanciera.porcentaje || 0).toFixed(2) }}
+              </span>
+            </div>
+          </div>
+        </label>
+
+        <label class="radio-option">
+          <input 
+            type="radio" 
+            name="topeCargaFinanciera" 
+            value="monto"
+            [(ngModel)]="tipoTopeCargaFinanciera"
+            (change)="onTipoTopeChange('cargaFinanciera', 'monto')"
+          />
+          <div class="option-content">
+            <span class="option-label">Monto Fijo</span>
+            <div class="input-row" *ngIf="tipoTopeCargaFinanciera === 'monto'">
+              <span class="input-prefix">S/</span>
+              <input 
+                type="number" 
+                class="input-medium" 
+                [(ngModel)]="configuracion.topesMensuales.cargaFinanciera.montoFijo"
+                name="montoCargaFin"
+                min="0"
+                step="0.01"
+              />
+            </div>
+          </div>
+        </label>
+
+        <label class="radio-option">
+          <input 
+            type="radio" 
+            name="topeCargaFinanciera" 
+            value="sin-tope"
+            [(ngModel)]="tipoTopeCargaFinanciera"
+            (change)="onTipoTopeChange('cargaFinanciera', 'sin-tope')"
+          />
+          <span class="option-label">Sin Tope</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Cobros Automáticos -->
+    <div class="tope-section">
+      <h3 class="section-title">Cobros Automáticos</h3>
+      <div class="tope-options">
+        <label class="radio-option">
+          <input 
+            type="radio" 
+            name="topeCobrosAuto" 
+            value="porcentaje"
+            [(ngModel)]="tipoTopeCobrosAutomaticos"
+            (change)="onTipoTopeChange('cobrosAutomaticos', 'porcentaje')"
+          />
+          <div class="option-content">
+            <span class="option-label">Porcentaje del ingreso</span>
+            <div class="input-row" *ngIf="tipoTopeCobrosAutomaticos === 'porcentaje'">
+              <input 
+                type="number" 
+                class="input-small" 
+                [(ngModel)]="configuracion.topesMensuales.cobrosAutomaticos.porcentaje"
+                name="porcCobrosAuto"
+                min="0"
+                max="100"
+                step="1"
+              />
+              <span class="input-unit">%</span>
+              <span class="calculated-amount">
+                = S/ {{ calcularMontoDesdePorcentaje(configuracion.topesMensuales.cobrosAutomaticos.porcentaje || 0).toFixed(2) }}
+              </span>
+            </div>
+          </div>
+        </label>
+
+        <label class="radio-option">
+          <input 
+            type="radio" 
+            name="topeCobrosAuto" 
+            value="monto"
+            [(ngModel)]="tipoTopeCobrosAutomaticos"
+            (change)="onTipoTopeChange('cobrosAutomaticos', 'monto')"
+          />
+          <div class="option-content">
+            <span class="option-label">Monto Fijo</span>
+            <div class="input-row" *ngIf="tipoTopeCobrosAutomaticos === 'monto'">
+              <span class="input-prefix">S/</span>
+              <input 
+                type="number" 
+                class="input-medium" 
+                [(ngModel)]="configuracion.topesMensuales.cobrosAutomaticos.montoFijo"
+                name="montoCobrosAuto"
+                min="0"
+                step="0.01"
+              />
+            </div>
+          </div>
+        </label>
+
+        <label class="radio-option">
+          <input 
+            type="radio" 
+            name="topeCobrosAuto" 
+            value="sin-tope"
+            [(ngModel)]="tipoTopeCobrosAutomaticos"
+            (change)="onTipoTopeChange('cobrosAutomaticos', 'sin-tope')"
+          />
+          <span class="option-label">Sin Tope</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Gastos Hormiga -->
+    <div class="tope-section">
+      <h3 class="section-title">Gastos Hormiga</h3>
+      <div class="tope-options">
+        <label class="radio-option">
+          <input 
+            type="radio" 
+            name="topeGastosHormiga" 
+            value="porcentaje"
+            [(ngModel)]="tipoTopeGastosHormiga"
+            (change)="onTipoTopeChange('gastosHormiga', 'porcentaje')"
+          />
+          <div class="option-content">
+            <span class="option-label">Porcentaje del ingreso</span>
+            <div class="input-row" *ngIf="tipoTopeGastosHormiga === 'porcentaje'">
+              <input 
+                type="number" 
+                class="input-small" 
+                [(ngModel)]="configuracion.topesMensuales.gastosHormiga.porcentaje"
+                name="porcGastosHormiga"
+                min="0"
+                max="100"
+                step="1"
+              />
+              <span class="input-unit">%</span>
+              <span class="calculated-amount">
+                = S/ {{ calcularMontoDesdePorcentaje(configuracion.topesMensuales.gastosHormiga.porcentaje || 0).toFixed(2) }}
+              </span>
+            </div>
+          </div>
+        </label>
+
+        <label class="radio-option">
+          <input 
+            type="radio" 
+            name="topeGastosHormiga" 
+            value="monto"
+            [(ngModel)]="tipoTopeGastosHormiga"
+            (change)="onTipoTopeChange('gastosHormiga', 'monto')"
+          />
+          <div class="option-content">
+            <span class="option-label">Monto Fijo</span>
+            <div class="input-row" *ngIf="tipoTopeGastosHormiga === 'monto'">
+              <span class="input-prefix">S/</span>
+              <input 
+                type="number" 
+                class="input-medium" 
+                [(ngModel)]="configuracion.topesMensuales.gastosHormiga.montoFijo"
+                name="montoGastosHormiga"
+                min="0"
+                step="0.01"
+              />
+            </div>
+          </div>
+        </label>
+
+        <label class="radio-option">
+          <input 
+            type="radio" 
+            name="topeGastosHormiga" 
+            value="sin-tope"
+            [(ngModel)]="tipoTopeGastosHormiga"
+            (change)="onTipoTopeChange('gastosHormiga', 'sin-tope')"
+          />
+          <span class="option-label">Sin Tope</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Gastos Medios -->
+    <div class="tope-section">
+      <h3 class="section-title">Gastos Medios</h3>
+      <div class="tope-options">
+        <label class="radio-option">
+          <input 
+            type="radio" 
+            name="topeGastosMedios" 
+            value="porcentaje"
+            [(ngModel)]="tipoTopeGastosMedios"
+            (change)="onTipoTopeChange('gastosMedios', 'porcentaje')"
+          />
+          <div class="option-content">
+            <span class="option-label">Porcentaje del ingreso</span>
+            <div class="input-row" *ngIf="tipoTopeGastosMedios === 'porcentaje'">
+              <input 
+                type="number" 
+                class="input-small" 
+                [(ngModel)]="configuracion.topesMensuales.gastosMedios.porcentaje"
+                name="porcGastosMedios"
+                min="0"
+                max="100"
+                step="1"
+              />
+              <span class="input-unit">%</span>
+              <span class="calculated-amount">
+                = S/ {{ calcularMontoDesdePorcentaje(configuracion.topesMensuales.gastosMedios.porcentaje || 0).toFixed(2) }}
+              </span>
+            </div>
+          </div>
+        </label>
+
+        <label class="radio-option">
+          <input 
+            type="radio" 
+            name="topeGastosMedios" 
+            value="monto"
+            [(ngModel)]="tipoTopeGastosMedios"
+            (change)="onTipoTopeChange('gastosMedios', 'monto')"
+          />
+          <div class="option-content">
+            <span class="option-label">Monto Fijo</span>
+            <div class="input-row" *ngIf="tipoTopeGastosMedios === 'monto'">
+              <span class="input-prefix">S/</span>
+              <input 
+                type="number" 
+                class="input-medium" 
+                [(ngModel)]="configuracion.topesMensuales.gastosMedios.montoFijo"
+                name="montoGastosMedios"
+                min="0"
+                step="0.01"
+              />
+            </div>
+          </div>
+        </label>
+
+        <label class="radio-option">
+          <input 
+            type="radio" 
+            name="topeGastosMedios" 
+            value="sin-tope"
+            [(ngModel)]="tipoTopeGastosMedios"
+            (change)="onTipoTopeChange('gastosMedios', 'sin-tope')"
+          />
+          <span class="option-label">Sin Tope</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Gastos Excepcionales -->
+    <div class="tope-section">
+      <h3 class="section-title">Gastos Excepcionales</h3>
+      <div class="tope-options">
+        <label class="radio-option">
+          <input 
+            type="radio" 
+            name="topeGastosExcepcionales" 
+            value="porcentaje"
+            [(ngModel)]="tipoTopeGastosExcepcionales"
+            (change)="onTipoTopeChange('gastosExcepcionales', 'porcentaje')"
+          />
+          <div class="option-content">
+            <span class="option-label">Porcentaje del ingreso</span>
+            <div class="input-row" *ngIf="tipoTopeGastosExcepcionales === 'porcentaje'">
+              <input 
+                type="number" 
+                class="input-small" 
+                [(ngModel)]="configuracion.topesMensuales.gastosExcepcionales.porcentaje"
+                name="porcGastosExcepcionales"
+                min="0"
+                max="100"
+                step="1"
+              />
+              <span class="input-unit">%</span>
+              <span class="calculated-amount">
+                = S/ {{ calcularMontoDesdePorcentaje(configuracion.topesMensuales.gastosExcepcionales.porcentaje || 0).toFixed(2) }}
+              </span>
+            </div>
+          </div>
+        </label>
+
+        <label class="radio-option">
+          <input 
+            type="radio" 
+            name="topeGastosExcepcionales" 
+            value="monto"
+            [(ngModel)]="tipoTopeGastosExcepcionales"
+            (change)="onTipoTopeChange('gastosExcepcionales', 'monto')"
+          />
+          <div class="option-content">
+            <span class="option-label">Monto Fijo</span>
+            <div class="input-row" *ngIf="tipoTopeGastosExcepcionales === 'monto'">
+              <span class="input-prefix">S/</span>
+              <input 
+                type="number" 
+                class="input-medium" 
+                [(ngModel)]="configuracion.topesMensuales.gastosExcepcionales.montoFijo"
+                name="montoGastosExcepcionales"
+                min="0"
+                step="0.01"
+              />
+            </div>
+          </div>
+        </label>
+
+        <label class="radio-option">
+          <input 
+            type="radio" 
+            name="topeGastosExcepcionales" 
+            value="sin-tope"
+            [(ngModel)]="tipoTopeGastosExcepcionales"
+            (change)="onTipoTopeChange('gastosExcepcionales', 'sin-tope')"
+          />
+          <span class="option-label">Sin Tope</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Movimientos de Caja -->
+    <div class="tope-section">
+      <h3 class="section-title">Movimientos de Caja</h3>
+      <div class="tope-options">
+        <label class="radio-option">
+          <input 
+            type="radio" 
+            name="topeMovimientosCaja" 
+            value="porcentaje"
+            [(ngModel)]="tipoTopeMovimientosCaja"
+            (change)="onTipoTopeChange('movimientosCaja', 'porcentaje')"
+          />
+          <div class="option-content">
+            <span class="option-label">Porcentaje del ingreso</span>
+            <div class="input-row" *ngIf="tipoTopeMovimientosCaja === 'porcentaje'">
+              <input 
+                type="number" 
+                class="input-small" 
+                [(ngModel)]="configuracion.topesMensuales.movimientosCaja.porcentaje"
+                name="porcMovCaja"
+                min="0"
+                max="100"
+                step="1"
+              />
+              <span class="input-unit">%</span>
+              <span class="calculated-amount">
+                = S/ {{ calcularMontoDesdePorcentaje(configuracion.topesMensuales.movimientosCaja.porcentaje || 0).toFixed(2) }}
+              </span>
+            </div>
+          </div>
+        </label>
+
+        <label class="radio-option">
+          <input 
+            type="radio" 
+            name="topeMovimientosCaja" 
+            value="monto"
+            [(ngModel)]="tipoTopeMovimientosCaja"
+            (change)="onTipoTopeChange('movimientosCaja', 'monto')"
+          />
+          <div class="option-content">
+            <span class="option-label">Monto Fijo</span>
+            <div class="input-row" *ngIf="tipoTopeMovimientosCaja === 'monto'">
+              <span class="input-prefix">S/</span>
+              <input 
+                type="number" 
+                class="input-medium" 
+                [(ngModel)]="configuracion.topesMensuales.movimientosCaja.montoFijo"
+                name="montoMovCaja"
+                min="0"
+                step="0.01"
+              />
+            </div>
+          </div>
+        </label>
+
+        <label class="radio-option">
+          <input 
+            type="radio" 
+            name="topeMovimientosCaja" 
+            value="sin-tope"
+            [(ngModel)]="tipoTopeMovimientosCaja"
+            (change)="onTipoTopeChange('movimientosCaja', 'sin-tope')"
+          />
+          <span class="option-label">Sin Tope</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Operaciones Recurrentes -->
+    <div class="tope-section">
+      <h3 class="section-title">Operaciones Recurrentes</h3>
+      <div class="tope-options">
+        <label class="radio-option">
+          <input 
+            type="radio" 
+            name="topeOpRecurrentes" 
+            value="porcentaje"
+            [(ngModel)]="tipoTopeOperacionesRecurrentes"
+            (change)="onTipoTopeChange('operacionesRecurrentes', 'porcentaje')"
+          />
+          <div class="option-content">
+            <span class="option-label">Porcentaje del ingreso</span>
+            <div class="input-row" *ngIf="tipoTopeOperacionesRecurrentes === 'porcentaje'">
+              <input 
+                type="number" 
+                class="input-small" 
+                [(ngModel)]="configuracion.topesMensuales.operacionesRecurrentes.porcentaje"
+                name="porcOpRecurrentes"
+                min="0"
+                max="100"
+                step="1"
+              />
+              <span class="input-unit">%</span>
+              <span class="calculated-amount">
+                = S/ {{ calcularMontoDesdePorcentaje(configuracion.topesMensuales.operacionesRecurrentes.porcentaje || 0).toFixed(2) }}
+              </span>
+            </div>
+          </div>
+        </label>
+
+        <label class="radio-option">
+          <input 
+            type="radio" 
+            name="topeOpRecurrentes" 
+            value="monto"
+            [(ngModel)]="tipoTopeOperacionesRecurrentes"
+            (change)="onTipoTopeChange('operacionesRecurrentes', 'monto')"
+          />
+          <div class="option-content">
+            <span class="option-label">Monto Fijo</span>
+            <div class="input-row" *ngIf="tipoTopeOperacionesRecurrentes === 'monto'">
+              <span class="input-prefix">S/</span>
+              <input 
+                type="number" 
+                class="input-medium" 
+                [(ngModel)]="configuracion.topesMensuales.operacionesRecurrentes.montoFijo"
+                name="montoOpRecurrentes"
+                min="0"
+                step="0.01"
+              />
+            </div>
+          </div>
+        </label>
+
+        <label class="radio-option">
+          <input 
+            type="radio" 
+            name="topeOpRecurrentes" 
+            value="sin-tope"
+            [(ngModel)]="tipoTopeOperacionesRecurrentes"
+            (change)="onTipoTopeChange('operacionesRecurrentes', 'sin-tope')"
+          />
+          <span class="option-label">Sin Tope</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Mensaje de Éxito -->
+    <div class="mensaje-exito" *ngIf="mensajeExito">
+      <span class="icon-check">✓</span>
+      {{ mensajeExito }}
+    </div>
+
+    <!-- Botones de Acción -->
+    <div class="action-buttons">
+      <button type="button" class="btn-secondary" (click)="volver()">
+        Cancelar
+      </button>
+      <button type="submit" class="btn-primary" [disabled]="guardando">
+        {{ guardando ? 'Guardando...' : 'Guardar Topes' }}
+      </button>
+    </div>
+  </form>
+</div>
+
+<div class="loading-container" *ngIf="!configuracion">
+  <div class="loading-spinner"></div>
+  <p>Cargando configuración...</p>
+</div>
+

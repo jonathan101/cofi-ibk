@@ -1,0 +1,197 @@
+@import '../../../../styles/variables';
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: $spacing-lg;
+  animation: fadeIn $transition-fast;
+
+  .modal-content {
+    background-color: $color-bg-light;
+    border-radius: $border-radius-sm;
+    max-width: 500px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    animation: slideUp $transition-normal;
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: $spacing-lg;
+      border-bottom: 1px solid $color-border;
+
+      h2 {
+        margin: 0;
+        font-size: $font-size-xl;
+        font-weight: $font-weight-bold;
+        color: $color-text-primary;
+      }
+
+      .btn-close {
+        background: none;
+        border: none;
+        color: $color-text-secondary;
+        cursor: pointer;
+        padding: $spacing-sm;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: $border-radius-sm;
+        transition: all $transition-fast;
+
+        &:hover {
+          background-color: $color-bg-secondary;
+          color: $color-text-primary;
+        }
+
+        svg {
+          width: 24px;
+          height: 24px;
+        }
+      }
+    }
+
+    .modal-body {
+      padding: $spacing-lg;
+
+      .description {
+        margin: 0 0 $spacing-lg 0;
+        color: $color-text-secondary;
+        font-size: $font-size-base;
+      }
+
+      .config-options {
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-md;
+
+        .checkbox-option {
+          display: flex;
+          align-items: flex-start;
+          cursor: pointer;
+          padding: $spacing-md;
+          border-radius: $border-radius-md;
+          border: 2px solid $color-border;
+          transition: all $transition-fast;
+
+          &:hover {
+            border-color: $color-primary;
+            background-color: rgba($color-primary, 0.05);
+          }
+
+          input[type="checkbox"] {
+            margin-right: $spacing-md;
+            margin-top: 4px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: $color-primary;
+            flex-shrink: 0;
+          }
+
+          .checkbox-label {
+            display: flex;
+            align-items: flex-start;
+            gap: $spacing-md;
+            flex: 1;
+
+            .icon {
+              width: 24px;
+              height: 24px;
+              color: $color-primary;
+              flex-shrink: 0;
+            }
+
+            .label-text {
+              display: flex;
+              flex-direction: column;
+              gap: $spacing-xs;
+
+              strong {
+                font-size: $font-size-base;
+                font-weight: $font-weight-bold;
+                color: $color-text-primary;
+              }
+
+              small {
+                font-size: $font-size-sm;
+                color: $color-text-secondary;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: $spacing-md;
+      padding: $spacing-lg;
+      border-top: 1px solid $color-border;
+
+      .btn {
+        padding: $spacing-sm $spacing-lg;
+        border-radius: $border-radius-md;
+        font-size: $font-size-base;
+        font-weight: $font-weight-medium;
+        cursor: pointer;
+        transition: all $transition-fast;
+        border: none;
+
+        &.btn-secondary {
+          background-color: $color-bg-secondary;
+          color: $color-text-primary;
+
+          &:hover {
+            background-color: darken($color-bg-secondary, 5%);
+          }
+        }
+
+        &.btn-primary {
+          background-color: $color-primary;
+          color: $color-text-light;
+
+          &:hover {
+            background-color: $color-primary-dark;
+          }
+
+          &:active {
+            transform: scale(0.98);
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

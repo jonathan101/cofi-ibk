@@ -1,0 +1,48 @@
+<div class="seleccionar-categoria-container">
+  <!-- Header -->
+  <header class="header">
+    <div class="spacer"></div>
+    <h1 class="title">Recategorizar</h1>
+    <button class="btn-close" (click)="cerrar()">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+  </header>
+
+  <!-- Content -->
+  <div class="content">
+    <!-- Descripción -->
+    <div class="descripcion">
+      <p>Selecciona la nueva categoría para este movimiento:</p>
+    </div>
+
+    <!-- Lista de Categorías -->
+    <div class="categorias-list">
+      <div 
+        *ngFor="let categoria of categorias" 
+        class="categoria-item"
+        [class.selected]="categoriaSeleccionada === categoria.id"
+        (click)="seleccionarCategoria(categoria.id)">
+        <div class="categoria-content">
+          <span class="material-symbols-outlined icon">{{ categoria.icono }}</span>
+          <div class="categoria-info">
+            <span class="nombre">{{ categoria.nombre }}</span>
+            <span class="descripcion-cat">{{ categoria.descripcion }}</span>
+          </div>
+          <div class="radio-indicator">
+            <div class="radio-dot" *ngIf="categoriaSeleccionada === categoria.id"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer con botón -->
+  <div class="footer">
+    <button 
+      class="btn-confirmar" 
+      [disabled]="!categoriaSeleccionada"
+      (click)="confirmar()">
+      Confirmar
+    </button>
+  </div>
+</div>

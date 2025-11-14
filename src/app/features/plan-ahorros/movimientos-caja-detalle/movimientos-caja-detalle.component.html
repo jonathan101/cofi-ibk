@@ -1,0 +1,73 @@
+<div class="movimientos-caja-container">
+  <!-- Header -->
+  <header class="header">
+    <button class="btn-back" (click)="volver()">
+      <span class="material-symbols-outlined">arrow_back</span>
+    </button>
+    <h1 class="title">{{ getTitulo() }}</h1>
+    <div class="spacer"></div>
+  </header>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-container">
+    <p>Cargando...</p>
+  </div>
+
+  <!-- Content -->
+  <div *ngIf="!loading" class="content">
+    <!-- Resumen con Icono -->
+    <section class="resumen-section">
+      <div class="resumen-card">
+        <div class="resumen-icon">
+          <span class="material-symbols-outlined">{{ getIcono() }}</span>
+        </div>
+        <div class="resumen-info">
+          <p class="resumen-titulo">{{ getTitulo() }}</p>
+          <p class="resumen-monto" [class]="getMontoClass(getTotalMonto())">
+            {{ formatearMontoTotal(getTotalMonto()) }}
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Filtros -->
+    <section  class="filtros-section">
+      <div *ngIf="getTitulo()=='Transferencias' || getTitulo()=='Otros Movimientos'" class="filtros-container">
+        <button class="filtro-chip" [class.active]="filtroActivo === 'entradas'" (click)="aplicarFiltro('entradas')">
+          <p>Entradas</p>
+        </button>
+        <button class="filtro-chip" [class.active]="filtroActivo === 'salidas'" (click)="aplicarFiltro('salidas')">
+          <p>Salidas</p>
+        </button>
+        <button class="filtro-chip" [class.active]="filtroActivo === 'todos'" (click)="aplicarFiltro('todos')">
+          <p>Todos</p>
+        </button>
+      </div>
+    </section>
+
+    <!-- Lista de Movimientos -->
+    <div class="movimientos-list">
+      <div *ngFor="let movimiento of movimientosFiltrados" class="movimiento-item">
+        <div class="movimiento-info">
+          <div class="info-text">
+            <p class="descripcion">{{ movimiento.descripcion }}</p>
+            <p class="fecha">{{ formatearFecha(movimiento.fecha) }}</p>
+            <p class="monto" [class]="getMontoClass(movimiento.monto)">
+              {{ formatearMonto(movimiento.monto) }}
+            </p>
+          </div>
+        </div>
+        <div class="movimiento-actions">
+          <button class="btn-recategorizar" (click)="recategorizar(movimiento)">
+            <span>Recategorizar</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="movimientosFiltrados.length === 0" class="empty-state">
+      <p>No hay movimientos para mostrar</p>
+    </div>
+  </div>
+</div>

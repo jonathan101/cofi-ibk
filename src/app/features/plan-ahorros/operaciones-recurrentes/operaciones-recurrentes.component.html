@@ -1,0 +1,184 @@
+<div class="operaciones-recurrentes-container">
+  <!-- Header -->
+  <div class="header">
+    <button class="btn-back" (click)="volverAlPlan()">
+      <span class="icon-back">←</span>
+    </button>
+    <h1>Operaciones Recurrentes</h1>
+    <button class="btn-add" (click)="mostrarFormularioNuevo()" *ngIf="!showForm">
+      <span class="icon-plus">+</span>
+    </button>
+  </div>
+
+  <!-- Error message -->
+  <div class="error-message" *ngIf="error">
+    {{ error }}
+  </div>
+
+  <!-- Loading -->
+  <div class="loading" *ngIf="loading && !showForm">
+    <div class="spinner"></div>
+    <p>Cargando...</p>
+  </div>
+
+  <!-- Formulario de creación/edición -->
+  <div class="form-container" *ngIf="showForm">
+    <div class="form-header">
+      <h2>{{ editingId ? 'Editar' : 'Nueva' }} Operación Recurrente</h2>
+    </div>
+
+    <form (ngSubmit)="guardarOperacion()" class="operacion-form">
+      <!-- Título -->
+      <div class="form-group">
+        <label for="titulo">Título *</label>
+        <input
+          type="text"
+          id="titulo"
+          [(ngModel)]="formData.titulo"
+          name="titulo"
+          placeholder="Ej: Pago de Netflix"
+          [class.error]="formErrors['titulo']"
+        />
+        <span class="error-text" *ngIf="formErrors['titulo']">{{ formErrors['titulo'] }}</span>
+      </div>
+
+      <!-- Monto -->
+      <div class="form-group">
+        <label for="monto">Monto (S/) *</label>
+        <input
+          type="number"
+          id="monto"
+          [(ngModel)]="formData.monto"
+          name="monto"
+          placeholder="0.00"
+          step="0.01"
+          min="0"
+          [class.error]="formErrors['monto']"
+        />
+        <span class="error-text" *ngIf="formErrors['monto']">{{ formErrors['monto'] }}</span>
+      </div>
+
+      <!-- Fecha Inicio -->
+      <div class="form-group">
+        <label for="fechaInicio">Fecha de Inicio *</label>
+        <input
+          type="date"
+          id="fechaInicio"
+          [(ngModel)]="formData.fechaInicio"
+          name="fechaInicio"
+          [class.error]="formErrors['fechaInicio']"
+        />
+        <span class="error-text" *ngIf="formErrors['fechaInicio']">{{ formErrors['fechaInicio'] }}</span>
+      </div>
+
+      <!-- Fecha Fin -->
+      <div class="form-group">
+        <label for="fechaFin">Fecha de Fin *</label>
+        <input
+          type="date"
+          id="fechaFin"
+          [(ngModel)]="formData.fechaFin"
+          name="fechaFin"
+          [class.error]="formErrors['fechaFin']"
+        />
+        <span class="error-text" *ngIf="formErrors['fechaFin']">{{ formErrors['fechaFin'] }}</span>
+      </div>
+
+      <!-- Día del Mes -->
+      <div class="form-group">
+        <label for="diaDelMes">Día del Mes *</label>
+        <select
+          id="diaDelMes"
+          [(ngModel)]="formData.diaDelMes"
+          name="diaDelMes"
+          [class.error]="formErrors['diaDelMes']"
+        >
+          <option [value]="1">Día 1</option>
+          <option [value]="5">Día 5</option>
+          <option [value]="10">Día 10</option>
+          <option [value]="15">Día 15</option>
+          <option [value]="20">Día 20</option>
+          <option [value]="25">Día 25</option>
+          <option [value]="28">Día 28</option>
+          <option value="fin_de_mes">Fin de mes</option>
+        </select>
+        <span class="error-text" *ngIf="formErrors['diaDelMes']">{{ formErrors['diaDelMes'] }}</span>
+      </div>
+
+      <!-- Activa -->
+      <div class="form-group checkbox-group">
+        <label>
+          <input
+            type="checkbox"
+            [(ngModel)]="formData.activa"
+            name="activa"
+          />
+          <span>Operación activa</span>
+        </label>
+      </div>
+
+      <!-- Botones -->
+      <div class="form-actions">
+        <button type="button" class="btn-secondary" (click)="cancelarEdicion()">
+          Cancelar
+        </button>
+        <button type="submit" class="btn-primary" [disabled]="loading">
+          {{ loading ? 'Guardando...' : 'Guardar' }}
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Lista de operaciones -->
+  <div class="operaciones-list" *ngIf="!showForm && !loading">
+    <div class="empty-state" *ngIf="operaciones.length === 0">
+      <p>No hay operaciones recurrentes programadas</p>
+      <button class="btn-primary" (click)="mostrarFormularioNuevo()">
+        Crear primera operación
+      </button>
+    </div>
+
+    <div class="operacion-card" *ngFor="let operacion of operaciones">
+      <div class="operacion-header">
+        <div class="operacion-title">
+          <h3>{{ operacion.titulo }}</h3>
+          <span class="badge" [class.badge-active]="operacion.activa" [class.badge-inactive]="!operacion.activa">
+            {{ operacion.activa ? 'Activa' : 'Inactiva' }}
+          </span>
+        </div>
+        <div class="operacion-monto">
+          S/ {{ operacion.monto.toFixed(2) }}
+        </div>
+      </div>
+
+      <div class="operacion-details">
+        <div class="detail-row">
+          <span class="label">Período:</span>
+          <span class="value">{{ formatDate(operacion.fechaInicio) }} - {{ formatDate(operacion.fechaFin) }}</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">Día de pago:</span>
+          <span class="value">{{ formatDiaDelMes(operacion.diaDelMes) }}</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">Operaciones generadas:</span>
+          <span class="value">
+            {{ contarOperacionesVinculadas(operacion) }} vinculadas / {{ contarOperacionesGeneradas(operacion) }} totales
+          </span>
+        </div>
+      </div>
+
+      <div class="operacion-actions">
+        <button class="btn-icon" (click)="toggleActivar(operacion)" [title]="operacion.activa ? 'Desactivar' : 'Activar'">
+          <span>{{ operacion.activa ? '⏸' : '▶' }}</span>
+        </button>
+        <button class="btn-icon" (click)="editarOperacion(operacion)" title="Editar">
+          <span>✏️</span>
+        </button>
+        <button class="btn-icon btn-danger" (click)="eliminarOperacion(operacion.id)" title="Eliminar">
+          <span>🗑️</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -549,3 +549,22 @@ Este documento define los requisitos para una Prueba de Concepto (PoC) de una ap
 6. THE operaciones SHALL distribuirse 60% TD / 40% TC
 7. THE tipo de producto SHALL respetar lógica de categoría (transferencias siempre TD, compras online siempre TC, etc.)
 8. THE operaciones SHALL incluir variedad realista de gastos, ingresos y movimientos
+
+
+### Requirement 50
+
+**User Story:** Como usuario, quiero que todas las vistas tengan scroll funcional y elementos de navegación visibles dentro del marco del celular, para poder acceder a todo el contenido de manera intuitiva
+
+#### Acceptance Criteria
+
+1. THE Sistema Angular SHALL configurar cada vista con un contenedor principal que use `overflow: hidden` para evitar que el contenido se salga del marco
+2. THE contenido scrolleable SHALL estar en un elemento hijo con `overflow-y: auto` y `flex: 1` para ocupar el espacio disponible
+3. THE header de cada vista SHALL usar `flex-shrink: 0` para mantener su tamaño fijo y no encogerse durante el scroll
+4. THE bottom navigation SHALL usar `position: absolute` con `bottom: 0` para mantenerse siempre visible en la parte inferior del marco del celular
+5. THE bottom navigation SHALL usar `flex-shrink: 0` para no encogerse y mantener su altura de 64px
+6. THE botón flotante de chat SHALL usar `position: absolute` con coordenadas relativas al contenedor padre para mantenerse dentro del marco
+7. THE contenido scrolleable SHALL incluir `padding-bottom` suficiente (80-100px) para que el último elemento no quede oculto detrás del bottom navigation
+8. THE pull-down handle SHALL usar `position: relative` y `flex-shrink: 0` para ser parte del flujo normal del documento
+9. THE Sistema Angular SHALL aplicar `-webkit-overflow-scrolling: touch` en iOS para scroll suave
+10. WHEN un usuario hace scroll, THE header y bottom navigation SHALL permanecer visibles en sus posiciones fijas
+11. THE Sistema Angular SHALL asegurar que todos los elementos de navegación (header, bottom nav, botones flotantes) estén dentro del contenedor móvil en todo momento

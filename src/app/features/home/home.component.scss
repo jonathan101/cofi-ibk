@@ -1,352 +1,431 @@
 @import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+// Host del componente - CRÍTICO para que obedezca al wrapper
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
 
 .home-container {
-  min-height: 100vh;
-  background-color: $color-bg-secondary;
-  padding-bottom: 80px; // Espacio para navegación inferior
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-bg-light);
+  overflow: hidden; // Importante: evita que el contenido se salga
+
+  @include dark-mode {
+    background-color: var(--color-bg-dark);
+  }
 }
 
-// Header
 .home-header {
-  background: linear-gradient(135deg, $color-primary 0%, $color-primary-dark 100%);
-  color: $color-text-light;
-  padding: $spacing-xl $spacing-lg $spacing-lg;
-  box-shadow: $shadow-md;
+  flex-shrink: 0; // No se encoge
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 95px;
+  padding: $spacing-4;
+  background-color: var(--color-bg-light);
+  border-bottom: 1px solid rgba(var(--color-gray-200-rgb), 0.5);
 
-  .header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-  }
-
-  .greeting {
-    h1 {
-      font-size: $font-size-2xl;
-      font-weight: $font-weight-bold;
-      margin: 0 0 $spacing-xs 0;
-    }
-
-    .subtitle {
-      font-size: $font-size-sm;
-      opacity: 0.9;
-      margin: 0;
-    }
-  }
-
-  .header-actions {
-    display: flex;
-    gap: $spacing-sm;
-
-    .icon-button {
-      width: 40px;
-      height: 40px;
-      border-radius: $border-radius-full;
-      background-color: rgba(255, 255, 255, 0.2);
-      border: none;
-      color: $color-text-light;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all $transition-fast;
-
-      &:hover {
-        background-color: rgba(255, 255, 255, 0.3);
-        transform: scale(1.05);
-      }
-
-      &:active {
-        transform: scale(0.95);
-      }
-
-      svg {
-        width: 24px;
-        height: 24px;
-      }
-    }
+  @include dark-mode {
+    background-color: var(--color-bg-dark);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
   }
 }
 
-// Main Content
+.icon-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  @include dark-mode {
+    color: var(--color-white);
+  }
+
+  &:hover {
+    background-color: rgba(var(--color-gray-200-rgb), 0.5);
+
+    @include dark-mode {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  .material-symbols-outlined {
+    font-size: 30px;
+  }
+}
+
+.notification-button {
+  position: relative;
+}
+
+.notification-badge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ef4444;
+  border: 2px solid var(--color-bg-light);
+
+  @include dark-mode {
+    border-color: var(--color-bg-dark);
+  }
+}
+
+.logo {
+  height: 32px;
+  object-fit: contain;
+}
+
 .home-content {
-  padding: $spacing-lg;
+  flex: 1;
+  padding: $spacing-6 $spacing-4 100px; // Padding bottom para el navbar + botón
+  overflow-y: auto;
+  overflow-x: hidden;
+  
+  // Ocultar scrollbar pero mantener funcionalidad
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-// Exchange Rate Section
-.exchange-rate-section {
-  margin-bottom: $spacing-lg;
+.main-title {
+  font-size: 32px;
+  font-weight: $font-weight-medium;
+  line-height: 1.2;
+  text-align: center;
+  color: var(--color-text-primary);
+  margin: 0;
+  padding: $spacing-4 0 $spacing-3;
 
-  .exchange-rate-card {
-    background-color: $color-bg-primary;
-    border-radius: $border-radius-lg;
-    padding: $spacing-lg;
-    box-shadow: $shadow-sm;
-
-    .exchange-rate-header {
-      display: flex;
-      align-items: center;
-      gap: $spacing-sm;
-      margin-bottom: $spacing-md;
-      color: $color-text-secondary;
-      font-size: $font-size-sm;
-      font-weight: $font-weight-medium;
-
-      svg {
-        width: 20px;
-        height: 20px;
-        color: $color-primary;
-      }
-    }
-
-    .exchange-rate-values {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-
-      .rate-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: $spacing-xs;
-
-        .rate-label {
-          font-size: $font-size-xs;
-          color: $color-text-secondary;
-          text-transform: uppercase;
-          letter-spacing: 0.5px;
-        }
-
-        .rate-value {
-          font-size: $font-size-xl;
-          font-weight: $font-weight-bold;
-          color: $color-primary;
-        }
-      }
-
-      .rate-divider {
-        width: 1px;
-        height: 40px;
-        background-color: $color-border-light;
-      }
-    }
+  @include dark-mode {
+    color: var(--color-white);
   }
 }
 
-// Products Section
+.plin-section {
+  padding: $spacing-4 0;
+}
+
+.plin-contacts {
+  display: flex;
+  justify-content: center;
+  gap: $spacing-6;
+  overflow-x: auto;
+  padding: 0 $spacing-2;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.plin-contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-2;
+  flex-shrink: 0;
+  text-align: center;
+}
+
+.plin-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.plin-button-primary {
+  background-color: #0039A6;
+  color: var(--color-white);
+}
+
+.plin-button-add {
+  background-color: var(--color-white);
+  border: 1px solid #05be50;
+  color: #05be50;
+
+  @include dark-mode {
+    background-color: transparent;
+  }
+
+  .material-symbols-outlined {
+    font-size: 40px;
+  }
+}
+
+.plin-logo {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.plin-label {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: #05be50;
+  max-width: 80px;
+  word-wrap: break-word;
+
+  &.plin-label-primary {
+    color: #0039A6;
+  }
+}
+
+.exchange-rate-text {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-normal;
+  text-align: center;
+  color: #0039A6;
+  margin: $spacing-4 0;
+
+  @include dark-mode {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  strong {
+    font-weight: $font-weight-bold;
+  }
+}
+
 .products-section {
-  margin-bottom: $spacing-xl;
+  margin-top: $spacing-4;
+}
 
-  .section-title {
-    font-size: $font-size-lg;
-    font-weight: $font-weight-semibold;
-    color: $color-text-primary;
-    margin: 0 0 $spacing-md 0;
-  }
+.products-card {
+  background-color: var(--color-white);
+  border-radius: $border-radius-sm;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  padding: $spacing-5;
 
-  .products-grid {
-    display: flex;
-    flex-direction: column;
-    gap: $spacing-md;
-  }
-
-  .product-card {
-    background-color: $color-bg-primary;
-    border-radius: $border-radius-lg;
-    padding: $spacing-lg;
-    box-shadow: $shadow-sm;
-    transition: all $transition-fast;
-
-    &:hover {
-      box-shadow: $shadow-md;
-      transform: translateY(-2px);
-    }
-
-    .product-header {
-      display: flex;
-      align-items: center;
-      gap: $spacing-md;
-      margin-bottom: $spacing-md;
-
-      .product-icon {
-        width: 48px;
-        height: 48px;
-        border-radius: $border-radius-md;
-        background-color: rgba($color-primary, 0.1);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-
-        svg {
-          width: 24px;
-          height: 24px;
-          color: $color-primary;
-        }
-
-        &.card-icon {
-          background-color: rgba($color-secondary, 0.1);
-
-          svg {
-            color: $color-secondary;
-          }
-        }
-      }
-
-      .product-info {
-        flex: 1;
-
-        .product-type {
-          font-size: $font-size-base;
-          font-weight: $font-weight-semibold;
-          color: $color-text-primary;
-          margin: 0 0 $spacing-xs 0;
-        }
-
-        .product-number {
-          font-size: $font-size-sm;
-          color: $color-text-secondary;
-          margin: 0;
-        }
-      }
-    }
-
-    .product-balance {
-      display: flex;
-      flex-direction: column;
-      gap: $spacing-xs;
-
-      .balance-label {
-        font-size: $font-size-xs;
-        color: $color-text-secondary;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-      }
-
-      .balance-amount {
-        font-size: $font-size-2xl;
-        font-weight: $font-weight-bold;
-        color: $color-text-primary;
-      }
-
-      .linked-account {
-        font-size: $font-size-sm;
-        color: $color-text-primary;
-        font-weight: $font-weight-medium;
-      }
-
-      .credit-progress {
-        margin-top: $spacing-sm;
-
-        .progress-bar {
-          width: 100%;
-          height: 8px;
-          background-color: $color-bg-tertiary;
-          border-radius: $border-radius-full;
-          overflow: hidden;
-          margin-bottom: $spacing-xs;
-
-          .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, $color-primary 0%, $color-primary-light 100%);
-            border-radius: $border-radius-full;
-            transition: width $transition-base;
-          }
-        }
-
-        .progress-label {
-          font-size: $font-size-xs;
-          color: $color-text-secondary;
-        }
-      }
-    }
+  @include dark-mode {
+    background-color: rgba(var(--color-bg-dark-rgb), 0.5);
   }
 }
 
-// Quick Actions Section
-.quick-actions-section {
-  margin-bottom: $spacing-xl;
+.products-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: $spacing-4;
+}
 
-  .section-title {
-    font-size: $font-size-lg;
-    font-weight: $font-weight-semibold;
-    color: $color-text-primary;
-    margin: 0 0 $spacing-md 0;
-  }
+.products-title {
+  font-size: 22px;
+  font-weight: $font-weight-bold;
+  line-height: 1.2;
+  color: var(--color-text-primary);
+  margin: 0;
 
-  .quick-actions-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: $spacing-md;
-
-    @media (max-width: $breakpoint-sm) {
-      grid-template-columns: repeat(4, 1fr);
-      gap: $spacing-sm;
-    }
-  }
-
-  .quick-action-button {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: $spacing-sm;
-    padding: $spacing-md;
-    background-color: $color-bg-primary;
-    border: none;
-    border-radius: $border-radius-lg;
-    cursor: pointer;
-    transition: all $transition-fast;
-    box-shadow: $shadow-sm;
-
-    &:hover {
-      box-shadow: $shadow-md;
-      transform: translateY(-2px);
-    }
-
-    &:active {
-      transform: translateY(0);
-    }
-
-    .action-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: $border-radius-full;
-      background-color: rgba($color-primary, 0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      svg {
-        width: 24px;
-        height: 24px;
-        color: $color-primary;
-      }
-    }
-
-    .action-label {
-      font-size: $font-size-xs;
-      color: $color-text-primary;
-      font-weight: $font-weight-medium;
-      text-align: center;
-    }
+  @include dark-mode {
+    color: var(--color-white);
   }
 }
 
-// Responsive adjustments
-@media (max-width: $breakpoint-md) {
-  .home-header {
-    padding: $spacing-lg $spacing-md $spacing-md;
+.edit-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: #05be50;
+  cursor: pointer;
+  padding: 0;
 
-    .greeting h1 {
-      font-size: $font-size-xl;
-    }
+  .material-symbols-outlined {
+    font-size: 24px;
   }
 
-  .home-content {
-    padding: $spacing-md;
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.fill-icon {
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.products-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.product-item {
+  display: flex;
+  align-items: center;
+  gap: $spacing-4;
+  padding: $spacing-4 0;
+  background-color: var(--color-white);
+  border-radius: 18px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  @include dark-mode {
+    background-color: transparent;
   }
 
-  .products-section .section-title,
-  .quick-actions-section .section-title {
-    font-size: $font-size-base;
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
+
+  &:not(:last-child) {
+    margin-bottom: $spacing-3;
+  }
+}
+
+.product-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--color-white);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  flex-shrink: 0;
+
+  @include dark-mode {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+.product-icon {
+  font-size: 30px;
+}
+
+.product-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.product-name {
+  font-size: $font-size-base;
+  font-weight: $font-weight-bold;
+  color: #0039A6;
+  margin: 0 0 2px;
+
+  @include dark-mode {
+    color: var(--color-white);
+  }
+}
+
+.product-description {
+  font-size: $font-size-sm;
+  color: #617289;
+  margin: 0;
+
+  @include dark-mode {
+    color: rgba(255, 255, 255, 0.7);
+  }
+}
+
+.product-actions {
+  display: flex;
+  align-items: center;
+  gap: $spacing-2;
+  flex-shrink: 0;
+}
+
+.product-balance {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+  color: #0039A6;
+  letter-spacing: 2px;
+  margin: 0;
+
+  @include dark-mode {
+    color: var(--color-white);
+  }
+}
+
+.chevron-icon {
+  font-size: 24px;
+  color: #05be50;
+}
+
+// Botón Flotante de Chat
+.chat-floating-button {
+  position: absolute;
+  bottom: 80px; // Justo encima del bottom nav
+  right: 16px;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 56px;
+  width: 56px;
+  border-radius: 50%;
+  background-color: #05be50;
+  color: var(--color-white);
+  border: none;
+  box-shadow: 0 4px 12px rgba(5, 190, 80, 0.4);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(5, 190, 80, 0.5);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  .material-symbols-outlined {
+    font-size: 30px;
+  }
+}
+
+.chat-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  background-color: #ef4444;
+  color: var(--color-white);
+  font-size: 12px;
+  font-weight: $font-weight-bold;
+  line-height: 1;
 }

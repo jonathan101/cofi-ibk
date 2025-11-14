@@ -6,7 +6,7 @@
     "leido": false,
     "titulo": "Gasto alto detectado",
     "subtitulo": "Compra de S/ 450 en tienda online",
-    "icono": "alert-warning",
+    "icono": "/assets/icons/alert-warning.svg",
     "textoBoton": "Ver detalle",
     "severidad": "warning"
   },
@@ -17,7 +17,7 @@
     "leido": false,
     "titulo": "Límite de gastos cerca",
     "subtitulo": "Has usado el 85% de tu presupuesto en restaurantes",
-    "icono": "alert-danger",
+    "icono": "/assets/icons/alert-danger.svg",
     "textoBoton": "Revisar gastos",
     "severidad": "danger"
   },
@@ -28,7 +28,7 @@
     "leido": false,
     "titulo": "Pago pendiente",
     "subtitulo": "Tienes un pago de S/ 120 venciendo mañana",
-    "icono": "alert-info",
+    "icono": "/assets/icons/alert-info.svg",
     "textoBoton": "Pagar ahora",
     "severidad": "info"
   }

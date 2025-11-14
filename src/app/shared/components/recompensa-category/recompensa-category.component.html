@@ -1,0 +1,35 @@
+<div class="recompensa-category">
+  <div class="category-header" (click)="toggle()">
+    <div class="category-icon">
+      <span>{{ getCategoryIcon() }}</span>
+    </div>
+    
+    <div class="category-info">
+      <h3 class="category-title">{{ getCategoryTitle() }}</h3>
+      <p class="category-description">{{ getCategoryDescription() }}</p>
+      <span class="category-count">{{ recompensas.length }} disponibles</span>
+    </div>
+    
+    <div class="category-toggle">
+      <span class="toggle-icon">{{ collapsed ? '▶' : '▼' }}</span>
+    </div>
+  </div>
+  
+  <div class="category-content" *ngIf="!collapsed">
+    <div class="recompensas-grid">
+      <app-reward-card
+        *ngFor="let recompensa of recompensas"
+        [titulo]="recompensa.title"
+        [subtitulo]="recompensa.description"
+        [icono]="recompensa.iconName || ''"
+        [imagen]="recompensa.imageUrl || ''"
+        [textoBoton]="recompensa.actionLabel"
+        (onAction)="handleRewardAction(recompensa.id)">
+      </app-reward-card>
+    </div>
+    
+    <div class="empty-category" *ngIf="recompensas.length === 0">
+      <p>No hay recompensas disponibles en esta categoría</p>
+    </div>
+  </div>
+</div>

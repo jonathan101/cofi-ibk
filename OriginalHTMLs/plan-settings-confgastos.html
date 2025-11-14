@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Categorizar Gastos</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#00843D",
+            "background-light": "#f6f8f7",
+            "background-dark": "#102218",
+            "text-primary-light": "#111814",
+            "text-primary-dark": "#e8f3ed",
+            "text-secondary-light": "#618972",
+            "text-secondary-dark": "#92bda3",
+            "border-light": "#dbe6e0",
+            "border-dark": "#3a5948",
+            "card-light": "#ffffff",
+            "card-dark": "#193525",
+            "icon-bg-light": "#f0f4f2",
+            "icon-bg-dark": "#234934",
+          },
+          fontFamily: {
+            "display": ["Inter", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.75rem",
+            "xl": "1rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings:
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<!-- Top App Bar -->
+<div class="sticky top-0 z-10 flex items-center justify-between bg-card-light dark:bg-card-dark p-4 pb-3 shadow-sm">
+<div class="flex size-10 shrink-0 items-center justify-center text-text-primary-light dark:text-text-primary-dark">
+<span class="material-symbols-outlined text-2xl">arrow_back</span>
+</div>
+<h1 class="flex-1 text-center text-lg font-bold leading-tight tracking-[-0.015em] text-text-primary-light dark:text-text-primary-dark">Categorizar mis Gastos</h1>
+<div class="size-10 shrink-0"></div>
+</div>
+<main class="flex-1 px-4 pt-6 pb-28">
+<!-- Body Text -->
+<p class="text-base font-normal leading-normal text-text-secondary-light dark:text-text-secondary-dark pb-6">Define los montos para clasificar automáticamente tus consumos y entender mejor tus hábitos.</p>
+<!-- Gastos Hormiga Section -->
+<div class="flex flex-col gap-4 rounded-xl bg-card-light dark:bg-card-dark p-4 mb-6 shadow-sm">
+<div class="flex items-center gap-4">
+<div class="flex size-12 shrink-0 items-center justify-center rounded-lg bg-icon-bg-light dark:bg-icon-bg-dark text-text-primary-light dark:text-text-primary-dark">
+<span class="material-symbols-outlined">bug_report</span>
+</div>
+<div class="flex flex-col justify-center">
+<p class="text-base font-medium leading-normal text-text-primary-light dark:text-text-primary-dark">Gastos Hormiga</p>
+<p class="text-sm font-normal leading-normal text-text-secondary-light dark:text-text-secondary-dark">Pequeños consumos diarios.</p>
+</div>
+</div>
+<div class="flex items-end gap-4">
+<label class="flex min-w-0 flex-1 flex-col">
+<p class="pb-2 text-sm font-medium leading-normal text-text-primary-light dark:text-text-primary-dark">Desde</p>
+<div class="relative">
+<span class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-text-secondary-light dark:text-text-secondary-dark">S/</span>
+<input class="form-input h-14 w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark p-[15px] pl-8 text-base font-normal leading-normal text-text-primary-light dark:text-text-primary-dark placeholder:text-text-secondary-light focus:border-primary focus:outline-0 focus:ring-0" disabled="" value="0"/>
+</div>
+</label>
+<label class="flex min-w-0 flex-1 flex-col">
+<p class="pb-2 text-sm font-medium leading-normal text-text-primary-light dark:text-text-primary-dark">Hasta</p>
+<div class="relative">
+<span class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-text-secondary-light dark:text-text-secondary-dark">S/</span>
+<input class="form-input h-14 w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark p-[15px] pl-8 text-base font-normal leading-normal text-text-primary-light dark:text-text-primary-dark placeholder:text-text-secondary-light focus:border-primary focus:outline-0 focus:ring-2 focus:ring-primary/50" placeholder="50.00"/>
+</div>
+</label>
+</div>
+</div>
+<!-- Gastos Regulares Section -->
+<div class="flex flex-col gap-4 rounded-xl bg-card-light dark:bg-card-dark p-4 mb-6 shadow-sm">
+<div class="flex items-center gap-4">
+<div class="flex size-12 shrink-0 items-center justify-center rounded-lg bg-icon-bg-light dark:bg-icon-bg-dark text-text-primary-light dark:text-text-primary-dark">
+<span class="material-symbols-outlined">shopping_cart</span>
+</div>
+<div class="flex flex-col justify-center">
+<p class="text-base font-medium leading-normal text-text-primary-light dark:text-text-primary-dark">Gastos Regulares</p>
+<p class="text-sm font-normal leading-normal text-text-secondary-light dark:text-text-secondary-dark">Compras y pagos recurrentes.</p>
+</div>
+</div>
+<div class="flex items-end gap-4">
+<label class="flex min-w-0 flex-1 flex-col">
+<p class="pb-2 text-sm font-medium leading-normal text-text-primary-light dark:text-text-primary-dark">Desde</p>
+<div class="relative">
+<span class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-text-secondary-light dark:text-text-secondary-dark">S/</span>
+<input class="form-input h-14 w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark p-[15px] pl-8 text-base font-normal leading-normal text-text-primary-light dark:text-text-primary-dark placeholder:text-text-secondary-light focus:border-primary focus:outline-0 focus:ring-0" disabled="" value="50.01"/>
+</div>
+</label>
+<label class="flex min-w-0 flex-1 flex-col">
+<p class="pb-2 text-sm font-medium leading-normal text-text-primary-light dark:text-text-primary-dark">Hasta</p>
+<div class="relative">
+<span class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-text-secondary-light dark:text-text-secondary-dark">S/</span>
+<input class="form-input h-14 w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark p-[15px] pl-8 text-base font-normal leading-normal text-text-primary-light dark:text-text-primary-dark placeholder:text-text-secondary-light focus:border-primary focus:outline-0 focus:ring-2 focus:ring-primary/50" placeholder="500.00"/>
+</div>
+</label>
+</div>
+</div>
+<!-- Gastos Excepcionales Section -->
+<div class="flex flex-col gap-4 rounded-xl bg-card-light dark:bg-card-dark p-4 shadow-sm">
+<div class="flex items-center gap-4">
+<div class="flex size-12 shrink-0 items-center justify-center rounded-lg bg-icon-bg-light dark:bg-icon-bg-dark text-text-primary-light dark:text-text-primary-dark">
+<span class="material-symbols-outlined">star</span>
+</div>
+<div class="flex flex-col justify-center">
+<p class="text-base font-medium leading-normal text-text-primary-light dark:text-text-primary-dark">Gastos Excepcionales</p>
+<p class="text-sm font-normal leading-normal text-text-secondary-light dark:text-text-secondary-dark">Compras grandes o inesperadas.</p>
+</div>
+</div>
+<div class="flex items-end gap-4">
+<label class="flex min-w-0 flex-1 flex-col">
+<p class="pb-2 text-sm font-medium leading-normal text-text-primary-light dark:text-text-primary-dark">Desde</p>
+<div class="relative">
+<span class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-text-secondary-light dark:text-text-secondary-dark">S/</span>
+<input class="form-input h-14 w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark p-[15px] pl-8 text-base font-normal leading-normal text-text-primary-light dark:text-text-primary-dark placeholder:text-text-secondary-light focus:border-primary focus:outline-0 focus:ring-0" disabled="" value="500.01"/>
+</div>
+</label>
+<label class="flex min-w-0 flex-1 flex-col">
+<p class="pb-2 text-sm font-medium leading-normal text-text-primary-light dark:text-text-primary-dark">Hasta</p>
+<div class="relative">
+<input class="form-input h-14 w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark p-[15px] text-base font-normal leading-normal text-text-primary-light dark:text-text-primary-dark placeholder:text-text-secondary-light focus:border-primary focus:outline-0 focus:ring-0" disabled="" value="Más"/>
+</div>
+</label>
+</div>
+</div>
+</main>
+<!-- Bottom Action Button -->
+<div class="fixed bottom-0 left-0 right-0 bg-card-light dark:bg-card-dark p-4 shadow-[0_-2px_4px_rgba(0,0,0,0.05)]">
+<button class="w-full rounded-lg bg-primary py-4 text-center text-base font-bold text-white transition-opacity hover:opacity-90 active:opacity-80">
+        Guardar Categorías
+      </button>
+</div>
+</div>
+</body></html>

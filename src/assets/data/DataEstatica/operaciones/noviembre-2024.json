@@ -3,7 +3,7 @@
     "id": "nov-001",
     "fecha": "2024-11-01T10:30:00.000Z",
     "operacion": "Sueldo mensual",
-    "monto": 4000,
+    "monto": 5200,
     "categoria": "ingresos",
     "tipoProducto": "TD"
   },
@@ -213,7 +213,7 @@
     "id": "nov-009",
     "fecha": "2024-11-11T11:37:00.000Z",
     "operacion": "Pago tarjeta de crédito Visa",
-    "monto": -557,
+    "monto": -250,
     "categoria": "pago_financiero",
     "tipoProducto": "TD",
     "estado": "pagado"
@@ -304,7 +304,7 @@
     "id": "nov-010",
     "fecha": "2024-11-17T13:34:00.000Z",
     "operacion": "Cuota préstamo personal",
-    "monto": -1103,
+    "monto": -450,
     "categoria": "pago_financiero",
     "tipoProducto": "TD",
     "estado": "pagado"
@@ -326,7 +326,7 @@
     "id": "nov-011",
     "fecha": "2024-11-14T8:13:00.000Z",
     "operacion": "Cuota préstamo personal",
-    "monto": -876,
+    "monto": -350,
     "categoria": "pago_financiero",
     "tipoProducto": "TD",
     "estado": "pagado"
@@ -335,7 +335,7 @@
     "id": "nov-012",
     "fecha": "2024-11-10T9:26:00.000Z",
     "operacion": "Pago tarjeta de crédito Visa",
-    "monto": -1369,
+    "monto": -300,
     "categoria": "pago_financiero",
     "tipoProducto": "TD",
     "estado": "pagado"

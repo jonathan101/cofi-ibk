@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Seleccionar Categoría</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#136dec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101822",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            font-size: 24px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
+<div class="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="flex items-center bg-background-light dark:bg-background-dark p-4 pb-2 justify-between sticky top-0 z-10 border-b border-gray-200 dark:border-gray-800">
+<button class="flex size-10 shrink-0 items-center justify-center text-gray-700 dark:text-gray-300">
+<span class="material-symbols-outlined">close</span>
+</button>
+<h1 class="text-lg font-bold flex-1 text-center pr-10 text-gray-900 dark:text-gray-100">Seleccionar Categoría</h1>
+</header>
+<main class="flex-grow p-4">
+<!-- BodyText -->
+<p class="text-base font-normal leading-normal pb-6 pt-2 text-gray-600 dark:text-gray-400">Elige la nueva categoría para esta operación.</p>
+<!-- Category List -->
+<div class="space-y-2">
+<!-- ListItem: Ingresos -->
+<div class="flex items-center gap-4 bg-white dark:bg-gray-800/50 p-4 min-h-14 justify-between rounded-xl shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700/50 cursor-pointer transition-colors duration-150">
+<div class="flex items-center gap-4">
+<div class="flex items-center justify-center rounded-lg bg-primary/20 shrink-0 size-10 text-primary dark:text-blue-300 dark:bg-blue-900/40">
+<span class="material-symbols-outlined">arrow_upward</span>
+</div>
+<p class="text-base font-medium flex-1 truncate text-gray-800 dark:text-gray-200">Ingresos</p>
+</div>
+<div class="shrink-0 text-gray-400 dark:text-gray-500">
+<span class="material-symbols-outlined">chevron_right</span>
+</div>
+</div>
+<!-- ListItem: Operaciones Recurrentes -->
+<div class="flex items-center gap-4 bg-white dark:bg-gray-800/50 p-4 min-h-14 justify-between rounded-xl shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700/50 cursor-pointer transition-colors duration-150">
+<div class="flex items-center gap-4">
+<div class="flex items-center justify-center rounded-lg bg-primary/20 shrink-0 size-10 text-primary dark:text-blue-300 dark:bg-blue-900/40">
+<span class="material-symbols-outlined">autorenew</span>
+</div>
+<p class="text-base font-medium flex-1 truncate text-gray-800 dark:text-gray-200">Operaciones Recurrentes</p>
+</div>
+<div class="shrink-0 text-gray-400 dark:text-gray-500">
+<span class="material-symbols-outlined">chevron_right</span>
+</div>
+</div>
+<!-- ListItem: Pagos Financieros -->
+<div class="flex items-center gap-4 bg-white dark:bg-gray-800/50 p-4 min-h-14 justify-between rounded-xl shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700/50 cursor-pointer transition-colors duration-150">
+<div class="flex items-center gap-4">
+<div class="flex items-center justify-center rounded-lg bg-primary/20 shrink-0 size-10 text-primary dark:text-blue-300 dark:bg-blue-900/40">
+<span class="material-symbols-outlined">account_balance</span>
+</div>
+<p class="text-base font-medium flex-1 truncate text-gray-800 dark:text-gray-200">Pagos Financieros (Otro Banco)</p>
+</div>
+<div class="shrink-0 text-gray-400 dark:text-gray-500">
+<span class="material-symbols-outlined">chevron_right</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Sticky Footer for Confirmation Button -->
+<footer class="sticky bottom-0 bg-background-light dark:bg-background-dark p-4 border-t border-gray-200 dark:border-gray-800">
+<button class="w-full bg-primary text-white font-bold py-3 px-4 rounded-xl shadow-md hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-background-light dark:focus:ring-offset-background-dark transition-colors duration-150 disabled:bg-gray-300 dark:disabled:bg-gray-600 disabled:text-gray-500 dark:disabled:text-gray-400 disabled:cursor-not-allowed" disabled="">
+                Confirmar Categoría
+            </button>
+</footer>
+</div>
+</body></html>

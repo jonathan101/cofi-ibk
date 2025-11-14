@@ -11,14 +11,14 @@
     "nombre": "Primer carro",
     "montoActual": 3500,
     "metaMonto": 15000,
-    "icono": "car"
+    "icono": "directions_car"
   },
   {
     "id": "ch3",
     "nombre": "Viaje a Europa",
     "montoActual": 2000,
     "metaMonto": 8000,
-    "icono": "plane"
+    "icono": "flight"
   },
   {
     "id": "ch4",

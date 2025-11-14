@@ -1,0 +1,85 @@
+<div class="recompensas-container">
+  <!-- Pull Down Handle -->
+  <app-pull-down-handle (pullDown)="onPullDown()"></app-pull-down-handle>
+
+  <!-- Header -->
+  <header class="recompensas-header">
+    <button class="icon-button" (click)="toggleSidebar()" aria-label="Menú">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
+    
+    <h1 class="header-title">Recompensas</h1>
+    
+    <div class="header-spacer"></div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="recompensas-content">
+    <!-- Loading State -->
+    <div *ngIf="loading" class="loading-container">
+      <div class="spinner"></div>
+      <p>Cargando recompensas...</p>
+    </div>
+
+    <!-- Recompensas List -->
+    <div *ngIf="!loading" class="recompensas-list">
+      <!-- Recompensa Card con Imagen -->
+      <div class="recompensa-card featured-card">
+        <div 
+          class="card-image"
+          style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCkJNOiE3aEY4KCm9tu5S7GNFjhZKDEwl11UjVV2W_tJjX8rDmhkEYkis9fyZKkWTluKbJoYfRY6cGI-4nstErtLcCmnQxlqGhEylYAgXrbIwrX2zgXb3ocohdiY-Yh6p0b9kbQZIpHc60OWAkoe9AjhB8IrXsx4PLNtT0m_L72ymyJ0C5orZ8hAKxiorrC-foDp252ie98G_-OCjrWa9hw2_Yhf2kzpBoHOU1cxOtchzia4ZzZg1yYUSZJNihKKKFbpZqehtfaWEI')"
+        ></div>
+        <div class="card-content">
+          <h2 class="card-title">Descuentos/Promociones por Ahorro</h2>
+          <p class="card-description">Descubre beneficios exclusivos por ahorrar con nosotros.</p>
+          <button class="card-button">Ver promoción</button>
+        </div>
+      </div>
+
+      <!-- Recompensa Card con Icono - Préstamos -->
+      <div class="recompensa-card">
+        <div class="card-content">
+          <div class="card-header">
+            <div class="card-icon">
+              <span class="material-symbols-outlined">payments</span>
+            </div>
+            <div class="card-text">
+              <h2 class="card-title">Préstamos Personales</h2>
+              <p class="card-description">Accede a un préstamo con tasas preferenciales.</p>
+            </div>
+          </div>
+          <button class="card-button">Solicitar ahora</button>
+        </div>
+      </div>
+
+      <!-- Recompensa Card con Icono - Ampliación -->
+      <div class="recompensa-card">
+        <div class="card-content">
+          <div class="card-header">
+            <div class="card-icon">
+              <span class="material-symbols-outlined">trending_up</span>
+            </div>
+            <div class="card-text">
+              <h2 class="card-title">Ampliación de Línea de Crédito</h2>
+              <p class="card-description">Aumenta tu línea de crédito de forma rápida y segura.</p>
+            </div>
+          </div>
+          <button class="card-button">Ampliar ahora</button>
+        </div>
+      </div>
+
+      <!-- Empty State -->
+      <div *ngIf="recompensas.length === 0" class="empty-state">
+        <span class="material-symbols-outlined empty-icon">workspace_premium</span>
+        <p class="empty-title">No hay recompensas disponibles</p>
+        <p class="empty-message">Vuelve pronto para ver nuevas ofertas</p>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Sidebar Menu -->
+<app-sidebar-menu 
+  *ngIf="showSidebar"
+  (close)="closeSidebar()">
+</app-sidebar-menu>

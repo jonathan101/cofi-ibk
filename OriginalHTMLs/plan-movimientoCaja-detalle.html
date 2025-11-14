@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Detalle de Movimiento</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#00843D",
+                        "background-light": "#F4F4F4",
+                        "background-dark": "#101822",
+                        "text-primary-light": "#333333",
+                        "text-secondary-light": "#666666",
+                        "text-primary-dark": "#E5E7EB",
+                        "text-secondary-dark": "#9CA3AF",
+                        "expense": "#EF4135"
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-display">
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-background-light dark:bg-background-dark group/design-root overflow-x-hidden">
+<header class="flex items-center bg-background-light dark:bg-background-dark p-4 pb-2 justify-between sticky top-0 z-10 border-b border-gray-200 dark:border-gray-700">
+<div class="text-text-primary-light dark:text-text-primary-dark flex size-10 shrink-0 items-center justify-center">
+<span class="material-symbols-outlined text-2xl">arrow_back</span>
+</div>
+<h1 class="text-text-primary-light dark:text-text-primary-dark text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center">Detalle de Movimiento</h1>
+<div class="size-10 shrink-0"></div> 
+</header>
+<main class="flex flex-col flex-grow">
+<section class="bg-white dark:bg-gray-800 p-4">
+<div class="flex items-center gap-4">
+<div class="text-primary flex items-center justify-center rounded-lg bg-primary/10 shrink-0 size-14">
+<span class="material-symbols-outlined text-3xl">swap_horiz</span>
+</div>
+<div class="flex flex-col justify-center">
+<p class="text-text-primary-light dark:text-text-primary-dark text-lg font-bold leading-normal">Transferencias</p>
+<p class="text-expense text-base font-medium leading-normal">S/ -1,250.00</p>
+</div>
+</div>
+</section>
+<section class="p-4 bg-background-light dark:bg-background-dark">
+<div class="flex gap-3 flex-wrap">
+<button class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-primary pl-4 pr-4 text-white">
+<p class="text-sm font-medium leading-normal">Entradas</p>
+</button>
+<button class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-gray-200 dark:bg-gray-700 pl-4 pr-4 text-text-primary-light dark:text-text-primary-dark">
+<p class="text-sm font-medium leading-normal">Salidas</p>
+</button>
+<button class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-gray-200 dark:bg-gray-700 pl-4 pr-4 text-text-primary-light dark:text-text-primary-dark">
+<p class="text-sm font-medium leading-normal">Todos</p>
+</button>
+</div>
+</section>
+<div class="flex flex-col gap-3 px-4 pb-4">
+<div class="flex items-center gap-4 bg-white dark:bg-gray-800 p-3 rounded-xl shadow-sm">
+<div class="flex items-center gap-4 flex-1">
+<div class="flex flex-col justify-center">
+<p class="text-text-primary-light dark:text-text-primary-dark text-base font-medium leading-normal line-clamp-1">Transferencia a María Rojas</p>
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-sm font-normal leading-normal line-clamp-2">25 de Octubre, 10:30 am</p>
+</div>
+</div>
+<div class="flex flex-col items-end shrink-0">
+<p class="text-expense text-base font-medium leading-normal mb-1">S/ -300.00</p>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-7 px-2 bg-primary text-white text-sm font-medium leading-normal w-fit">
+<span class="truncate">Recategorizar</span>
+</button>
+</div>
+</div>
+<div class="flex items-center gap-4 bg-white dark:bg-gray-800 p-3 rounded-xl shadow-sm">
+<div class="flex items-center gap-4 flex-1">
+<div class="flex flex-col justify-center">
+<p class="text-text-primary-light dark:text-text-primary-dark text-base font-medium leading-normal line-clamp-1">Pago de servicio - Luz</p>
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-sm font-normal leading-normal line-clamp-2">22 de Octubre, 08:15 am</p>
+</div>
+</div>
+<div class="flex flex-col items-end shrink-0">
+<p class="text-expense text-base font-medium leading-normal mb-1">S/ -150.00</p>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-7 px-2 bg-primary text-white text-sm font-medium leading-normal w-fit">
+<span class="truncate">Recategorizar</span>
+</button>
+</div>
+</div>
+<div class="flex items-center gap-4 bg-white dark:bg-gray-800 p-3 rounded-xl shadow-sm">
+<div class="flex items-center gap-4 flex-1">
+<div class="flex flex-col justify-center">
+<p class="text-text-primary-light dark:text-text-primary-dark text-base font-medium leading-normal line-clamp-1">Transferencia a Juan Pérez</p>
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-sm font-normal leading-normal line-clamp-2">18 de Octubre, 04:50 pm</p>
+</div>
+</div>
+<div class="flex flex-col items-end shrink-0">
+<p class="text-expense text-base font-medium leading-normal mb-1">S/ -800.00</p>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-7 px-2 bg-primary text-white text-sm font-medium leading-normal w-fit">
+<span class="truncate">Recategorizar</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

@@ -1,0 +1,86 @@
+<div class="confirmar-recategorizacion-container">
+  <!-- Header -->
+  <header class="header">
+    <button class="btn-back" (click)="volver()">
+      <span class="material-symbols-outlined">arrow_back</span>
+    </button>
+    <h1 class="title">Confirmar Recategorización</h1>
+    <button class="btn-close" (click)="cerrar()">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+  </header>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-container">
+    <p>Cargando...</p>
+  </div>
+
+  <!-- Content -->
+  <div *ngIf="!loading" class="content">
+    <!-- Resumen del Movimiento -->
+    <div class="resumen-card">
+      <h2 class="resumen-titulo">Movimiento a recategorizar</h2>
+      <div class="movimiento-info">
+        <div class="info-row">
+          <span class="label">Descripción:</span>
+          <span class="value">{{ movimiento.descripcion }}</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Monto:</span>
+          <span class="value monto">{{ formatearMonto(movimiento.monto) }}</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Fecha:</span>
+          <span class="value">{{ formatearFecha(movimiento.fecha) }}</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Nueva categoría:</span>
+          <span class="value categoria">{{ getNombreCategoria() }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Selección de Operación Vinculable (si aplica) -->
+    <div *ngIf="requiereSeleccion()" class="vinculacion-section">
+      <h3 class="section-titulo">Vincular con:</h3>
+      <p class="section-descripcion">Selecciona la operación a la que deseas vincular este movimiento</p>
+
+      <div class="operaciones-list">
+        <div 
+          *ngFor="let operacion of operacionesVinculables" 
+          class="operacion-item"
+          [class.selected]="operacionSeleccionada === operacion.id"
+          (click)="seleccionarOperacion(operacion.id)">
+          <div class="operacion-content">
+            <span class="material-symbols-outlined icon">{{ operacion.icono }}</span>
+            <div class="operacion-info">
+              <span class="nombre">{{ operacion.nombre }}</span>
+              <span class="descripcion">{{ operacion.descripcion }}</span>
+              <span *ngIf="operacion.monto" class="monto-op">{{ formatearMonto(operacion.monto) }}</span>
+            </div>
+            <div class="radio-indicator">
+              <div class="radio-dot" *ngIf="operacionSeleccionada === operacion.id"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mensaje para Ingresos -->
+    <div *ngIf="categoria === 'ingresos'" class="info-message">
+      <span class="material-symbols-outlined">info</span>
+      <p>Este movimiento será categorizado como ingreso y se sumará a tu saldo disponible.</p>
+    </div>
+  </div>
+
+  <!-- Footer con botón -->
+  <div class="footer">
+    <button 
+      class="btn-confirmar" 
+      [disabled]="procesando || (requiereSeleccion() && !operacionSeleccionada)"
+      (click)="confirmar()">
+      <span *ngIf="!procesando">Confirmar Recategorización</span>
+      <span *ngIf="procesando">Procesando...</span>
+    </button>
+  </div>
+</div>

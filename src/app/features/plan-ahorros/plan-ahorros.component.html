@@ -1,0 +1,652 @@
+<div class="plan-ahorros-container">
+  <!-- Pull Down Handle -->
+  <app-pull-down-handle (pullDown)="onPullDown()"></app-pull-down-handle>
+
+  <!-- Header -->
+  <header class="plan-header">
+    <button class="icon-button" (click)="toggleSidebar()" aria-label="Menú">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
+    <h1 class="header-title">Plan de Ahorros</h1>
+    <button class="icon-button" (click)="abrirConfiguracion()" aria-label="Configuración">
+      <span class="material-symbols-outlined">settings</span>
+    </button>
+  </header>
+
+  <!-- Contenido scrolleable -->
+  <div class="plan-content" #planContent>
+    <!-- Selector de Mes -->
+    <app-selector-mes 
+      [mesActual]="mesActual" 
+      [mesesDisponibles]="mesesDisponibles"
+      (onMesChange)="onMesChange($event)">
+    </app-selector-mes>
+
+    <!-- Loading State -->
+    <div *ngIf="loading" class="loading-state">
+      <div class="spinner"></div>
+      <p>Cargando...</p>
+    </div>
+
+    <!-- Error State -->
+    <div *ngIf="error && !loading" class="error-state">
+      <p>{{ error }}</p>
+      <button (click)="cargarDatosMes(mesActual)" class="btn-retry">Reintentar</button>
+    </div>
+
+    <!-- Contenido Principal -->
+    <div *ngIf="!loading && !error && resumen" class="plan-scrollable-content">
+      
+      <!-- Resumen del Mes -->
+      <div class="card resumen-card">
+        <div class="card-header">
+          <div class="card-header-content">
+            <p class="card-title">Resumen del mes</p>
+            <button class="expand-button" (click)="toggleResumen()">
+              <span class="material-symbols-outlined">
+                {{ resumenExpandido ? 'expand_less' : 'expand_more' }}
+              </span>
+            </button>
+          </div>
+        </div>
+        
+        <div class="resumen-items">
+          <div class="resumen-item">
+            <p class="resumen-label">Saldo Inicial</p>
+            <p class="resumen-value">{{ formatCurrency(resumen.saldoInicial) }}</p>
+          </div>
+          <div class="resumen-item">
+            <p class="resumen-label">{{ esMesActual() ? 'Saldo Actual' : 'Saldo FDM' }}</p>
+            <p class="resumen-value">{{ formatCurrency(getSaldoFinal()) }}</p>
+          </div>
+          <div class="resumen-item">
+            <p class="resumen-label">Meta de Ahorro</p>
+            <p class="resumen-value">{{ formatCurrency(configuracion?.metaAhorro || 0) }}</p>
+          </div>
+          <div class="resumen-item">
+            <p class="resumen-label">Falta Pagar</p>
+            <p class="resumen-value danger">{{ formatCurrency(resumen.porPagar) }}</p>
+          </div>
+        </div>
+
+        <hr class="divider"/>
+
+        <!-- Ahorro del Mes -->
+        <div class="ahorro-section">
+          <p class="ahorro-title">Ahorro del mes</p>
+          
+          <!-- Gráfico Circular -->
+          <div class="circular-progress">
+            <svg viewBox="0 0 100 100" class="progress-svg">
+              <circle class="progress-bg" cx="50" cy="50" r="40" fill="none" stroke-width="15"></circle>
+              <circle class="progress-bar" cx="50" cy="50" r="40" fill="none" stroke-width="15" 
+                      [attr.stroke-dasharray]="getProgressDashArray()" 
+                      [attr.stroke-dashoffset]="getProgressDashOffset()"
+                      transform="rotate(-90 50 50)"></circle>
+              <text class="progress-text" x="50" y="55" text-anchor="middle">
+                {{ getPorcentajeAhorro() }}%
+              </text>
+            </svg>
+          </div>
+
+          <!-- Leyenda -->
+          <div class="ahorro-legend">
+            <div class="legend-item">
+              <div class="legend-dot actual"></div>
+              <p class="legend-text">Actual: {{ formatCurrency(getAhorroActual()) }}</p>
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot meta"></div>
+              <p class="legend-text">Meta: {{ formatCurrency(configuracion?.metaAhorro || 0) }}</p>
+            </div>
+          </div>
+
+          <!-- Botón Enviar a Chanchito (solo mes actual) -->
+          <div *ngIf="esMesActual()" class="btn-chanchito-container">
+            <button class="btn-chanchito" [disabled]="getSaldoFinal() <= 0">
+              <div 
+                class="chanchito-icon-left" 
+                [class.dragging]="isDragging"
+                [ngStyle]="getDragStyle()"
+                (mousedown)="onDragStart($event)"
+                (touchstart)="onDragStart($event)">
+                <div class="money-icon">S/.</div>
+              </div>
+              <span class="chanchito-text">Desliza para enviar</span>
+              <div class="chanchito-icon-right" [style.opacity]="getChanchitoOpacity()">
+                <span class="material-symbols-outlined piggy-icon">savings</span>
+              </div>
+            </button>
+          </div>
+
+          <!-- Resumen del mes cerrado (meses anteriores) -->
+          <div *ngIf="!esMesActual()" class="resumen-mes-cerrado">
+            <p class="resumen-texto">{{ getResumenMesCerrado() }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pagos Atrasados -->
+      <div class="card" *ngIf="tieneOperacionesAtrasadas()">
+        <div class="card-header clickable" (click)="toggleSeccionKey('atrasados')">
+          <h3 class="card-title">Pagos Atrasados</h3>
+          <div class="card-header-right">
+            <p class="card-total danger">{{ formatCurrency(getTotalAtrasados()) }}</p>
+            <span class="material-symbols-outlined">
+              {{ isSeccionColapsada('atrasados') ? 'expand_more' : 'expand_less' }}
+            </span>
+          </div>
+        </div>
+        
+        <ul class="operaciones-list" *ngIf="!isSeccionColapsada('atrasados')">
+          <!-- Pagos Financieros Atrasados -->
+          <li class="operacion-item" *ngFor="let op of operacionesAtrasadas.pagosFinancieros">
+            <p class="operacion-descripcion">
+              {{ op.operacion }}
+              <span class="operacion-monto">{{ formatCurrency(op.monto) }}</span>
+            </p>
+            <div class="operacion-actions">
+              <button class="btn-pagar">Pagar</button>
+              <button class="btn-icon">
+                <span class="material-symbols-outlined">edit</span>
+              </button>
+            </div>
+          </li>
+          
+          <!-- Operaciones Recurrentes Atrasadas -->
+          <li class="operacion-item" *ngFor="let op of operacionesAtrasadas.operacionesRecurrentes">
+            <p class="operacion-descripcion">
+              {{ op.operacion }}
+              <span class="operacion-monto">{{ formatCurrency(op.monto) }}</span>
+            </p>
+            <div class="operacion-actions">
+              <button class="btn-pagar">Pagar</button>
+              <button class="btn-icon">
+                <span class="material-symbols-outlined">edit</span>
+              </button>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Operaciones Recurrentes -->
+      <div class="card">
+        <div class="card-header clickable" (click)="toggleSeccionKey('operacionesRegulares')">
+          <h3 class="card-title">Operaciones Recurrentes</h3>
+          <div class="card-header-right">
+            <p class="card-total">{{ formatCurrency(resumen.operacionesRegulares) }}</p>
+            <span class="material-symbols-outlined">
+              {{ isSeccionColapsada('operacionesRegulares') ? 'expand_more' : 'expand_less' }}
+            </span>
+          </div>
+        </div>
+        
+        <ul class="operaciones-list" *ngIf="!isSeccionColapsada('operacionesRegulares') && operacionesRecurrentes.length > 0">
+          <li class="operacion-item" *ngFor="let op of operacionesRecurrentes">
+            <p class="operacion-descripcion">
+              {{ op.operacion }}
+              <span class="operacion-monto">{{ formatCurrency(op.monto) }}</span>
+            </p>
+            <div class="operacion-actions">
+              <span class="badge-estado" [class.pagado]="op.estado === 'pagado'" [class.pendiente]="op.estado === 'pendiente'">
+                {{ op.estado === 'pagado' ? 'Pagado' : 'Pagar' }}
+              </span>
+              <button class="btn-icon">
+                <span class="material-symbols-outlined">edit</span>
+              </button>
+            </div>
+          </li>
+        </ul>
+        
+        <p class="empty-message" *ngIf="!isSeccionColapsada('operacionesRegulares') && operacionesRecurrentes.length === 0">
+          No hay operaciones recurrentes
+        </p>
+      </div>
+
+      <!-- Ingresos -->
+      <div class="card">
+        <div class="card-header clickable" (click)="toggleSeccionKey('ingresos')">
+          <p class="card-title">Ingresos</p>
+          <div class="card-header-right">
+            <p class="card-total positive">{{ formatCurrency(resumen.ingresos) }}</p>
+            <span class="material-symbols-outlined">
+              {{ isSeccionColapsada('ingresos') ? 'expand_more' : 'expand_less' }}
+            </span>
+          </div>
+        </div>
+        
+        <ul class="operaciones-list" *ngIf="!isSeccionColapsada('ingresos') && operacionesIngresos.length > 0">
+          <li class="operacion-item-simple" *ngFor="let op of operacionesIngresos">
+            <div class="operacion-info">
+              <p class="operacion-descripcion">{{ op.operacion }}</p>
+              <p class="operacion-fecha">{{ formatFecha(op.fecha) }}</p>
+            </div>
+            <div class="operacion-right">
+              <p class="operacion-monto-inline positive">{{ formatCurrency(op.monto) }}</p>
+            </div>
+          </li>
+        </ul>
+        
+        <p class="empty-message" *ngIf="!isSeccionColapsada('ingresos') && operacionesIngresos.length === 0">
+          No hay operaciones
+        </p>
+      </div>
+
+      <!-- Gastos del Mes -->
+      <div class="card">
+        <div class="card-header clickable" (click)="toggleSeccionKey('gastos')">
+          <h3 class="card-title">Gastos del mes</h3>
+          <div class="card-header-right">
+            <p class="card-total">{{ formatCurrency(resumen.gastosMes) }}</p>
+            <span class="material-symbols-outlined">
+              {{ isSeccionColapsada('gastos') ? 'expand_more' : 'expand_less' }}
+            </span>
+          </div>
+        </div>
+
+        <!-- Subsecciones de Gastos -->
+        <div class="gastos-subsecciones" *ngIf="!isSeccionColapsada('gastos')">
+          <!-- Automáticos -->
+          <div class="gasto-subseccion" *ngIf="resumenGastos.cobrosAutomaticos">
+            <div class="subseccion-header">
+              <div class="subseccion-left">
+                <h4 class="subseccion-title clickeable" (click)="verDetalleGastosPorTipo('automaticos')">Automáticos</h4>
+              </div>
+              <div class="subseccion-right">
+                <p class="subseccion-total">{{ formatCurrency(resumenGastos.cobrosAutomaticos.total) }}</p>
+              </div>
+            </div>
+            <div class="subseccion-content">
+              <div class="subseccion-info">
+                <!-- Desglose TD/TC en línea -->
+                <div class="subseccion-desglose-inline">
+                  <span class="desglose-text">Débito {{ formatCurrency(resumenGastos.cobrosAutomaticos.consumoDebito) }}</span>
+                  <span class="desglose-separator-inline">•</span>
+                  <span class="desglose-text">TC {{ formatCurrency(resumenGastos.cobrosAutomaticos.consumoTC) }}</span>
+                </div>
+
+                <!-- Mes actual: mostrar disponible -->
+                <p class="subseccion-disponible" *ngIf="esMesActual()">
+                  Disponible: <span [class]="getDisponibleClass(resumenGastos.cobrosAutomaticos)">{{ formatCurrency(getDisponible(resumenGastos.cobrosAutomaticos)) }}</span>
+                </p>
+                
+                <!-- Mes pasado: mostrar porcentaje usado -->
+                <p class="subseccion-porcentaje" *ngIf="!esMesActual()">
+                  Utilizado: <span [class]="getPorcentajeClass(resumenGastos.cobrosAutomaticos)">{{ getPorcentajeUsado(resumenGastos.cobrosAutomaticos) }}%</span>
+                </p>
+              </div>
+              <div class="subseccion-action">
+                <button class="btn-ver-mas" (click)="verDetalleGastosPorTipo('automaticos')">
+                  Ver detalle
+                  <span class="material-symbols-outlined">
+                    chevron_right
+                  </span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Lista de operaciones -->
+            <ul class="operaciones-list subseccion-operaciones" *ngIf="isSubseccionExpandida('cobrosAutomaticos') && operacionesCobrosAutomaticos.length > 0">
+              <li class="operacion-item-simple" *ngFor="let op of operacionesCobrosAutomaticos">
+                <div class="operacion-info">
+                  <p class="operacion-descripcion">{{ op.operacion }}</p>
+                  <p class="operacion-fecha">{{ formatFecha(op.fecha) }}</p>
+                </div>
+                <div class="operacion-right">
+                  <p class="operacion-monto-inline">{{ formatCurrency(op.monto) }}</p>
+                </div>
+              </li>
+            </ul>
+            
+            <p class="empty-message" *ngIf="isSubseccionExpandida('cobrosAutomaticos') && operacionesCobrosAutomaticos.length === 0">
+              No hay operaciones
+            </p>
+          </div>
+
+          <!-- Hormigas -->
+          <div class="gasto-subseccion" *ngIf="resumenGastos.gastosHormiga">
+            <div class="subseccion-header">
+              <div class="subseccion-left">
+                <h4 class="subseccion-title clickeable" (click)="verDetalleGastosPorTipo('hormigas')">Hormigas</h4>
+              </div>
+              <div class="subseccion-right">
+                <p class="subseccion-total">{{ formatCurrency(resumenGastos.gastosHormiga.total) }}</p>
+              </div>
+            </div>
+            <div class="subseccion-content">
+              <div class="subseccion-info">
+                <!-- Desglose TD/TC en línea -->
+                <div class="subseccion-desglose-inline">
+                  <span class="desglose-text">Débito {{ formatCurrency(resumenGastos.gastosHormiga.consumoDebito) }}</span>
+                  <span class="desglose-separator-inline">•</span>
+                  <span class="desglose-text">TC {{ formatCurrency(resumenGastos.gastosHormiga.consumoTC) }}</span>
+                </div>
+
+                <!-- Mes actual: mostrar disponible -->
+                <p class="subseccion-disponible" *ngIf="esMesActual()">
+                  Disponible: <span [class]="getDisponibleClass(resumenGastos.gastosHormiga)">{{ formatCurrency(getDisponible(resumenGastos.gastosHormiga)) }}</span>
+                </p>
+                
+                <!-- Mes pasado: mostrar porcentaje usado -->
+                <p class="subseccion-porcentaje" *ngIf="!esMesActual()">
+                  Utilizado: <span [class]="getPorcentajeClass(resumenGastos.gastosHormiga)">{{ getPorcentajeUsado(resumenGastos.gastosHormiga) }}%</span>
+                </p>
+              </div>
+              <div class="subseccion-action">
+                <button class="btn-ver-mas" (click)="verDetalleGastosPorTipo('hormigas')">
+                  Ver detalle
+                  <span class="material-symbols-outlined">
+                    chevron_right
+                  </span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Lista de operaciones -->
+            <ul class="operaciones-list subseccion-operaciones" *ngIf="isSubseccionExpandida('gastosHormiga') && operacionesGastosHormiga.length > 0">
+              <li class="operacion-item-simple" *ngFor="let op of operacionesGastosHormiga">
+                <div class="operacion-info">
+                  <p class="operacion-descripcion">{{ op.operacion }}</p>
+                  <p class="operacion-fecha">{{ formatFecha(op.fecha) }}</p>
+                </div>
+                <div class="operacion-right">
+                  <p class="operacion-monto-inline">{{ formatCurrency(op.monto) }}</p>
+                </div>
+              </li>
+            </ul>
+            
+            <p class="empty-message" *ngIf="isSubseccionExpandida('gastosHormiga') && operacionesGastosHormiga.length === 0">
+              No hay operaciones
+            </p>
+          </div>
+
+          <!-- Regulares -->
+          <div class="gasto-subseccion" *ngIf="resumenGastos.gastosMedios">
+            <div class="subseccion-header">
+              <div class="subseccion-left">
+                <h4 class="subseccion-title clickeable" (click)="verDetalleGastosPorTipo('medios')">Regulares</h4>
+              </div>
+              <div class="subseccion-right">
+                <p class="subseccion-total">{{ formatCurrency(resumenGastos.gastosMedios.total) }}</p>
+              </div>
+            </div>
+            <div class="subseccion-content">
+              <div class="subseccion-info">
+                <!-- Desglose TD/TC en línea -->
+                <div class="subseccion-desglose-inline">
+                  <span class="desglose-text">Débito {{ formatCurrency(resumenGastos.gastosMedios.consumoDebito) }}</span>
+                  <span class="desglose-separator-inline">•</span>
+                  <span class="desglose-text">TC {{ formatCurrency(resumenGastos.gastosMedios.consumoTC) }}</span>
+                </div>
+
+                <!-- Mes actual: mostrar disponible -->
+                <p class="subseccion-disponible" *ngIf="esMesActual()">
+                  Disponible: <span [class]="getDisponibleClass(resumenGastos.gastosMedios)">{{ formatCurrency(getDisponible(resumenGastos.gastosMedios)) }}</span>
+                </p>
+                
+                <!-- Mes pasado: mostrar porcentaje usado -->
+                <p class="subseccion-porcentaje" *ngIf="!esMesActual()">
+                  Utilizado: <span [class]="getPorcentajeClass(resumenGastos.gastosMedios)">{{ getPorcentajeUsado(resumenGastos.gastosMedios) }}%</span>
+                </p>
+              </div>
+              <div class="subseccion-action">
+                <button class="btn-ver-mas" (click)="verDetalleGastosPorTipo('medios')">
+                  Ver detalle
+                  <span class="material-symbols-outlined">
+                    chevron_right
+                  </span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Lista de operaciones -->
+            <ul class="operaciones-list subseccion-operaciones" *ngIf="isSubseccionExpandida('gastosMedios') && operacionesGastosMedios.length > 0">
+              <li class="operacion-item-simple" *ngFor="let op of operacionesGastosMedios">
+                <div class="operacion-info">
+                  <p class="operacion-descripcion">{{ op.operacion }}</p>
+                  <p class="operacion-fecha">{{ formatFecha(op.fecha) }}</p>
+                </div>
+                <div class="operacion-right">
+                  <p class="operacion-monto-inline">{{ formatCurrency(op.monto) }}</p>
+                </div>
+              </li>
+            </ul>
+            
+            <p class="empty-message" *ngIf="isSubseccionExpandida('gastosMedios') && operacionesGastosMedios.length === 0">
+              No hay operaciones
+            </p>
+          </div>
+
+          <!-- Excepcionales -->
+          <div class="gasto-subseccion" *ngIf="resumenGastos.gastosExcepcionales">
+            <div class="subseccion-header">
+              <div class="subseccion-left">
+                <h4 class="subseccion-title clickeable" (click)="verDetalleGastosPorTipo('excepcionales')">Excepcionales</h4>
+              </div>
+              <div class="subseccion-right">
+                <p class="subseccion-total">{{ formatCurrency(resumenGastos.gastosExcepcionales.total) }}</p>
+              </div>
+            </div>
+            <div class="subseccion-content">
+              <div class="subseccion-info">
+                <!-- Desglose TD/TC en línea -->
+                <div class="subseccion-desglose-inline">
+                  <span class="desglose-text">Débito {{ formatCurrency(resumenGastos.gastosExcepcionales.consumoDebito) }}</span>
+                  <span class="desglose-separator-inline">•</span>
+                  <span class="desglose-text">TC {{ formatCurrency(resumenGastos.gastosExcepcionales.consumoTC) }}</span>
+                </div>
+
+                <!-- Mes actual: mostrar disponible -->
+                <p class="subseccion-disponible" *ngIf="esMesActual()">
+                  Disponible: <span [class]="getDisponibleClass(resumenGastos.gastosExcepcionales)">{{ formatCurrency(getDisponible(resumenGastos.gastosExcepcionales)) }}</span>
+                </p>
+                
+                <!-- Mes pasado: mostrar porcentaje usado -->
+                <p class="subseccion-porcentaje" *ngIf="!esMesActual()">
+                  Utilizado: <span [class]="getPorcentajeClass(resumenGastos.gastosExcepcionales)">{{ getPorcentajeUsado(resumenGastos.gastosExcepcionales) }}%</span>
+                </p>
+              </div>
+              <div class="subseccion-action">
+                <button class="btn-ver-mas" (click)="verDetalleGastosPorTipo('excepcionales')">
+                  Ver detalle
+                  <span class="material-symbols-outlined">
+                    chevron_right
+                  </span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Lista de operaciones -->
+            <ul class="operaciones-list subseccion-operaciones" *ngIf="isSubseccionExpandida('gastosExcepcionales') && operacionesGastosExcepcionales.length > 0">
+              <li class="operacion-item-simple" *ngFor="let op of operacionesGastosExcepcionales">
+                <div class="operacion-info">
+                  <p class="operacion-descripcion">{{ op.operacion }}</p>
+                  <p class="operacion-fecha">{{ formatFecha(op.fecha) }}</p>
+                </div>
+                <div class="operacion-right">
+                  <p class="operacion-monto-inline">{{ formatCurrency(op.monto) }}</p>
+                </div>
+              </li>
+            </ul>
+            
+            <p class="empty-message" *ngIf="isSubseccionExpandida('gastosExcepcionales') && operacionesGastosExcepcionales.length === 0">
+              No hay operaciones
+            </p>
+          </div>
+
+          <!-- Botón Ver Detalle Completo -->
+          <div class="ver-detalle-gastos">
+            <button class="btn-ver-detalle" (click)="verDetalleGastos()">
+              Ver detalle completo de gastos
+              <span class="material-symbols-outlined">arrow_forward</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Movimiento de Caja -->
+      <div class="card">
+        <div class="card-header clickable" (click)="toggleSeccionKey('movimientosCaja')">
+          <h3 class="card-title">Movimiento de Caja</h3>
+          <div class="card-header-right">
+            <p class="card-total" [class.positive]="resumen.movimientosCaja > 0">{{ formatCurrency(resumen.movimientosCaja) }}</p>
+            <span class="material-symbols-outlined">
+              {{ isSeccionColapsada('movimientosCaja') ? 'expand_more' : 'expand_less' }}
+            </span>
+          </div>
+        </div>
+        
+        <!-- Subsecciones de Movimientos de Caja -->
+        <div class="movimientos-subsecciones" *ngIf="!isSeccionColapsada('movimientosCaja')">
+          <!-- Transferencias -->
+          <div class="movimiento-subseccion">
+            <div class="subseccion-header-simple">
+              <h4 class="subseccion-title">Transferencias</h4>
+              <div class="subseccion-right">
+                <p class="subseccion-total" [class.positive]="resumenMovimientos.transferencias.total > 0">
+                  {{ formatCurrency(resumenMovimientos.transferencias.total) }}
+                </p>
+                <button class="btn-ver-mas" (click)="verDetalleMovimientosCaja('transferencias')">
+                  Ver más
+                  <span class="material-symbols-outlined">chevron_right</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Retiros -->
+          <div class="movimiento-subseccion">
+            <div class="subseccion-header-simple">
+              <h4 class="subseccion-title">Retiros</h4>
+              <div class="subseccion-right">
+                <p class="subseccion-total">
+                  {{ formatCurrency(resumenMovimientos.retiros.total) }}
+                </p>
+                <button class="btn-ver-mas" (click)="verDetalleMovimientosCaja('retiros')">
+                  Ver más
+                  <span class="material-symbols-outlined">chevron_right</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Depósitos -->
+          <div class="movimiento-subseccion">
+            <div class="subseccion-header-simple">
+              <h4 class="subseccion-title">Depósitos</h4>
+              <div class="subseccion-right">
+                <p class="subseccion-total positive">
+                  {{ formatCurrency(resumenMovimientos.depositos.total) }}
+                </p>
+                <button class="btn-ver-mas" (click)="verDetalleMovimientosCaja('depositos')">
+                  Ver más
+                  <span class="material-symbols-outlined">chevron_right</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Otros -->
+          <div class="movimiento-subseccion">
+            <div class="subseccion-header-simple">
+              <h4 class="subseccion-title">Otros</h4>
+              <div class="subseccion-right">
+                <p class="subseccion-total" [class.positive]="resumenMovimientos.otros.total > 0">
+                  {{ formatCurrency(resumenMovimientos.otros.total) }}
+                </p>
+                <button class="btn-ver-mas" (click)="verDetalleMovimientosCaja('otros')">
+                  Ver más
+                  <span class="material-symbols-outlined">chevron_right</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Uso de Línea de Crédito -->
+      <div class="card">
+        <p class="card-title">Uso de línea de crédito</p>
+        <div class="progress-bar-wrapper">
+          <div class="progress-bar-container">
+            <div class="progress-bar-fill" [style.width.%]="15"></div>
+            <div class="progress-marker" [style.left.%]="30">
+              <span class="marker-label">30%</span>
+            </div>
+            <div class="progress-value-circle" [style.left.%]="15">
+              <span>15%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Carga Financiera -->
+      <div class="card">
+        <div class="card-header clickable" (click)="toggleSeccionKey('cargaFinanciera')">
+          <p class="card-title">Carga Financiera</p>
+          <div class="card-header-right">
+            <p class="card-total">{{ formatCurrency(resumen.cargaFinanciera) }}</p>
+            <span class="material-symbols-outlined">
+              {{ isSeccionColapsada('cargaFinanciera') ? 'expand_more' : 'expand_less' }}
+            </span>
+          </div>
+        </div>
+
+        <div *ngIf="!isSeccionColapsada('cargaFinanciera')">
+          <!-- Progress Bar -->
+          <div class="progress-bar-wrapper" *ngIf="cargaFinancieraDetalle">
+            <div class="progress-bar-container">
+              <div class="progress-bar-fill" 
+                   [ngClass]="getCargaFinancieraClass()"
+                   [style.width.%]="getCargaFinancieraWidth()"></div>
+              <div class="progress-marker" [style.left.%]="20">
+                <span class="marker-label">20%</span>
+              </div>
+              <div class="progress-marker" [style.left.%]="30">
+                <span class="marker-label">30%</span>
+              </div>
+              <div class="progress-value-circle" [style.left.%]="getCargaFinancieraWidth()">
+                <span>{{ getPorcentajeCargaFinanciera().toFixed(0) }}%</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Disponible/Porcentaje usado -->
+          <p class="subseccion-disponible" *ngIf="esMesActual() && cargaFinancieraDetalle">
+            Disponible: <span [class]="getDisponibleClass(cargaFinancieraDetalle)">{{ formatCurrency(getDisponible(cargaFinancieraDetalle)) }}</span>
+          </p>
+          <p class="subseccion-porcentaje" *ngIf="!esMesActual() && cargaFinancieraDetalle">
+            Utilizado: <span [class]="getPorcentajeClass(cargaFinancieraDetalle)">{{ getPorcentajeUsado(cargaFinancieraDetalle) }}%</span>
+          </p>
+          
+          <!-- Lista de operaciones de carga financiera -->
+          <ul class="operaciones-list" *ngIf="operacionesCargaFinanciera.length > 0">
+            <li class="operacion-item-simple" *ngFor="let op of operacionesCargaFinanciera">
+              <p class="operacion-descripcion">
+                {{ op.operacion }} {{ formatCurrency(op.monto) }}
+              </p>
+              <div class="operacion-actions">
+                <span class="badge-estado" [class.pagado]="op.estado === 'pagado'" [class.pendiente]="op.estado === 'pendiente'">
+                  {{ op.estado === 'pagado' ? 'Pagado' : 'Pagar' }}
+                </span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Sidebar Menu -->
+<app-sidebar-menu *ngIf="showSidebar" (close)="closeSidebar()"></app-sidebar-menu>
+
+
+<!-- Modal de Transferencia a Chanchito -->
+<app-transferencia-ahorro-modal
+  [show]="showTransferenciaModal"
+  [saldoDisponible]="getSaldoDisponible()"
+  (close)="cerrarTransferenciaModal()"
+  (confirm)="onTransferenciaConfirmada($event)">
+</app-transferencia-ahorro-modal>

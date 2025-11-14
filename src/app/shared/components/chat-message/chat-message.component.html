@@ -1,5 +1,8 @@
 <!-- Mensaje de chat normal -->
 <div *ngIf="message.tipo === 'chat'" class="mensaje-chat" [class.es-ia]="message.esIA">
+  <div class="avatar-ia" *ngIf="message.esIA">
+    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+  </div>
   <div class="mensaje-contenido">
     <p>{{ message.texto }}</p>
   </div>

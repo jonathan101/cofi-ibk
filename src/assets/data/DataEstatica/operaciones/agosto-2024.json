@@ -123,7 +123,7 @@
     "id": "ago-010",
     "fecha": "2024-08-11T18:38:00.000Z",
     "operacion": "Pago tarjeta de crédito Mastercard",
-    "monto": -1145,
+    "monto": -450,
     "categoria": "pago_financiero",
     "tipoProducto": "TD",
     "estado": "pagado"
@@ -272,7 +272,7 @@
     "id": "ago-011",
     "fecha": "2024-08-26T14:38:00.000Z",
     "operacion": "Pago tarjeta de crédito Visa",
-    "monto": -744,
+    "monto": -350,
     "categoria": "pago_financiero",
     "tipoProducto": "TD",
     "estado": "pagado"
@@ -303,7 +303,7 @@
     "id": "ago-009",
     "fecha": "2024-08-15T8:41:00.000Z",
     "operacion": "Cuota préstamo vehicular",
-    "monto": -779,
+    "monto": -350,
     "categoria": "pago_financiero",
     "tipoProducto": "TD",
     "estado": "pagado"
